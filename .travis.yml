@@ -10,7 +10,7 @@ jobs:
 #          script: sonar-scanner
        - stage: deploy
          deploy:
-               script: ./script/deploy.sh
+               script: bash deploy.sh
                provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
