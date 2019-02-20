@@ -9,8 +9,8 @@ jobs:
 #                   secure: "$SONAR_TOKEN"
 #          script: sonar-scanner
        - stage: deploy
+         script: bash deploy.sh
          deploy:
-               script: bash deploy.sh
                provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
