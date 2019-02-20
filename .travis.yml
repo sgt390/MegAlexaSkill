@@ -1,4 +1,4 @@
-before-script: cd scripts
+before_script: cd scripts
 jobs:
     include:
        - stage: "Static tests"
@@ -30,5 +30,5 @@ stages:
   - "Static tests"
   - "Dynamic tests"
   - deploy      
-notifications:
-  slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF
+#notifications:
+#  slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF
