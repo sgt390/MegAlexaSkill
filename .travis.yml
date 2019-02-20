@@ -1,4 +1,3 @@
-before_script: cd scripts
 jobs:
     include:
        - stage: "Static tests"
@@ -15,9 +14,11 @@ jobs:
        - name: "Integration tests"
          script: skip
        - stage: deploy
-         script: sh deploy.sh
          deploy:
-               provider: lambda
+               - provider: script
+                   script:
+                       ./script/deploy.sh
+               - provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
                role: "arn:aws:iam::401184049861:role/service-role/basicpermission"
