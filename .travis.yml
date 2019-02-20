@@ -16,8 +16,9 @@ jobs:
        - stage: deploy
          deploy:
                - provider: script
-                   script:
-                       ./script/deploy.sh
+                 script: bash /script/deploy.sh
+                 on:
+                   branch: develop
                - provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
