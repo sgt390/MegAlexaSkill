@@ -1,5 +1,10 @@
 exports.handler = (event, context, callback) => {
-switch (event.request.type) {
+    const alexa = Alexa.handler(eventi,context);
+
+    alexa.appId = process.env.APP_ID;
+    alexa.registerHandlers(newSessionHandler,startWorkflowHandler);
+    alexa.execute();
+/*    switch (event.request.type) {
 case "LaunchRequest":
     context.succeed(generateResponse(buildSpeechletResponse("Welcome to megalexa.", false)));
     break;
@@ -11,20 +16,19 @@ case "IntentRequest":
     }
     break;
     }
+*/
 }
 
-function buildSpeechletResponse(outputText, shouldEndSession){
-    return {
-        outputSpeech: {
-        type: "PlainText",
-        text: outputText
-    },
-    shouldEndSession: shouldEndSession
+const newSessionHandler = {
+    LaunchRequest() {
+        this.handler.state = "MAINMODE";
+        this.emit(":ask", "Welcome to megalexa.");
     }
-}
-function generateResponse(speechletResponse){
-    return {
-        version: "1.0",
-        response: speechletResponse
+};
+
+const startWorkflowHandler = Alexa.CreateStateHandler("MAINMODE", {
+    "BuiltInWorkflowIntent": function () {
+        this.handler.state = "ANSWERMODE";
+        this.emit(":ask", "built in workflow");
     }
-}
+});
