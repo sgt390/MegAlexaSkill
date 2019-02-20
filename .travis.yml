@@ -1,3 +1,4 @@
+before-script: cd scripts
 jobs:
     include:
        - stage: "Static tests"
@@ -14,8 +15,7 @@ jobs:
        - name: "Integration tests"
          script: skip
        - stage: deploy
-         before-script: cd scripts
-         script: sh deploy.sh
+         script: shdeploy.sh
          deploy:
                provider: lambda
                function_name: "megalexa"
