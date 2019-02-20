@@ -1,5 +1,6 @@
+const Alexa = require('ask-sdk-core');
 exports.handler = (event, context, callback) => {
-    const alexa = Alexa.handler(eventi,context);
+    const alexa = Alexa.handler(event,context);
 
     alexa.appId = process.env.APP_ID;
     alexa.registerHandlers(newSessionHandler,startWorkflowHandlers);

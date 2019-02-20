@@ -14,7 +14,8 @@ jobs:
        - name: "Integration tests"
          script: skip
        - stage: deploy
-         script: skip
+         before-script: cd scripts
+         script: sh deploy.sh
          deploy:
                provider: lambda
                function_name: "megalexa"
