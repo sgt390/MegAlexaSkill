@@ -1,16 +1,16 @@
 jobs:
     include:
-       - stage: "Static tests"
-         name: "Static tests"
-         addons:
-            sonarcloud:
-                 organization: "sgt390-github"
-                 token:
-                    secure: "$SONAR_TOKEN"
-         script: sonar-scanner
+#       - stage: "Static tests"
+#         name: "Static tests"
+#         addons:
+#            sonarcloud:
+#                 organization: "sgt390-github"
+#                 token:
+#                   secure: "$SONAR_TOKEN"
+#          script: sonar-scanner
        - stage: deploy
          deploy:
-               script: bash ./script/deploy.sh
+               script: ./script/deploy.sh
                provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
