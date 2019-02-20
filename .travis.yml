@@ -8,18 +8,9 @@ jobs:
                  token:
                     secure: "$SONAR_TOKEN"
          script: sonar-scanner
-       - stage: "Dynamic tests"  
-         name: "Unit tests"
-         script: skip
-       - name: "Integration tests"
-         script: skip
        - stage: deploy
          deploy:
-               - provider: script
-                 script: bash /script/deploy.sh
-                 on:
-                   branch: develop
-               - provider: lambda
+               provider: lambda
                function_name: "megalexa"
                region: "us-east-1"
                role: "arn:aws:iam::401184049861:role/service-role/basicpermission"
