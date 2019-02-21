@@ -1,30 +1,112 @@
-const Alexa = require('alexa-sdk');
-exports.handler = (event, context, callback) => {
-    const alexa = Alexa.handler(event,context);
-    alexa.appId = process.env.APP_ID;
-    alexa.registerHandlers(newSessionHandler,startWorkflowHandlers, outOfSessionHandler,pinDemoHandlers,boxDemoHandlers);
-    alexa.execute();
-
-}
+const Alexa = require('ask-sdk-core');
 
 const BUILTIN_BLOCK_STATE = Array.from(Array(3).keys()).map(k => "BUILTIN_BLOCK_STATE" + k)
 
-const newSessionHandler = {
-    LaunchRequest() {
-        this.handler.state = "WORKFLOW_SELECTION_MODE";
-        this.emit(":ask", "Welcome to megalexa.");
+const LaunchRequestHandler = {
+    canHandle(handlerInput) {
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+      },
+      handle(handlerInput) {
+        const speechText = 'Welcome to megalexa!';
+    
+        return handlerInput.responseBuilder
+          .speak(speechText)
+          .reprompt(speechText)
+          .withSimpleCard('Megalexa', speechText)
+          .getResponse();
+      }
+    };
+
+const HelpIntentHandler = {
+    canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
+    },
+    handle(handlerInput) {
+      const speechText = 'say your workflow name';
+  
+      return handlerInput.responseBuilder
+        .speak(speechText)
+        .reprompt(speechText)
+        .withSimpleCard('MegAlexa', speechText)
+        .getResponse();
     }
+  };
+
+  const CancelAndStopIntentHandler = {
+    canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+        && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+          || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+    },
+    handle(handlerInput) {
+      const speechText = 'Goodbye!';
+  
+      return handlerInput.responseBuilder
+        .speak(speechText)
+        .withSimpleCard('MegAlexa', speechText)
+        .getResponse();
+    }
+  };
+
+  const SessionEndedRequestHandler = {
+    canHandle(handlerInput) {
+      return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+    },
+    handle(handlerInput) {
+      //any cleanup logic goes here
+      return handlerInput.responseBuilder.getResponse();
+    }
+  };
+
+  const ErrorHandler = {
+    canHandle() {
+      return true;
+    },
+    handle(handlerInput, error) {
+      console.log(`Error handled: ${error.message}`);
+  
+      return handlerInput.responseBuilder
+        .speak('Sorry, I can\'t understand the command. Please say again.')
+        .reprompt('Sorry, I can\'t understand the command. Please say again.')
+        .getResponse();
+    },
+  };
+
+  let skill;
+
+exports.handler = async function (event, context) {
+  console.log(`REQUEST++++${JSON.stringify(event)}`);
+  if (!skill) {
+    skill = Alexa.SkillBuilders.custom()
+      .addRequestHandlers(
+        LaunchRequestHandler,
+        startWorkflowHandler,
+        HelpIntentHandler,
+        CancelAndStopIntentHandler,
+        SessionEndedRequestHandler,
+      )
+      .addErrorHandlers(ErrorHandler)
+      .create();
+  }
+
+  const response = await skill.invoke(event, context);
+  console.log(`RESPONSE++++${JSON.stringify(response)}`);
+
+  return response;
 };
 
+  ///////////////////////////////////////////////////////////
+
+/*
 const startWorkflowHandlers = Alexa.CreateStateHandler("WORKFLOW_SELECTION_MODE", {
-    /*
     list_of_workflow_names.foreach(function(workflowName){
         //ask the database what to do with a function
         //(e.g. response = buildResponseByWorkflowName(workflowName))
         this.handler.state = response.state()
         this.emit("ask", "response.say()"); 
     });
-    */
+    
    ///////////// <testing workflow without external functions> demo ///////////////////////////////////
     "WorkflowIntent": function () {
         this.handler.state = "BUILT_IN_WORKFLOW";
@@ -34,7 +116,7 @@ const startWorkflowHandlers = Alexa.CreateStateHandler("WORKFLOW_SELECTION_MODE"
         {
             this.speak("the workflow does not exist, please repeat")
                 .listen("please say a workflow name");
-        }*/
+        }
         this.emit(":responseReady");
     },
 
@@ -51,8 +133,9 @@ const startWorkflowHandlers = Alexa.CreateStateHandler("WORKFLOW_SELECTION_MODE"
         this.emit(':responseReady');
     }
 });
+*/
 
-
+/*
 const outOfSessionHandler = {
 
     'SessionEndedRequest': function () {
@@ -68,7 +151,7 @@ const outOfSessionHandler = {
     }
 };
 
-//////////////////////////////*  demo   *///////////////////////////////
+//////////////////////////////  demo  ///////////////////////////////
 const pinDemoHandlers = Alexa.CreateStateHandler(BUILTIN_BLOCK_STATE[0], {
 
     "pinDemoIntent": function () {
@@ -115,4 +198,4 @@ const boxDemoHandlers = Alexa.CreateStateHandler(BUILTIN_BLOCK_STATE[1], {
                     .listen('error in demo workflow');
         this.emit(':responseReady');
     }
-});
+});*/
