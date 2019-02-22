@@ -1,0 +1,27 @@
+{
+  "name": "megalexa",
+  "version": "0.0.1",
+  "description": "Amazon Alexa skill",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "publish": "bash scripts/publish.sh",
+    "build": "bash scripts/build.sh"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/sgt390/MegAlexaSkill.git"
+  },
+  "keywords": [
+    "amazon",
+    "alexa",
+    "megalexa",
+    "workflow"
+  ],
+  "author": "ZeroSeven",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/sgt390/MegAlexaSkill/issues"
+  },
+  "homepage": "https://github.com/sgt390/MegAlexaSkill#readme"
+}
