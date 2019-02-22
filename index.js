@@ -16,14 +16,15 @@ const LaunchRequestHandler = {
           .getResponse();
       }
     };
+
 const WorkflowIntentHandler = {
   canHandle(handlerInput) {
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'WorkflowIntent';
+      && handlerInput.requestEnvelope.request.intent.name === 'WorkflowIntent' 
   },
   handle(handlerInput) {
     const speechText = 'Workflow';
-
+    // build the workflow with some function
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard('MegAlexa', speechText)
