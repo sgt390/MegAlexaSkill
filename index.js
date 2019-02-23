@@ -17,10 +17,93 @@ const LaunchRequestHandler = {
       }
     };
 
-const WorkflowIntentHandler = {
+const StartedWorkflowIntentHandler = {
   canHandle(handlerInput) {
-    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-      && handlerInput.requestEnvelope.request.intent.name === 'WorkflowIntent' 
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'WorkflowIntent'
+      && request.dialogState !== 'COMPLETED'
+      && !request.intent.slots.workflow_name.value;
+  },
+  handle(handlerInput) {
+    const speechText = "what is your workflow?";
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .addElicitSlotDirective("workflow_name")
+      .getResponse();
+  }
+};
+
+////////////////////////////////////////* BEGIN DEMO *////////////////////////////
+const ElicitInProgressWorkflowIntentHandler = {
+  canHandle(handlerInput) {
+    const attributesManager = handlerInput.attributesManager;
+    const request = handlerInput.requestEnvelope.request;
+    const attributes = attributesManager.getSessionAttributes() || {};
+    attributes.blockStatus = (!request.intent.slots.element.value || request.intent.slots.element.value !== "no")? "elicit": "noElicit";
+    attributesManager.setSessionAttributes(attributes);
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'WorkflowIntent'
+      && request.dialogState !== 'COMPLETED'
+      && request.intent.slots.workflow_name.value
+      && (!handlerInput.attributesManager.getSessionAttributes().blockStatus
+      || handlerInput.attributesManager.getSessionAttributes().blockStatus === "elicit")
+  },
+  handle(handlerInput) {
+    //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
+    //const speechText = block.getResponse();
+    const request = handlerInput.requestEnvelope.request;
+    const speechText = (!request.intent.slots.element.value)? "element1, element2, element3. add an element?": "you added "+ request.intent.slots.element.value +", what's the next item? (say no to stop)";
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .addElicitSlotDirective("element")
+      .getResponse();
+  }
+};
+
+const NotElicitInProgressWorkflowIntentHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'WorkflowIntent'
+      && request.dialogState !== 'COMPLETED'
+      && request.intent.slots.workflow_name.value
+      && handlerInput.attributesManager.getSessionAttributes().blockStatus
+      && handlerInput.attributesManager.getSessionAttributes().blockStatus === "noElicit";
+  },
+  handle(handlerInput) {
+    //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
+    //const speechText = block.getResponse();
+    let speechText = "text to speech";
+    const attributesManager = handlerInput.attributesManager;
+
+    const attributes = attributesManager.getSessionAttributes() || {};
+    attributes.blockStatus = "last";
+    attributesManager.setSessionAttributes(attributes);
+
+    //if the workflow is over...
+    handlerInput.requestEnvelope.request.dialogState = "COMPLETED";
+    speechText += ". workflow ended, please start another workflow";
+
+    //handlerInput.attributesManager.setPersistentAttributes(attributes);
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse();
+  }
+};
+
+//////////////////////////* END DEMO */////////////////////////////////////////
+
+const CompletedWorkflowIntentHandler = {
+  canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    return request.type === 'IntentRequest'
+      && request.intent.name === 'WorkflowIntent'
+      && request.dialogState === 'COMPLETED';
   },
   handle(handlerInput) {
     const speechText = 'Workflow';
@@ -96,7 +179,10 @@ exports.handler = async function (event, context) {
     skill = Alexa.SkillBuilders.custom()
       .addRequestHandlers(
         LaunchRequestHandler,
-        WorkflowIntentHandler,
+        StartedWorkflowIntentHandler,
+        ElicitInProgressWorkflowIntentHandler,
+        NotElicitInProgressWorkflowIntentHandler,
+        CompletedWorkflowIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
