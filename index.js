@@ -1,4 +1,5 @@
-const Alexa = require('ask-sdk-core');
+const Alexa = require('ask-sdk');
+
 
 const BUILTIN_BLOCK_STATE = Array.from(Array(3).keys()).map(k => "BUILTIN_BLOCK_STATE" + k)
 
@@ -50,19 +51,26 @@ const ElicitInProgressWorkflowIntentHandler = {
       && (!handlerInput.attributesManager.getSessionAttributes().blockStatus
       || handlerInput.attributesManager.getSessionAttributes().blockStatus === "elicit")
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
     //const speechText = block.getResponse();
-    const request = handlerInput.requestEnvelope.request;
-    const speechText = (!request.intent.slots.element.value)? "element1, element2, element3. add an element?": "you added "+ request.intent.slots.element.value +", what's the next item? (say no to stop)";
 
-    return handlerInput.responseBuilder
-      .speak(speechText)
-      .reprompt(speechText)
-      .addElicitSlotDirective("element")
-      .getResponse();
+         // const { content } = attributes;
+
+         // let speechText = "your elements are: ";
+         //   content.array.forEach(element => {
+         //     speechText += element + ", ";
+          //  }); 
+          const attributesManager = await handlerInput.attributesManager.getPersistentAttributes() || {};
+
+
+          return handlerInput.responseBuilder
+            .speak(speechText)
+            .reprompt(speechText)
+            .addElicitSlotDirective("element")
+            .getResponse();
   }
-};
+}
 
 const NotElicitInProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
@@ -176,7 +184,7 @@ const HelpIntentHandler = {
 exports.handler = async function (event, context) {
   console.log(`REQUEST++++${JSON.stringify(event)}`);
   if (!skill) {
-    skill = Alexa.SkillBuilders.custom()
+    skill = Alexa.SkillBuilders.standard()
       .addRequestHandlers(
         LaunchRequestHandler,
         StartedWorkflowIntentHandler,
@@ -188,6 +196,8 @@ exports.handler = async function (event, context) {
         SessionEndedRequestHandler,
       )
       .addErrorHandlers(ErrorHandler)
+      .withTableName('magalli')
+      .withAutoCreateTable(true)
       .create();
   }
 
