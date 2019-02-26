@@ -1,0 +1,3 @@
+class Block {
+    get text();
+}
