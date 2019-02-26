@@ -1,8 +1,5 @@
 const Alexa = require('ask-sdk');
 
-
-const BUILTIN_BLOCK_STATE = Array.from(Array(3).keys()).map(k => "BUILTIN_BLOCK_STATE" + k)
-
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
@@ -52,18 +49,7 @@ const ElicitInProgressWorkflowIntentHandler = {
       || handlerInput.attributesManager.getSessionAttributes().blockStatus === "elicit")
   },
   async handle(handlerInput) {
-    //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
-    //const speechText = block.getResponse();
-
-         // const { content } = attributes;
-
-         // let speechText = "your elements are: ";
-         //   content.array.forEach(element => {
-         //     speechText += element + ", ";
-          //  }); 
-          const attributesManager = await handlerInput.attributesManager.getPersistentAttributes() || {};
-
-
+    handlerInput.attributesManager.getSessionAttributes().blockStatus = "noElicit";
           return handlerInput.responseBuilder
             .speak(speechText)
             .reprompt(speechText)
@@ -86,14 +72,6 @@ const NotElicitInProgressWorkflowIntentHandler = {
     //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
     //const speechText = block.getResponse();
     let speechText = "text to speech";
-    const attributesManager = handlerInput.attributesManager;
-
-    const attributes = attributesManager.getSessionAttributes() || {};
-    attributes.blockStatus = "last";
-    attributesManager.setSessionAttributes(attributes);
-
-    //if the workflow is over...
-    handlerInput.requestEnvelope.request.dialogState = "COMPLETED";
     speechText += ". workflow ended, please start another workflow";
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
@@ -196,8 +174,6 @@ exports.handler = async function (event, context) {
         SessionEndedRequestHandler,
       )
       .addErrorHandlers(ErrorHandler)
-      .withTableName('magalli')
-      .withAutoCreateTable(true)
       .create();
   }
 
