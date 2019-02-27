@@ -1,8 +1,11 @@
-const assert = require('chai').assert();
+var assert = require('chai').assert;
 //const myTestingBlock = require(..);
 
 describe('DemoTest', function(){
-    it('app should return hello', function(){
+    it('passing test', function(){
         assert.equal('hel' + 'lo', 'hello');
     });
+    it('not passing test', function(){
+      assert.equal('hel' + 'ol', 'hello');
+  });
 });

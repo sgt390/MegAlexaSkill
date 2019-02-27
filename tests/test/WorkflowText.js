@@ -9,9 +9,13 @@
 * Author            || Date         ||  descriptor
 * Stefano Zanatta   || 2019-02-25   || Created file
 */
-//a = require(..)
-class WorkflowTest {
-    blockTest(position){
-        // ...
-    }
-}
+const assert = require('chai').assert;
+//const workflow = require(../../lambda/classname);
+
+describe('Workflow', function(){
+    it('description', function(){
+        // let result = myfunctionName(..)
+        // assert.equal(result,...);
+        assert.equals(1,1);
+    });
+});
