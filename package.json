@@ -4,7 +4,7 @@
   "description": "Amazon Alexa skill",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "cd tests && mocha",
     "publish-lambda": "bash scripts/publish.sh",
     "build": "bash scripts/build.sh"
   },
@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/sgt390/MegAlexaSkill/issues"
   },
-  "homepage": "https://github.com/sgt390/MegAlexaSkill#readme"
+  "homepage": "https://github.com/sgt390/MegAlexaSkill#readme",
+  "dependencies": {},
+  "devDependencies": {
+    "ask-sdk": "^2.4.0",
+    "aws-sdk": "^2.411.0",
+    "chai": "^4.2.0",
+    "mocha": "^6.0.2"
+  }
 }
