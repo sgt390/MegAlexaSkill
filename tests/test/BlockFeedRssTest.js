@@ -1,13 +1,13 @@
 /*
-* File: Workflow.js
+* File: BlockFeedRssTest.js
 * Version: 0.0.1
-* Date: Date: 2019-02-25
+* Date: Date: 2019-02-26
 * Author: Stefano Zanatta
 * License:
 *
 * History:
 * Author            || Date         ||  descriptor
-* Stefano Zanatta   || 2019-02-25   || Created file
+* Stefano Zanatta   || 2019-02-26   || Created file
 */
 const assert = require('chai').assert;
 //const NameBlock = require(../../lambda/classname);
