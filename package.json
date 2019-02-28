@@ -25,10 +25,5 @@
   },
   "homepage": "https://github.com/sgt390/MegAlexaSkill#readme",
   "dependencies": {},
-  "devDependencies": {
-    "ask-sdk": "^2.4.0",
-    "aws-sdk": "^2.411.0",
-    "chai": "^4.2.0",
-    "mocha": "^6.0.2"
-  }
+  "devDependencies": {}
 }
