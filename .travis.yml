@@ -1,13 +1,14 @@
+dist: trusty
 jobs:
     include:
        - stage: "Static tests"
          name: "Static tests"
          addons:
-          sonarcloud:
-              organization: "sgt390-github"
-              token:
-                secure: "$SONAR_TOKEN"
-          script: sonar-scanner
+            sonarcloud:
+                organization: "sgt390-github"
+                token:
+                  secure: "$SONAR_TOKEN"
+            script: sonar-scanner
        - stage: deploy
          script: bash scripts/deploy.sh
          deploy:
