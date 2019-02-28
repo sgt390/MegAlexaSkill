@@ -1,13 +1,13 @@
 jobs:
     include:
-#       - stage: "Static tests"
-#         name: "Static tests"
-#         addons:
-#            sonarcloud:
-#                 organization: "sgt390-github"
-#                 token:
-#                   secure: "$SONAR_TOKEN"
-#          script: sonar-scanner
+       - stage: "Static tests"
+         name: "Static tests"
+         addons:
+            sonarcloud:
+                 organization: "sgt390-github"
+                 token:
+                   secure: "$SONAR_TOKEN"
+          script: sonar-scanner
        - stage: deploy
          script: bash scripts/deploy.sh
          deploy:
@@ -24,5 +24,5 @@ stages:
   - "Static tests"
   - "Dynamic tests"
   - deploy      
-#notifications:
-#  slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF
+notifications:
+  slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF
