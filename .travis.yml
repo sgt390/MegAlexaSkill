@@ -8,7 +8,7 @@ jobs:
                 organization: "sgt390-github"
                 token:
                   secure: "$SONAR_TOKEN"
-#            script: sonar-scanner
+         script: sonar-scanner
        - stage: deploy
          script: bash scripts/deploy.sh
          deploy:
