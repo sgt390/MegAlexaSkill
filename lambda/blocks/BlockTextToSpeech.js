@@ -9,21 +9,35 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
+//"use strict";
 
-class BlockTextToSpeech extends Block {
-    text;
+// module.exports = class Block {
 
-    constructor(blockID) {
-        this.text=TextFromDB(blockID);
+//     get text(){}
+
+//     parseBlock(blockConfig){}
+
+//     isElicit(){} // boolean for know if there is a interaction whith user
+// }
+
+//const Block = require("Block");
+module.exports = class BlockTextToSpeech {
+
+    constructor(blockConfig) {
+        this.text=blockConfig.textToSpeech;
     }
 
-    text() {
+    get text() {
         return text;
     }
 
     //method will be private (using https://github.com/resugar/resugar)
-    get textFromDB(blockID) {
-        //blockID is used to search the correct text from dynamoDB
+    parseBlock(blockConfig) {
+        return blockConfig.textToSpeech;
+    }
+
+    isElicit(){
+        return false;
     }
 
 }
