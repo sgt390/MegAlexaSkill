@@ -9,17 +9,20 @@
 * Author            || Date         ||  descriptor
 * Stefano Zanatta   || 2019-02-28   || Created file
 */
-const axios = require("axios");
+var axios = require("axios");
+var authentication = {
+    accessKey: 'AKIAIKPQXLQTNZZ6YVVQ',
+    secretKey: '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'
+  };
 module.exports = class Router {
-    constructor(){
-    }
+    constructor(){}
     // #TODO implement a cache system 
     userDataById(userID){
-        const data = {
+        const body = {
             userID: userID
         }
 
-        axios.post('https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/user/read', data)
+        axios.post('https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/user/read', body)
         .then(function (result) {
             console.log("fetched user from database with success.");
             console.log(result.data);
