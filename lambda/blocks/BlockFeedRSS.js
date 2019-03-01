@@ -25,7 +25,6 @@ class BlockFeedRSS extends Block {
         /*  HOW TO:
             feedRSS = new BlockFeedRSS; //URL
             jsonRSS = getjson() //
-            
 
             return parseJson(jsonRSS);
         */
