@@ -9,19 +9,10 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
-//"use strict";
+"use strict";
 
-// module.exports = class Block {
-
-//     get text(){}
-
-//     parseBlock(blockConfig){}
-
-//     isElicit(){} // boolean for know if there is a interaction whith user
-// }
-
-//const Block = require("Block");
-module.exports = class BlockTextToSpeech {
+const Block = require("Block");
+module.exports = class BlockTextToSpeech extends Block {
 
     constructor(blockConfig) {
         this.text=blockConfig.textToSpeech;
