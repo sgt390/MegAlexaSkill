@@ -11,8 +11,8 @@
 */
 var axios = require("axios");
 var authentication = {
-    accessKey: 'AKIAIKPQXLQTNZZ6YVVQ',
-    secretKey: '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'
+    accessKey: '',
+    secretKey: ''
   };
 module.exports = class Router {
     constructor(){}
