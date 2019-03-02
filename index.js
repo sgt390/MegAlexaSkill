@@ -1,4 +1,21 @@
-const Alexa = require('ask-sdk-core');
+/*
+* File: BlockAlarmClock.js
+* Version: 0.0.1
+* Date: 2019-02-20
+* Author: Stefano Zanatta
+* License:
+*
+* History:
+* Author                || Date         || Description
+* Stefano Zanatta      || 2019-02-20   || Created file
+*/
+
+//N.B: must have a look at https://momentjs.com/
+
+/* User will start the workflow, when it's alarm's turn then alexa will start 
+ * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
+*/ 
+const Alexa = require('ask-sdk');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
