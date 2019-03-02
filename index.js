@@ -94,7 +94,7 @@ const InProgressWorkflowIntentHandler = {
     const userID = "AmazonUse56765000";
     workflow = new workflow(slots.workflow_name.value, userID);
     
-    
+
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -102,8 +102,6 @@ const InProgressWorkflowIntentHandler = {
       .getResponse();
   }
 };
-
-//////////////////////////* END DEMO */////////////////////////////////////////
 
 const CompletedWorkflowIntentHandler = {
   canHandle(handlerInput) {
