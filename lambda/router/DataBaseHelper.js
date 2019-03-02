@@ -13,13 +13,21 @@ const Router = require("./router");
 class DataBaseHelper {
 
     constructor(userID){
-        this.router = new Router(userId); 
+        this.userInfo = new Router(userID).userData(); 
     }
     /**
      * @returns array of objects rappresenting blocks
      */
-    blocks(workflow,userID){
-
+    blocks(workflowName){
+        var result=this.userInfo;
+        result.then(result => {
+            console.log(result.Item.workflowList[workflowName]);
+        })
+        .catch(function(error){
+            console.log(error);
+        });
+        //return this.userInfo.workflowList[workflowName];
+        return;
     }
 
     workflows(userID){}
