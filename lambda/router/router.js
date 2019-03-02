@@ -16,18 +16,18 @@ var authentication = {
     accessKey: '',
     secretKey: ''
   };
-module.exports = class Router {
-    constructor(){}
+class Router {
+    constructor(userID){
+        this.userID = userID;
+    }
     // #TODO implement a cache system 
-    userDataById(userID){
+    userData(){
         const body = {
-            userID: userID
+            userID: this.userID
         }
-
-        axios.post('https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/user/read', body)
+        return axios.post('https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/user/read', body)
         .then(function (result) {
             console.log("fetched user from database with success.");
-            console.log(result.data);
             return result.data;
         })
         .catch(function (error) {
@@ -35,3 +35,4 @@ module.exports = class Router {
         });
     }
 }
+module.exports = Router;

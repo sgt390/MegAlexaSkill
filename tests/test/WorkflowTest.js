@@ -17,6 +17,6 @@ describe('Workflow', function(){
     it('description', function(){
         //let result = workflow();
         //assert.equal(result,...);
-        assert.equals(1,1);
+        assert.equal(1,1);
     });
 });

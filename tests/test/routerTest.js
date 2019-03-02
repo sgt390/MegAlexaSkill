@@ -20,35 +20,42 @@ const oracle =
     {
         "email": "matteo.depascale@gmail.com",
         "name": "africa",
+        "userID": "AmazonUse56765000",
         "workflowList": {
             "Buongiorno": [
-                {
-                "blockType": "Allarmino",
-                "textToSpeech": "Ciao, io suono piano"
-                },
-                {
-                "blockType": "Sveglia",
-                "textToSpeech": "Ciao, io suono"
-                },
-                {
-                "blockType": "Allarmone",
-                "textToSpeech": "Ciao, io suono"
-                },
-                {
-                "blockType": "Feed Rss",
-                "textToSpeech": "Ciao, io feeeddo"
-                },
-                {
+            {
                 "blockType": "TextToSpeech",
-                "textToSpeech": "Ciao, io suono"
-                },
-                {
-                "blockType": "feeeed RSS",
-                "textToSpeech": "Ciao, io fido"
+                "config": {
+                "TextToSpeech": "First block goes here"
                 }
+            },
+            {
+                "blockType": "FeedRSS",
+                "config": {
+                "URL": "https://www.ansa.it/sito/ansait_rss.xml"
+                }
+            },
+            {
+                "blockType": "TextToSpeech",
+                "config": {
+                "TextToSpeech": "Third block goes here"
+                }
+            },
+            {
+                "blockType": "Weather",
+                "config": {
+                "latitude": "45.40797",
+                "longitude": "11.88586"
+                }
+            },
+            {
+                "blockType": "TextToSpeech",
+                "config": {
+                "TextToSpeech": "Fifth block goes here"
+                }
+            }
             ]
-        },
-        "userID": "AmazonUse56765000"
+        }
     }
 };
 describe('Router', function(){
