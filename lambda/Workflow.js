@@ -10,11 +10,15 @@
 * Matteo Depascale      || 2019-02-25   || Created file
 */
 'use strict';
-const database = require("./router/DataBaseHelper");
+const Database = require("./router/DataBaseHelper");
 class Workflow {
-    
+    /**
+     * 
+     * @param {*} workflowName 
+     * @param {*} userID 
+     */
     constructor(workflowName, userID) {
-        this.blocks=database.blocks(workflowName, userID);
+        this.blocks= new Database(userID).blocks(workflowName);
     }
 
     block(blockPosition) {
@@ -22,3 +26,5 @@ class Workflow {
     }
     
 }
+
+module.exports = Workflow;

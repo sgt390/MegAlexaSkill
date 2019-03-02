@@ -15,7 +15,7 @@
 /* User will start the workflow, when it's alarm's turn then alexa will start 
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
-const Alexa = require('ask-sdk-core');
+const Alexa = require('ask-sdk');
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -76,6 +76,7 @@ const ElicitInProgressWorkflowIntentHandler = {
             .getResponse();
   }
 }*/
+const workflow = require("./Workflow");
 
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
@@ -84,15 +85,16 @@ const InProgressWorkflowIntentHandler = {
       && request.intent.name === 'WorkflowIntent'
       && request.dialogState !== 'COMPLETED'
       && request.intent.slots.workflow_name.value
-      && handlerInput.attributesManager.getSessionAttributes().blockStatus
-      && handlerInput.attributesManager.getSessionAttributes().blockStatus === "noElicit";
+      && handlerInput.attributesManager.getSessionAttributes().blockType
   },
   handle(handlerInput) {
-    //const block = Workflows.nextBlock(request.intent.slot.workflow_name.value);
-    //const speechText = block.getResponse();
-    let speechText = "text to speech";
-    speechText += ". workflow ended, please start another workflow";
-
+    const request = handlerInput.requestEnvelope.request;
+    const slots = request.intent.slots;
+    // to automize with ask data
+    const userID = "AmazonUse56765000";
+    workflow = new workflow(slots.workflow_name.value, userID);
+    
+    
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)
