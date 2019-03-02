@@ -10,12 +10,7 @@
 * Stefano Zanatta   || 2019-02-28   || Created file
 */
 var axios = require("axios");
-var aws4 = require("aws4-master");
 
-var authentication = {
-    accessKey: '',
-    secretKey: ''
-  };
 class Router {
     constructor(userID){
         this.userID = userID;

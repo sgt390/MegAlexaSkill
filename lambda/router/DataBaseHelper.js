@@ -10,6 +10,7 @@
 * Stefano Zanatta   || 2019-03-02   || Created file
 */
 const Router = require("./router");
+
 class DataBaseHelper {
 
     constructor(userID){
@@ -30,8 +31,6 @@ class DataBaseHelper {
     workflows(userID){}
 
 }
-r = new DataBaseHelper('AmazonUse56765000');
-console.log(r.blocks('Buongiorno'));
 
 
 module.exports = DataBaseHelper;
