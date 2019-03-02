@@ -10,12 +10,15 @@
 * Stefano Zanatta   || 2019-02-26   || Created file
 */
 const assert = require('chai').assert;
-//const NameBlock = require(../../lambda/classname);
+const blockTextToSpeech = require("../../lambda/blocks/BlockTextToSpeech");
 
-describe('FunctionName', function(){
-    it('description', function(){
-        // let result = myfunctionName(..)
-        // assert.equal(result,...);
-        assert.equals(1,1);
+describe('BlockTextToSpeech', function(){
+    it('text return string', function(){
+        objectBlock = {textToSpeech : 'this is a text block'};
+        tts = new blockTextToSpeech(objectBlock);
+        oracle = 'this is a text block';
+        assert.equal(tts.text,oracle);
+
     });
 });
+
