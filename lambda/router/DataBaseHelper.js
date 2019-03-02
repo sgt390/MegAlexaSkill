@@ -19,19 +19,20 @@ class DataBaseHelper {
      * @returns array of objects rappresenting blocks
      */
     blocks(workflowName){
-        var result=this.userInfo;
-        result.then(result => {
-            console.log(result.Item.workflowList[workflowName]);
+        return this.userInfo.then(result => {
+            return result.Item.workflowList[workflowName];
         })
         .catch(function(error){
             console.log(error);
         });
-        //return this.userInfo.workflowList[workflowName];
-        return;
     }
 
     workflows(userID){}
 
 }
+r = new DataBaseHelper('AmazonUse56765000');
+console.log(r.blocks('Buongiorno'));
+
 
 module.exports = DataBaseHelper;
+
