@@ -22,7 +22,3 @@ class Workflow {
     }
     
 }
-
-function blocksIDFromDB(name, userID) {
-    
-}
