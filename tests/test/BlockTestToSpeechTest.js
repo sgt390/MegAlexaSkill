@@ -15,10 +15,10 @@ const blockTextToSpeech = require("../../lambda/blocks/BlockTextToSpeech");
 
 describe('BlockTextToSpeech', function(){
     it('text return string', function(){
-        objectBlock = {textToSpech : 'this is a text block'};
+        objectBlock = {textToSpeech : 'this is a text block'};
         tts = new blockTextToSpeech(objectBlock);
         oracle = 'this is a text block';
-        assert.equal(tts.getText(),oracle);
+        assert.equal(tts.text,oracle);
 
     });
 });
