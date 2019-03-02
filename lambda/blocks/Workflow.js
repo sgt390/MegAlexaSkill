@@ -11,7 +11,6 @@
 */
 
 class Workflow {
-    blocksID=[];
 
     constructor(name, userID) {
         this.blocksID=blocksIDFromDB(name, userID);
