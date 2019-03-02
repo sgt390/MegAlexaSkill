@@ -9,6 +9,7 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
+'use strict';
 const database = require("./router/DataBaseHelper");
 class Workflow {
     

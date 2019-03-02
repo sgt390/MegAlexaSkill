@@ -9,3 +9,4 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created class
 */
+'use strict';
