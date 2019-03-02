@@ -1,21 +1,22 @@
 /*
 * File: Workflow.js
 * Version: 0.0.1
-* Date: Date: 2019-02-26
-* Author: Stefano Zanatta
+* Date: 2019-03-02
+* Author:   Stefano Zanatta  
 * License:
 *
 * History:
-* Author            || Date         ||  descriptor
-* Stefano Zanatta   || 2019-02-26   || Created file
+* Author                || Date         || Description
+* Stefano Zanatta      || 2019-03-02   || Created file
 */
+
 const assert = require('chai').assert;
-//const workflow = require(../../lambda/classname);
+const workflow = require("./../../lambda/Workflow");
 
 describe('Workflow', function(){
     it('description', function(){
-        // let result = myfunctionName(..)
-        // assert.equal(result,...);
+        //let result = workflow();
+        //assert.equal(result,...);
         assert.equals(1,1);
     });
 });

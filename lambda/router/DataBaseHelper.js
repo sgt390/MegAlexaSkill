@@ -1,3 +1,14 @@
+/*
+* File: DataBaseHelper.js
+* Version: 0.0.1
+* Date: Date: 2019-03-02
+* Author: Stefano Zanatta
+* License:
+*
+* History:
+* Author            || Date         ||  descriptor
+* Stefano Zanatta   || 2019-03-02   || Created file
+*/
 const Router = require("./router");
 class DataBaseHelper {
 
@@ -10,7 +21,6 @@ class DataBaseHelper {
     blocks(workflow,userID){
 
     }
-
 
     workflows(userID){}
 
