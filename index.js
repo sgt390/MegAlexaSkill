@@ -24,6 +24,7 @@ const StartedWorkflowIntentHandler = {
       && !request.intent.slots.workflow_name.value;
   },
   handle(handlerInput) {
+    //implement multiple speechText using custom Voice Dialog Flow from ADR Document
     const speechText = "what is your workflow?";
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -34,6 +35,7 @@ const StartedWorkflowIntentHandler = {
 };
 
 ////////////////////////////////////////* BEGIN DEMO *////////////////////////////
+/*
 const ElicitInProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const attributesManager = handlerInput.attributesManager;
@@ -56,9 +58,9 @@ const ElicitInProgressWorkflowIntentHandler = {
             .addElicitSlotDirective("element")
             .getResponse();
   }
-}
+}*/
 
-const NotElicitInProgressWorkflowIntentHandler = {
+const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest'
@@ -166,8 +168,7 @@ exports.handler = async function (event, context) {
       .addRequestHandlers(
         LaunchRequestHandler,
         StartedWorkflowIntentHandler,
-        ElicitInProgressWorkflowIntentHandler,
-        NotElicitInProgressWorkflowIntentHandler,
+        InProgressWorkflowIntentHandler,
         CompletedWorkflowIntentHandler,
         HelpIntentHandler,
         CancelAndStopIntentHandler,
