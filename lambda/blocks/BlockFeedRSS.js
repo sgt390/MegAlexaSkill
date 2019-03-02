@@ -11,7 +11,7 @@
 */
 
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
-
+'use strict';
 class BlockFeedRSS extends Block {
     feedRSS;
 
