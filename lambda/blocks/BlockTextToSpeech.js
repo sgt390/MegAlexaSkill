@@ -11,15 +11,17 @@
 */
 "use strict";
 
-const Block = require("Block");
-module.exports = class BlockTextToSpeech extends Block {
+const Block = require("./Block");
+class BlockTextToSpeech extends Block{
 
     constructor(blockConfig) {
+        super();
         this.text=blockConfig.textToSpeech;
     }
 
-    get text() {
-        return text;
+    getText() {
+        console.log(this.text);
+        return this.text;
     }
 
     //method will be private (using https://github.com/resugar/resugar)
@@ -32,3 +34,5 @@ module.exports = class BlockTextToSpeech extends Block {
     }
 
 }
+
+module.exports = BlockTextToSpeech;

@@ -1,9 +1,9 @@
+'use strict';
+class Block {
 
-module.exports = class Block {
-
-    get text();
-
-    parseBlock(blockConfig);
-
-    isElicit(); // boolean for know if there is a interaction whith user
+    getText(){}
+    parseBlock(blockConfig){}
+    isElicit(){} // boolean for know if there is a interaction whith user
 }
+
+module.exports =  Block;

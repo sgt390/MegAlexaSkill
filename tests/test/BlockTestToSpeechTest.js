@@ -10,14 +10,16 @@
 * Stefano Zanatta   || 2019-02-26   || Created file
 */
 const assert = require('chai').assert;
+const expect = require('chai').expect;
 const blockTextToSpeech = require("../../lambda/blocks/BlockTextToSpeech");
 
 describe('BlockTextToSpeech', function(){
     it('text return string', function(){
         objectBlock = {textToSpech : 'this is a text block'};
         tts = new blockTextToSpeech(objectBlock);
-        oracle = "this is a text block"
-        assert.equals(tts.text(),oracle);
+        oracle = 'this is a text block';
+        assert.equal(tts.getText(),oracle);
+
     });
 });
 
