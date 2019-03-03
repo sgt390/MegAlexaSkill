@@ -17,7 +17,7 @@ const Block = require("./Block");
 let Parser = require('rss-parser');
 let parser = new Parser();
 
-class BlockFeedRSS extends Block {}
+class BlockFeedRSS extends Block {
     constructor(blockConfig) {
         super(blockConfig);
     }
