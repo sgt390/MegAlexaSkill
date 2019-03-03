@@ -39,6 +39,8 @@ class Workflow {
                     case 'FeedRSS':
                         block = new BlockFeedRSS(result.config);
                     break;
+                    default:
+                        console.log("block not found");
                 }
                 return block;
             });
@@ -73,11 +75,45 @@ d();
 async function f(){
     var w = new Workflow("buongiorno","AmazonUse56765000");
     var blocks = await w.blocks;
-    blocks.forEach(obj => {
-        obj = obj.text;
+    blocks.forEach(async function(obj) {
+        obj = await obj.text;
         console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');
-        //console.log()
+        console.log(obj);
     });
 }
 f();
 */
+/*
+async function f(){
+    var w = new Workflow("buongiorno","AmazonUse56765000");
+    var blocks = await w.blocks;
+    /*var result = blocks.reduce(async function(buffer,block) {
+        var b = await block.text;
+        console.log(b);
+        return buffer + block.text;
+        //console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');
+    },"").catch(function(error){
+        console.log(error);
+    });
+   var a =await blocks[0].text;
+    console.log(a);
+}*/
+//f();
+
+var w = new Workflow("firstworkflow","amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ");
+async function a() {
+    
+   var blocks = await w.blocks;
+    var text = "";
+    var b =await blocks.reduce(async function(buffer,block) {
+        //var c = await block.text;
+        //console.log(buffer);
+        return await buffer + await block.text;
+        
+    },"").catch(function(error){
+        console.log(error);
+    });
+   console.log(b);
+}
+a();
+//console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');

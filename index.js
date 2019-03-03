@@ -93,26 +93,28 @@ const InProgressWorkflowIntentHandler = {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
     // to automize with ask data
-    const userID = "AmazonUse56765000";
+    const userID = "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
     const workflow = new Workflow(slots.workflow_name.value, userID);
     var speechText = "";
     const blocks = await workflow.blocks;
     //speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
-    
-    speechText = await blocks.reduce(function(speechText, block){
+    /*
+    speechText = await blocks.reduce(async function(buffer, block){
       var text = "";
       var obj = block.text;
       if(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'){
-            text = obj.then(function(result){
-              return result;
-            }).catch(function(error){
-              console.log(error);
-            });
+            return await buffer + await obj;
       }else{
         text = block.text;
+        return buffer + text;
       }
-      return speechText + text;
     }, "");
+    */
+      speechText = await blocks.reduce(async function(buffer,block) {
+        return await buffer + await block.text;
+      },"").catch(function(error){
+        console.log(error);
+      });
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder

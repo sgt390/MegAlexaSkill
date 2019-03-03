@@ -22,8 +22,9 @@ class BlockFeedRSS extends Block {
         super(blockConfig);
     }
 
+    
     get text() {
-        let feed = parser.parseURL('https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml');
+        let feed = parser.parseURL(this.blockConfig.URL.toString());
         //let stringFeed = "";
         return feed.then(function(result){
             return result.items.map(el => el.title + ". " + el.content + "; ").reduce(((buffer, element) => buffer + element), "");
@@ -37,13 +38,5 @@ class BlockFeedRSS extends Block {
     }
 
 }
-
 module.exports = BlockFeedRSS;
 
-/*
-let b = new BlockFeedRSS({});
-async function a() {
-    let c = await b.text;
-    console.log(c);
-}
-a();*/
