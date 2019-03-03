@@ -12,7 +12,29 @@
 
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 'use strict';
-class BlockFeedRSS {
+const Block = require("./Block");
+class BlockFeedRSS extends Block {
 
-    
+    constructor(blockConfig) {
+        super();
+        this.feedRSS=blockConfig;
+        console.log(this.feedRSS);
+    }
+
+    text() {
+        //logic here
+
+        //   return parseJson(jsonRSS);
+    }
+
+    parseJson() {
+        //parse element return from getJson()
+    }
+    isElicit(){
+        return false;
+    }
+
 }
+const newblockfeedrss = require("./sample.xml");
+new BlockFeedRSS("newblockfeedrss"); 
+
