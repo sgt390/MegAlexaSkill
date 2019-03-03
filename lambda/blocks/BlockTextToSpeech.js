@@ -15,12 +15,11 @@ const Block = require("./Block");
 class BlockTextToSpeech extends Block{
 
     constructor(blockConfig) {
-        super();
-        this.textToSpeech=blockConfig.textToSpeech;
+        super(blockConfig);
     }
 
     get text() {
-        return this.textToSpeech;
+        return this.blockConfig.TextToSpeech;
     }
 
     isElicit(){

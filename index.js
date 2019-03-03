@@ -75,8 +75,11 @@ const ElicitInProgressWorkflowIntentHandler = {
             .addElicitSlotDirective("element")
             .getResponse();
   }
+
+
+  // && handlerInput.attributesManager.getSessionAttributes().blockType
 }*/
-const workflow = require("./Workflow");
+const Workflow = require("./Workflow");
 
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
@@ -85,16 +88,17 @@ const InProgressWorkflowIntentHandler = {
       && request.intent.name === 'WorkflowIntent'
       && request.dialogState !== 'COMPLETED'
       && request.intent.slots.workflow_name.value
-      && handlerInput.attributesManager.getSessionAttributes().blockType
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
     // to automize with ask data
     const userID = "AmazonUse56765000";
-    workflow = new workflow(slots.workflow_name.value, userID);
+    const workflow = new Workflow(slots.workflow_name.value, userID);
+    var speechText = "";
+    const blocks = await workflow.blocks;
+    speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
     
-
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)

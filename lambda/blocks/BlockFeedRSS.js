@@ -12,35 +12,7 @@
 
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 'use strict';
-class BlockFeedRSS extends Block {
-    feedRSS;
+class BlockFeedRSS {
 
-    constructor(blockID) {
-        this.feedRSS=FeedRSSFromDB(blockID);
-    }
-
-    text() {
-        //logic here
-
-        /*  HOW TO:
-            feedRSS = new BlockFeedRSS; //URL
-            jsonRSS = getjson() //
-
-            return parseJson(jsonRSS);
-        */
-    }
-
-    get feedRSSFromDB(blockID) {
-        //blockID is used to search the correct text from dynamoDB
-    }
-
-    get json() {
-        //get .json using url feed rss
-        //asynch call, be careful dude
-    }
-
-    parseJson() {
-        //parse element return from getJson()
-    }
+    
 }
-

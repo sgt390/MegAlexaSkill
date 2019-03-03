@@ -19,7 +19,7 @@ class DataBaseHelper {
     /**
      * @returns array of objects rappresenting blocks
      */
-    blocks(workflowName){
+    workflowByName(workflowName){
         return this.userInfo.then(result => {
             return result.Item.workflowList[workflowName];
         })

@@ -16,7 +16,7 @@ class Router {
         this.userID = userID;
     }
     // #TODO implement a cache system 
-    userData(){
+    userData() {
         const body = {
             userID: this.userID
         }
