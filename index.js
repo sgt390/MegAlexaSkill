@@ -82,6 +82,7 @@ const ElicitInProgressWorkflowIntentHandler = {
 
   // && handlerInput.attributesManager.getSessionAttributes().blockType
 }*/
+//index.js
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -103,7 +104,6 @@ const InProgressWorkflowIntentHandler = {
         console.log(error);
     });
 
-    //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
