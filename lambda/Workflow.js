@@ -104,16 +104,14 @@ var w = new Workflow("firstworkflow","amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ
 async function a() {
     
    var blocks = await w.blocks;
-    var text = "";
     var b =await blocks.reduce(async function(buffer,block) {
-        //var c = await block.text;
-        //console.log(buffer);
-        return await buffer + await block.text;
+        return await buffer +" "+ await block.text+ ";";
         
     },"").catch(function(error){
         console.log(error);
     });
    console.log(b);
 }
+
 a();
 //console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');

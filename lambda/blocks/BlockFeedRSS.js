@@ -27,7 +27,7 @@ class BlockFeedRSS extends Block {
         let feed = parser.parseURL(this.blockConfig.URL.toString());
         //let stringFeed = "";
         return feed.then(function(result){
-            return result.items.map(el => el.title + ". " + el.content + "; ").reduce(((buffer, element) => buffer + element), "");
+            return result.items.map(el => el.title + " " + el.content + " ").reduce(((buffer, element) => buffer + element), "");
         }).catch(function(error) {
             console.log(error);
         })

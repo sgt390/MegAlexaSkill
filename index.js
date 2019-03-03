@@ -97,24 +97,12 @@ const InProgressWorkflowIntentHandler = {
     const workflow = new Workflow(slots.workflow_name.value, userID);
     var speechText = "";
     const blocks = await workflow.blocks;
-    //speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
-    /*
-    speechText = await blocks.reduce(async function(buffer, block){
-      var text = "";
-      var obj = block.text;
-      if(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'){
-            return await buffer + await obj;
-      }else{
-        text = block.text;
-        return buffer + text;
-      }
-    }, "");
-    */
-      speechText = await blocks.reduce(async function(buffer,block) {
-        return await buffer + await block.text;
+
+    speechText = await blocks.reduce(async function(buffer,block) {
+        return await buffer + await block.text + "; ";
       },"").catch(function(error){
         console.log(error);
-      });
+    });
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
