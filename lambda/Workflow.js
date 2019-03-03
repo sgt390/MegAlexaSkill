@@ -99,7 +99,7 @@ async function f(){
     console.log(a);
 }*/
 //f();
-
+/*
 var w = new Workflow("firstworkflow","amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ");
 async function a() {
     
@@ -114,4 +114,5 @@ async function a() {
 }
 
 a();
+*/
 //console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');
