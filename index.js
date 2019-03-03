@@ -68,8 +68,6 @@ const ElicitInProgressWorkflowIntentHandler = {
       && (!handlerInput.attributesManager.getSessionAttributes().blockStatus
       || handlerInput.attributesManager.getSessionAttributes().blockStatus === "elicit")
   },
-    // to automize with ask data
-    const userID = "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
   async handle(handlerInput) {
     handlerInput.attributesManager.getSessionAttributes().blockStatus = "noElicit";
           return handlerInput.responseBuilder
@@ -82,7 +80,6 @@ const ElicitInProgressWorkflowIntentHandler = {
 
   // && handlerInput.attributesManager.getSessionAttributes().blockType
 }*/
-//index.js
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -94,6 +91,8 @@ const InProgressWorkflowIntentHandler = {
   async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
+    // to automize with ask data
+    const userID = "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
     const workflow = new Workflow(slots.workflow_name.value, userID);
     var speechText = "";
     const blocks = await workflow.blocks;
@@ -104,6 +103,7 @@ const InProgressWorkflowIntentHandler = {
         console.log(error);
     });
 
+    //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
