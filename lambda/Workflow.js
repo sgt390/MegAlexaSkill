@@ -38,7 +38,6 @@ class Workflow {
                     break;
                     case 'FeedRSS':
                         block = new BlockFeedRSS(result.config);
-                        console.log(block.text);
                     break;
                 }
                 return block;
@@ -57,15 +56,28 @@ let s = db.blocks.then(function(result){
 }).catch(function(err){
 });
 */
-
+/*
 let wf = new Workflow("buongiorno","AmazonUse56765000");
 async function d (){
     let blocks = await wf.blocks;
     let speechText = "";
     //speechText = blocks.reduce((speechText, block) => speechText + block.text + ". ");
-    //console.log(speechText); 
+    //console.log(speechText);
     blocks.forEach(element => {
-        console.log(element.text);
+        console.log(typeof element.text);
     }); 
 }
 d();
+*/
+/*
+async function f(){
+    var w = new Workflow("buongiorno","AmazonUse56765000");
+    var blocks = await w.blocks;
+    blocks.forEach(obj => {
+        obj = obj.text;
+        console.log(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function');
+        //console.log()
+    });
+}
+f();
+*/

@@ -100,11 +100,18 @@ const InProgressWorkflowIntentHandler = {
     //speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
     
     speechText = await blocks.reduce(function(speechText, block){
-      return block.text.then(function(result){
-          return speechText + result;
-      }).catch(function(error){
-          console.log(error);
-      });
+      var text = "";
+      var obj = block.text;
+      if(!!obj && (typeof obj === 'object' || typeof obj === 'function') && typeof obj.then === 'function'){
+            text = obj.then(function(result){
+              return result;
+            }).catch(function(error){
+              console.log(error);
+            });
+      }else{
+        text = block.text;
+      }
+      return speechText + text;
     }, "");
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
