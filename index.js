@@ -16,6 +16,7 @@
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
 const Alexa = require('ask-sdk');
+const Workflow = require("./Workflow");
 
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
@@ -79,8 +80,6 @@ const ElicitInProgressWorkflowIntentHandler = {
 
   // && handlerInput.attributesManager.getSessionAttributes().blockType
 }*/
-const Workflow = require("./Workflow");
-
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
