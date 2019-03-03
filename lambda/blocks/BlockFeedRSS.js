@@ -11,18 +11,17 @@
 */
 
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
+
 'use strict';
 const Block = require("./Block");
 let Parser = require('rss-parser');
 let parser = new Parser();
 
-class BlockFeedRSS extends Block {
-
+class BlockFeedRSS extends Block {}
     constructor(blockConfig) {
         super(blockConfig);
     }
 
-    
     get text() {
         let feed = parser.parseURL(this.blockConfig.URL.toString());
         //let stringFeed = "";
@@ -36,7 +35,6 @@ class BlockFeedRSS extends Block {
     isElicit(){
         return false;
     }
-
+    
 }
 module.exports = BlockFeedRSS;
-

@@ -6,7 +6,7 @@
 * License:
 *
 * History:
-* Author            || Date         ||  descriptor
+* Author            || Date         || Description
 * Stefano Zanatta   || 2019-03-02   || Created file
 */
 const Router = require("./router");
@@ -28,10 +28,6 @@ class DataBaseHelper {
         });
     }
 
-    workflows(userID){}
-
 }
 
-
 module.exports = DataBaseHelper;
-

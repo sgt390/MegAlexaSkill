@@ -12,8 +12,8 @@
 'use strict';
 
 const Block = require("./Block");
-class BlockTextToSpeech extends Block{
 
+class BlockTextToSpeech extends Block{
     constructor(blockConfig) {
         super(blockConfig);
     }

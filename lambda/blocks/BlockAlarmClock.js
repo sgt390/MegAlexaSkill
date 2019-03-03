@@ -18,7 +18,6 @@
 'use strict';
 
 class BlockAlarmClock extends Block {
-    dateTime;
     
     constructor(blockID) {
         this.DateTime=DateTimeFromDB(blockID);

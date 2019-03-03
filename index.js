@@ -7,7 +7,7 @@
 *
 * History:
 * Author                || Date         || Description
-* Stefano Zanatta      || 2019-02-20   || Created file
+* Stefano Zanatta       || 2019-02-20   || Created file
 */
 
 //N.B: must have a look at https://momentjs.com/

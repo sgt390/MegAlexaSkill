@@ -16,7 +16,6 @@ const BlockFeedRSS = require("./blocks/BlockFeedRSS")
 
 class Workflow {
     /**
-     * 
      * @param {*} workflowName 
      * @param {*} userID 
      */
@@ -51,6 +50,7 @@ class Workflow {
      
 }
 module.exports = Workflow;
+
 /*
 let db = new Workflow("buongiorno","AmazonUse56765000");
 let s = db.blocks.then(function(result){
