@@ -26,6 +26,7 @@ class Workflow {
     block(blockPosition) {
         return this.userWorkflow[blockPosition];
     }
+
     get blocks(){
         let workflow = this.userWorkflow;
         return workflow.then(function(result){
