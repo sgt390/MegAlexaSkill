@@ -12,7 +12,8 @@
 'use strict';
 const Database = require("./router/DataBaseHelper");
 const BlockTextToSpeech = require("./blocks/BlockTextToSpeech");
-const BlockFeedRss = require("./blocks/BlockFeedRSS")
+const BlockFeedRSS = require("./blocks/BlockFeedRSS")
+
 class Workflow {
     /**
      * 
@@ -36,7 +37,8 @@ class Workflow {
                         block = new BlockTextToSpeech(result.config);
                     break;
                     case 'FeedRSS':
-                        block = new BlockFeedRss(result.config);
+                        block = new BlockFeedRSS(result.config);
+                        console.log(block.text);
                     break;
                 }
                 return block;
@@ -55,7 +57,7 @@ let s = db.blocks.then(function(result){
 }).catch(function(err){
 });
 */
-/*
+
 let wf = new Workflow("buongiorno","AmazonUse56765000");
 async function d (){
     let blocks = await wf.blocks;
@@ -67,4 +69,3 @@ async function d (){
     }); 
 }
 d();
-*/

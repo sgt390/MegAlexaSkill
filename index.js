@@ -97,8 +97,16 @@ const InProgressWorkflowIntentHandler = {
     const workflow = new Workflow(slots.workflow_name.value, userID);
     var speechText = "";
     const blocks = await workflow.blocks;
-    speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
+    //speechText += blocks.reduce(((speechText, block) => (speechText + block.text + ". ")), "");
     
+    speechText = await blocks.reduce(function(speechText, block){
+      return block.text.then(function(result){
+          return speechText + result;
+      }).catch(function(error){
+          console.log(error);
+      });
+    }, "");
+
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
       .speak(speechText)

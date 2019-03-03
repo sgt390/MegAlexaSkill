@@ -20,6 +20,12 @@ class BlockTextToSpeech extends Block{
 
     get text() {
         return this.blockConfig.TextToSpeech;
+        /*
+        return new Promise(function(resolve, reject) {
+            resolve(this.blockConfig.TextToSpeech);
+            reject("sadf");
+        });
+        */
     }
 
     isElicit(){

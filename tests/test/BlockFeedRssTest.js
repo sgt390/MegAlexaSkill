@@ -1,5 +1,5 @@
 /*
-* File: BlockFeedRssTest.js
+* File: BlockFeedRSSTest.js
 * Version: 0.0.1
 * Date: Date: 2019-02-26
 * Author: Stefano Zanatta

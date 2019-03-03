@@ -23,12 +23,13 @@ class BlockFeedRSS extends Block {
     }
 
     get text() {
-        let feed = parser.parseURL('http://feeds.washingtonpost.com/rss/rss_powerpost');
+        let feed = parser.parseURL('https://www.ansa.it/sito/notizie/mondo/mondo_rss.xml');
+        //let stringFeed = "";
         return feed.then(function(result){
-            return result.items.map(el => el.title + ". " + el.content);
+            return result.items.map(el => el.title + ". " + el.content + "; ").reduce(((buffer, element) => buffer + element), "");
         }).catch(function(error) {
             console.log(error);
-        });
+        })
     }
 
     isElicit(){
@@ -37,11 +38,12 @@ class BlockFeedRSS extends Block {
 
 }
 
+module.exports = BlockFeedRSS;
+
 /*
 let b = new BlockFeedRSS({});
 async function a() {
     let c = await b.text;
     console.log(c);
 }
-a();
-*/
+a();*/
