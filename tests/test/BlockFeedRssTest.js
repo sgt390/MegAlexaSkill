@@ -10,12 +10,13 @@
 * Stefano Zanatta   || 2019-02-26   || Created file
 */
 const assert = require('chai').assert;
-//const NameBlock = require(../../lambda/classname);
+const blockFeedRSS = require("../../lambda/blocks/BlockFeedRSS");
 
-describe('FunctionName', function(){
-    it('description', function(){
-        // let result = myfunctionName(..)
-        // assert.equal(result,...);
-        assert.equal(1,1);
+describe('BlockFeedRSS', function(){
+    it('test on FeedRSS', function(){
+        objectBlock = {feedRSS : ''};
+        fRSS = new blockFeedRSS(objectBlock);
+        oracle = 'this is a feedRSS block';
+        assert.equal(fRSS.text,oracle);
     });
 });
