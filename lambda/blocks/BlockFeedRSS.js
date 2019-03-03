@@ -13,28 +13,36 @@
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 'use strict';
 const Block = require("./Block");
+let Parser = require('rss-parser');
+let parser = new Parser();
+
 class BlockFeedRSS extends Block {
 
     constructor(blockConfig) {
-        super();
-        this.feedRSS=blockConfig;
-        console.log(this.feedRSS);
+        super(blockConfig);
     }
 
-    text() {
-        //logic here
-
-        //   return parseJson(jsonRSS);
+    get text() {
+        let feed = parser.parseURL('http://www.meteoam.it/situazione.xml');
+        return feed.then(function(result){
+            return result.items.map(el => el.title + ". " + el.description + ". ");
+        }).catch(function(error) {
+            console.log(error);
+        });
     }
 
-    parseJson() {
-        //parse element return from getJson()
-    }
+
+
     isElicit(){
         return false;
     }
 
 }
-const newblockfeedrss = require("./sample.xml");
-new BlockFeedRSS("newblockfeedrss"); 
 
+
+let b = new BlockFeedRSS({});
+async function a() {
+    let c = await b.text;
+    console.log(c);
+}
+a();
