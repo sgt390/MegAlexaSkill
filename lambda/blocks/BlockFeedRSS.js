@@ -23,15 +23,13 @@ class BlockFeedRSS extends Block {
     }
 
     get text() {
-        let feed = parser.parseURL('http://www.meteoam.it/situazione.xml');
+        let feed = parser.parseURL('http://feeds.washingtonpost.com/rss/rss_powerpost');
         return feed.then(function(result){
-            return result.items.map(el => el.title + ". " + el.description + ". ");
+            return result.items.map(el => el.title + ". " + el.content);
         }).catch(function(error) {
             console.log(error);
         });
     }
-
-
 
     isElicit(){
         return false;
@@ -39,10 +37,11 @@ class BlockFeedRSS extends Block {
 
 }
 
-
+/*
 let b = new BlockFeedRSS({});
 async function a() {
     let c = await b.text;
     console.log(c);
 }
 a();
+*/
