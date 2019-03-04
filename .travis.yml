@@ -1,4 +1,10 @@
 dist: trusty
+before_script:
+  - npm install
+stages:
+  - "Static tests"
+  - "Dynamic tests"
+  - deploy  
 jobs:
     include:
        - stage: "Static tests"
@@ -9,8 +15,11 @@ jobs:
                 token:
                   secure: "$SONAR_TOKEN"
          script: sonar-scanner
+       - stage: "Dynamic tests"
+          name: "Unit tests"
+          script: npm test
        - stage: deploy
-         script: bash scripts/deploy.sh
+         script: bash scripts/build.sh
          deploy:
                provider: lambda
                function_name: "megalexa"
@@ -18,11 +27,8 @@ jobs:
                role: "arn:aws:iam::401184049861:role/service-role/basicpermission"
                runtime: "nodejs8.10"
                handler_name: "handler"
-               zip: "lambda/"
+               zip: "scripts/lambda.zip"
                on:
                   branch: develop
-stages:
-  - "Static tests"
-  - deploy      
 notifications:
   slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF
