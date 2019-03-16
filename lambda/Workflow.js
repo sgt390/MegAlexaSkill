@@ -10,7 +10,7 @@
 * Matteo Depascale      || 2019-02-25   || Created file
 */
 'use strict';
-const Database = require("./router/DataBaseHelper");
+const Database = require("./connection/DataBaseHelper");
 const BlockTextToSpeech = require("./blocks/BlockTextToSpeech");
 const BlockFeedRSS = require("./blocks/BlockFeedRSS")
 

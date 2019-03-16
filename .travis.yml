@@ -4,7 +4,6 @@ before_script:
 stages:
   - "Static tests"
   - "Dynamic tests"
-  - deploy  
 jobs:
     include:
        - stage: "Static tests"
@@ -16,8 +15,8 @@ jobs:
                   secure: "$SONAR_TOKEN"
          script: sonar-scanner
        - stage: "Dynamic tests"
-          name: "Unit tests"
-          script: npm test
+         name: "Unit tests"
+         script: npm test
        - stage: deploy
          script: bash scripts/build.sh
          deploy:
