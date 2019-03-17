@@ -12,6 +12,15 @@
 
 export interface Block {
 
-    text(): String;
-    isElicit(): boolean; // boolean for know if there is a interaction whith user
+    /**
+     * @description generate the text to speech
+     * @returns Promise containing the text to speech
+     */
+    text(): Promise<String>;
+    /**
+     * @description evaluates if the block needs one or more parameters from the user to execute
+     */
+    isElicit(): boolean; 
 }
+
+export type BlockConfig = {}

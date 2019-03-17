@@ -16,7 +16,7 @@
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
 const Alexa = require('ask-sdk');
-const Workflow = require("./Workflow");
+import {User} from './lambda/User'
 
 const AUTENTICATION_MESSAGE = "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Alexa App";
 const WELCOME_MESSAGE = "Welcome to megalexa!"; 
@@ -123,10 +123,12 @@ const InProgressWorkflowIntentHandler = {
   async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
+    const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
-    const workflow = new Workflow(slots.workflow_name.value, userAccessToken);
+    const user = new User(userAccessToken);
+    const workflow = await user.workflowFromDatabase(workflowName);
     var speechText = "";
-    const blocks = await workflow.blocks;
+    const blocks = workflow.blocks();
 
     speechText = await blocks.reduce(async function(buffer,block) {
         return await buffer + await block.text + "; ";

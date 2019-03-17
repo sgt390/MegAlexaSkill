@@ -13,17 +13,19 @@
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 
 import {Block} from "./Block";
+import {BlockConfig} from './Block' 
 const Parser = require('rss-parser');
 const parser = new Parser();
 
 export class BlockFeedRSS implements Block {
 
     private _url: String;
-    constructor(blockConfig) {
-        this._url = blockConfig.URL.toString();
+    constructor(blockConfig: BlockConfig) {
+        const blockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
+        this._url = blockFeedRSSConfig.URL.toString();
     }
 
-    public text(): String {
+    public async text(): Promise<String> {
         let feed = parser.parseURL(this._url);
         return feed.then(function(result){
             return result.items.map(el => el.title + " " + el.content + " ").reduce(((buffer, element) => buffer + element), "").trim();
@@ -37,4 +39,8 @@ export class BlockFeedRSS implements Block {
         return false;
     }
     
+}
+
+type BlockFeedRSSConfig = {
+    URL: String
 }

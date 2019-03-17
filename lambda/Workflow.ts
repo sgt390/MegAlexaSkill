@@ -10,46 +10,56 @@
 * Matteo Depascale      || 2019-02-25   || Created file
 */
 'use strict';
-const Database = require("./connection/DataBaseHelper");
-const BlockTextToSpeech = require("./blocks/BlockTextToSpeech");
-const BlockFeedRSS = require("./blocks/BlockFeedRSS")
+import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
+import {BlockFeedRSS} from './blocks/BlockFeedRSS';
+import {Block} from './blocks/Block'
+import {BlockConfig} from './blocks/Block'
 
 export class Workflow {
+
+    private _blocks: Block[];
+    private name: String;
     /**
-     * @param {*} workflowName 
-     * @param {*} userID 
+     *
+     * @param workflowConfigJSON promise containing a workflow and all his blocks
      */
-    constructor(workflowName, userID) {
-        this.userWorkflow = new Database(userID).workflowByName(workflowName);
-    }
-
-    block(blockPosition) {
-        return this.userWorkflow[blockPosition];
-    }
-
-    get blocks(){
-        let workflow = this.userWorkflow;
-        return workflow.then(function(result){
-            return result.map(function(result){
-                let block;
-                switch(result.blockType){
-                    case 'TextToSpeech':
-                        block = new BlockTextToSpeech(result.config);
-                    break;
-                    case 'FeedRSS':
-                        block = new BlockFeedRSS(result.config);
-                    break;
-                    default:
-                        console.log("block not found");
-                }
-                return block;
-            });
-        }).catch(function(error){
-            console.log(error)
+    constructor(workflowConfigJSON: blockJSON[], workflowName: String) {
+        this.name = workflowName; 
+        this._blocks = workflowConfigJSON.map(function(_blockJSON: blockJSON){
+                return Workflow.blockFromJSON(_blockJSON);
         });
+    }
+
+    block(blockPosition: number) {
+        return this._blocks[blockPosition];
+    }
+
+    blocks(): Block[]{
+        return this._blocks;
+    }
+
+    private static blockFromJSON(blockConfigurationJSON: blockJSON): Block {
+        let block: Block;
+        switch(blockConfigurationJSON.blockType){
+            case 'TextToSpeech':
+                block = new BlockTextToSpeech(blockConfigurationJSON.config);
+            break;
+            case 'FeedRSS':
+                block = new BlockFeedRSS(blockConfigurationJSON.config);
+            break;
+            default:
+                console.log("block not found");
+        }
+        return block;
     }
      
 }
+
+type blockJSON = {
+    blockType: String,
+    config: BlockConfig
+}
+
 
 /*
 let db = new Workflow("buongiorno","AmazonUse56765000");

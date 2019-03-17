@@ -9,24 +9,30 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
-import {Block} from "./Block";
+import {Block} from './Block';
+import {BlockConfig} from './Block';
 
 export class BlockTextToSpeech implements Block{
 
     private _text: String;
 
-    constructor(blockConfig) {
-        this._text = blockConfig.TextToSpeech;
+    constructor(blockConfig: BlockConfig) {
+        const blockTTSConfig = <blockConfig> blockConfig;
+        this._text = blockTTSConfig.TextToSpeech;
     }
     /**
      * @TODO
      */
-    public text(): String{
+    public async text(): Promise<String> {
         return this._text;
     }
 
-    public isElicit(): boolean{
+    public isElicit(): boolean {
         return false;
     }
 
+}
+
+type blockConfig = {
+    TextToSpeech: String
 }

@@ -10,23 +10,23 @@
 * Stefano Zanatta   || 2019-02-28   || Created file
 */
 const axios = require("axios");
-import {Workflow} from "../Workflow";
+import {Workflow} from "./Workflow";
 
 export class User {
-    private user_id: Promise<String>;
+    private userID: Promise<String>;
     private name: Promise<String>;
     private email: Promise<String>;
-    private workflows: Promise<Workflow[]>;
 
 constructor(accessToken: String) {
-    const values = this.loginByAccessToken(accessToken).then(function(result){
+    const values = this.credentialsByAccessToken(accessToken)
+    .then(function(result){
         return [result.user_id, result.name, result.email];
     }).catch(function(error){
         console.log("error in User constructor: "+ error);
         return[];
     });
     
-    this.user_id = values.then(response => response[0])
+    this.userID = values.then(response => response[0])
     .catch(error => console.log(error));
 
     this.name = values.then(response => response[1])
@@ -37,7 +37,7 @@ constructor(accessToken: String) {
 
 }
 
-private loginByAccessToken(accessToken: String): Promise<userJSON> {
+private async credentialsByAccessToken(accessToken: String): Promise<userJSON> {
     return axios.get('api.amazon.com/user/profile?access_token=' + accessToken)
     .then(function (result) {
         console.log("logged to amazon with success.");
@@ -50,16 +50,28 @@ private loginByAccessToken(accessToken: String): Promise<userJSON> {
 }
 
 /**
- * download workflows from database and put them in workflows array
- * @TODO
+ * @description download workflows from database and put them in workflows array
  */
-private downloadWorkflows(user_id): Promise<Workflow[]>{
-    return Promise.resolve([]);
+public async workflowFromDatabase(workflowName: String): Promise<Workflow>{
+    const body = {
+        userID: this.userID,
+        workflowName: workflowName
+    };
+    const URL = 'https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/workflow/read';
+    return axios.post(URL, body)
+    .then(function(response){
+        return response;
+    }).catch(function(error){
+        console.log('exception while reading the user_id from database. £££ERROR: '+ error);
+        return 1;
+    });
 }
+
 }
 
 type userJSON = {
     user_id: String,
     name: String,
-    email: String
+    email: String,
+    error: String
 }
