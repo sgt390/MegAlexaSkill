@@ -27,9 +27,9 @@ export class BlockFeedRSS implements Block {
 
     public async text(): Promise<String> {
         let feed = parser.parseURL(this._url);
-        return feed.then(function(result){
+        return feed.then(function(result: feedRssJSON){
             return result.items.map(el => el.title + " " + el.content + " ").reduce(((buffer, element) => buffer + element), "").trim();
-        }).catch(function(error) {
+        }).catch(function(error: String) {
             console.log(error);
             return "there was an error with the feed rss";
         });
@@ -43,4 +43,13 @@ export class BlockFeedRSS implements Block {
 
 type BlockFeedRSSConfig = {
     URL: String
+}
+
+type feedRssJSON = {
+    items: [
+        {
+        title: String,
+        content: String
+        }
+    ]
 }

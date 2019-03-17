@@ -4,7 +4,7 @@
   "description": "Amazon Alexa skill",
   "main": "index.js",
   "scripts": {
-    "test": "cd tests && mocha",
+    "test": "mocha -r ts-node/register ./tests/test/*.ts",
     "publish-lambda": "sh ./scripts/publish.sh",
     "build": "bash scripts/build.sh"
   },
@@ -34,7 +34,10 @@
     "typescript": "^3.3.3333"
   },
   "devDependencies": {
+    "@types/chai": "^4.1.7",
+    "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
-    "mocha": "^6.0.2"
+    "mocha": "^6.0.2",
+    "ts-node": "^8.0.3"
   }
 }

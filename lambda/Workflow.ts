@@ -17,7 +17,7 @@ import {BlockConfig} from './blocks/Block'
 
 export class Workflow {
 
-    private _blocks: Block[];
+    private _blocks: Promise<Block>[];
     private name: String;
     /**
      *
@@ -30,24 +30,25 @@ export class Workflow {
         });
     }
 
-    block(blockPosition: number) {
+    public async block(blockPosition: number): Promise<Block> {
         return this._blocks[blockPosition];
     }
 
-    blocks(): Block[]{
+    public blocks(): Promise<Block>[]{
         return this._blocks;
     }
 
-    private static blockFromJSON(blockConfigurationJSON: blockJSON): Block {
-        let block: Block;
-        switch(blockConfigurationJSON.blockType){
+    private static blockFromJSON(blockConfigurationJSON: blockJSON): Promise<Block> {
+        let block: Promise<Block>;
+        switch(blockConfigurationJSON.blockType) {
             case 'TextToSpeech':
-                block = new BlockTextToSpeech(blockConfigurationJSON.config);
+                block = Promise.resolve(new BlockTextToSpeech(blockConfigurationJSON.config));
             break;
             case 'FeedRSS':
-                block = new BlockFeedRSS(blockConfigurationJSON.config);
+                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
             default:
+                block = Promise.resolve(new BlockTextToSpeech({TextToSpeech: "error"}));
                 console.log("block not found");
         }
         return block;
