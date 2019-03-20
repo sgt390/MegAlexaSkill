@@ -4,7 +4,7 @@
   "description": "Amazon Alexa skill",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register ./tests/test/*.ts",
+    "test": "mocha -r ts-node/register ./tests/*.ts",
     "publish-lambda": "sh ./scripts/publish.sh",
     "build": "bash scripts/build.sh"
   },
