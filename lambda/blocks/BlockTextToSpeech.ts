@@ -1,5 +1,5 @@
 /*
-* File: BlockTextToSpeech.js
+* File: BlockTextToSpeech.ts
 * Version: 0.0.1
 * Date: 2019-02-25
 * Author: Matteo Depascale

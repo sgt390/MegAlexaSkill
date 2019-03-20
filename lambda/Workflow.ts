@@ -1,5 +1,5 @@
 /*
-* File: Workflow.js
+* File: Workflow.ts
 * Version: 0.0.1
 * Date: 2019-02-25
 * Author: Matteo Depascale

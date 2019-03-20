@@ -1,11 +1,11 @@
 /*
-* File: BlockTextToSpeechService.js
+* File: ConnectorBlockCalendar.ts
 * Version: 0.0.1
 * Date: 2019-03-20
-* Author: Stefano Zanatta
+* Author: Matteo Depascale
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Stefano Zanatta       || 2019-03-19   || Created file
+* Matteo Depascale      || 2019-03-20   || Created file
 */

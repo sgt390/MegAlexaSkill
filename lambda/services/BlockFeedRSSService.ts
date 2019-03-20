@@ -1,9 +1,8 @@
-
 /*
-* File: Workflow.js
+* File: BlockFeedRssService.js
 * Version: 0.0.1
 * Date: 2019-02-25
-* Author: Matteo Depascale
+* Author: Stefano Zanatta
 * License:
 *
 * History:
