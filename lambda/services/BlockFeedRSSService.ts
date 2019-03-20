@@ -1,4 +1,3 @@
-import { BlockFeedRSS } from "../concreteBlocks/BlockFeedRSS";
 
 /*
 * File: Workflow.js
