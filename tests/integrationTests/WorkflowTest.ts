@@ -11,9 +11,9 @@
 */
 
 //import {expect} from 'chai';
-import {Workflow} from '../lambda/Workflow';
-import {BlockTextToSpeech} from '../lambda/blocks/BlockTextToSpeech';
-import { Block } from './../lambda/blocks/Block';
+import {Workflow} from '../../lambda/Workflow';
+import {BlockTextToSpeech} from '../../lambda/blocks/BlockTextToSpeech';
+import { Block } from '../../lambda/blocks/Block';
 import {expect} from 'chai';
 
 const workflowConfigJSON = [
