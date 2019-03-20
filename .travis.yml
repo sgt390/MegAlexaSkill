@@ -14,9 +14,12 @@ jobs:
                 token:
                   secure: "$SONAR_TOKEN"
          script: sonar-scanner
-       - stage: "Dynamic tests"
+       - stage: "unit tests"
          name: "Unit tests"
-         script: npm test
+         script: skip
+       - stage: "Integration tests"
+         name: "Integration tests"
+         script: npm run integrationTests
        - stage: deploy
          script: bash scripts/build.sh
          deploy:

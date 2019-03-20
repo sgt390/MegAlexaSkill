@@ -4,9 +4,11 @@
   "description": "Amazon Alexa skill",
   "main": "index.js",
   "scripts": {
-    "test": "mocha -r ts-node/register ./tests/*.ts",
+    "test": "mocha -r ts-node/register ./tests/unitTests/*.ts",
     "publish-lambda": "sh ./scripts/publish.sh",
-    "build": "bash scripts/build.sh"
+    "build": "bash scripts/build.sh",
+    "unitTests": "mocha -r ts-node/register ./tests/unitTests/*.ts",
+    "integrationTests": "mocha -r ts-node/register ./tests/integrationTests/*.ts"
   },
   "repository": {
     "type": "git",
