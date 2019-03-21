@@ -1,45 +1,43 @@
 /*
-* File: BlockTestToSpeechTest.ts
+* File: BlockList.ts
 * Version: 0.0.1
-* Date: Date: 2019-02-26
-* Author: Stefano Zanatta
+* Date: Date: 2019-03-21
+* Author: Andrea Deidda
 * License:
 *
 * History:
 * Author            || Date         ||  descriptior
-* Stefano Zanatta   || 2019-02-26   || Created file
-* Stefano Zanatta   || 2019-03-21   || Completed
+* Andrea Deidda     || 2019-03-21   ||  Created file
 */
 import {expect} from 'chai';
-import { BlockTextToSpeechService } from '../../lambda/services/BlockTextToSpeechService';
+import {BlockList} from "../../lambda/blocks/BlockList";
 
-describe('BlockTextToSpeech', function(){
+describe('BlockList', function(){
     it('block from configuration - positive', function(){
         const objectBlock = {TextToSpeech : 'this is a text block'};
-        const tts = new BlockTextToSpeechService().create(objectBlock);
+        const tts = new BlockList(objectBlock);
         const oracle = 'this is a text block';
         expect(tts.text()).to.equal(oracle);
 
     });
 
-    it('block from configuration - negative TextToSpeech content', function(){
+    it('block from configuration - negative List content', function(){
         const objectBlock = {TextToSpeech : 'this is not a text block'};
-        const tts = new BlockTextToSpeechService().create(objectBlock);
+        const tts = new BlockList(objectBlock);
         const oracle = 'this is a text block';
         expect(tts.text()).to.not.equal(oracle);
     });
 
-    it('block from configuration - TextToSpeech not found', function(){
+    it('block from configuration - List not found', function(){
         const objectBlock = {notTextToSpeech : 'this is a text block'};
-        const tts = new BlockTextToSpeechService().create(objectBlock);
+        const tts = new BlockList(objectBlock);
         const oracle = 'this is a text block';
         expect(tts.text()).to.not.equal(oracle);
     });
 
     it('block from configuration - not elicit', function(){
         const objectBlock = {TextToSpeech : ''};
-        const tts = new BlockTextToSpeechService().create(objectBlock);
+        const tts = new BlockList(objectBlock);
         expect(tts.isElicit()).to.equal(false);
     });
 });
-
