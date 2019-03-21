@@ -15,7 +15,7 @@ export type BlockPinConfig = {
     pin: String;
 }
 
-export type BlockTTSConfigConfig = {
+export type BlockTTSConfig = {
     TextToSpeech: String;
 }
 
@@ -25,4 +25,25 @@ export type BlockFeedRSSConfig = {
 
 export type BlockListConfig = {
     list: []
+}
+
+export type feedRssJSON = {
+    items: [
+        {
+        title: String,
+        content: String
+        }
+    ]
+}
+
+export type userJSON = {
+    user_id: String,
+    name: String,
+    email: String,
+    error: String
+}
+
+export type blockJSON = {
+    blockType: String,
+    config: BlockConfig
 }

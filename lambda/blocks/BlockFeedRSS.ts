@@ -13,7 +13,7 @@
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration"; 
+import {BlockConfig, BlockFeedRSSConfig, feedRssJSON} from "./../JSONconfigurations/JSONconfiguration"; 
 const Parser = require('rss-parser');
 const parser = new Parser();
 
@@ -42,17 +42,4 @@ export class BlockFeedRSS implements Block {
         return false;
     }
     
-}
-
-type BlockFeedRSSConfig = {
-    URL: String
-}
-
-type feedRssJSON = {
-    items: [
-        {
-        title: String,
-        content: String
-        }
-    ]
 }

@@ -11,6 +11,7 @@
 */
 const axios = require("axios");
 import {Workflow} from "./Workflow";
+import { userJSON } from "./JSONconfigurations/JSONconfiguration";
 
 export class User {
     private userID: Promise<String>;
@@ -76,11 +77,4 @@ public async workflowFromDatabase(workflowName: String): Promise<Workflow> {
     });
 }
 
-}
-
-type userJSON = {
-    user_id: String,
-    name: String,
-    email: String,
-    error: String
 }

@@ -27,6 +27,3 @@ export class BlockList implements Block {
     }
 
 }
-type blockConfig = {
-    TextToSpeech: String
-}

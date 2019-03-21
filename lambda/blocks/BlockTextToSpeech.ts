@@ -10,14 +10,14 @@
 * Matteo Depascale      || 2019-02-25   || Created file
 */
 import {Block} from './Block';
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockTTSConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockTextToSpeech implements Block {
 
     private _text: String;
 
     constructor(blockConfig: BlockConfig) {
-        const blockTTSConfig = <blockConfig> blockConfig;
+        const blockTTSConfig = <BlockTTSConfig> blockConfig;
         this._text = blockTTSConfig.TextToSpeech;
         if (this._text === undefined) {
             console.log("TextToSpeech value in TextToSpeech block not found");
@@ -35,8 +35,4 @@ export class BlockTextToSpeech implements Block {
         return false;
     }
 
-}
-
-type blockConfig = {
-    TextToSpeech: String
 }

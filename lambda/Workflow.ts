@@ -13,7 +13,7 @@
 import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
-import {BlockConfig} from './blocks/Block'
+import { blockJSON } from "./JSONconfigurations/JSONconfiguration";
 
 export class Workflow {
 
@@ -54,11 +54,6 @@ export class Workflow {
         return block;
     }
      
-}
-
-type blockJSON = {
-    blockType: String,
-    config: BlockConfig
 }
 
 
