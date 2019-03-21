@@ -59,22 +59,5 @@ private async credentialsByAccessToken(accessToken: String): Promise<userJSON> {
     });
 }
 
-/**
- * @description download workflows from database and put them in workflows array
- */
-public async workflowFromDatabase(workflowName: String): Promise<Workflow> {
-    const body = {
-        userID: this.userID,
-        workflowName: workflowName
-    };
-    const URL = 'https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/workflow/read';
-    return axios.post(URL, body)
-    .then(function(response: {}){
-        return response;
-    }).catch(function(error: String){
-        console.log('exception while reading the user_id from database. £££ERROR: '+ error);
-        return 1;
-    });
-}
 
 }

@@ -8,37 +8,31 @@
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
+* Stefano Zanatta       || 2019-03-21   || Update
 */
 
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 
 import {Block} from "./Block";
-import {BlockConfig, BlockFeedRSSConfig, feedRssJSON} from "./../JSONconfigurations/JSONconfiguration"; 
-const Parser = require('rss-parser');
-const parser = new Parser();
+import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
+import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
 
 export class BlockFeedRSS implements Block {
 
-    private URL: String;
+    private connector: ConnectorBlockFeedRSS;
+
     constructor(blockConfig: BlockConfig) {
-        const blockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
-        this.URL = blockFeedRSSConfig.URL.toString();
+        const blockFeedRSSConfig: BlockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
+        let URL: String = blockFeedRSSConfig.URL.toString();
+        this.connector = new ConnectorBlockFeedRSS(URL);
+
     }
 
     public async text(): Promise<String> {
-        let feed = parser.parseURL(this.URL);
-        return feed.then(function(result: feedRssJSON){
-            return result.items
-            .map(el => el.title + " " + el.content + " ")
-            .reduce(((buffer, element) => buffer + element), "")
-            .trim();
-        }).catch(function(error: String) {
-            console.log(error);
-            return "there was an error with the feed rss";
-        });
+        return this.connector.connect();
     }
 
-    public isElicit(): boolean{
+    public isElicit(): boolean {
         return false;
     }
     

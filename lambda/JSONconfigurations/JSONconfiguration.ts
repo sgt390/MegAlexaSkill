@@ -27,7 +27,7 @@ export type BlockListConfig = {
     list: []
 }
 
-export type feedRssJSON = {
+export type connectorFeedRSSResult = {
     items: [
         {
         title: String,
@@ -47,3 +47,5 @@ export type blockJSON = {
     blockType: String,
     config: BlockConfig
 }
+
+export type connectorResult = {}
