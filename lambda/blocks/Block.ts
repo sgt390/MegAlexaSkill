@@ -23,5 +23,3 @@ export interface Block {
     isElicit(): boolean; 
     toString(): String;
 }
-
-export type BlockConfig = {}

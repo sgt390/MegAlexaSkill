@@ -11,7 +11,7 @@
 * Andrea Deidda         || 2019-03-21   || Update file
 */
 import {Block} from "./Block";
-import {BlockConfig} from './Block'; 
+import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration"; 
 
 export class BlockList implements Block {
 
