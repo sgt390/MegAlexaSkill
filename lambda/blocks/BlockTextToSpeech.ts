@@ -12,18 +12,22 @@
 import {Block} from './Block';
 import {BlockConfig} from './Block';
 
-export class BlockTextToSpeech implements Block{
+export class BlockTextToSpeech implements Block {
 
     private _text: String;
 
     constructor(blockConfig: BlockConfig) {
         const blockTTSConfig = <blockConfig> blockConfig;
         this._text = blockTTSConfig.TextToSpeech;
+        if (this._text === undefined) {
+            console.log("TextToSpeech value in TextToSpeech block not found");
+            this._text = "error";
+        }
     }
     /**
      * @TODO
      */
-    public async text(): Promise<String> {
+    public text(): String {
         return this._text;
     }
 
