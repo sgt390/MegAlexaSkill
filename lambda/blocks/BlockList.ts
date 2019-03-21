@@ -8,13 +8,17 @@
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-20   || Created file
+* Andrea Deidda         || 2019-03-21   || Update file
 */
 import {Block} from "./Block";
 import {BlockConfig} from './Block'; 
 
 export class BlockList implements Block {
 
-    public async text(): Promise<String> {
+    constructor(private blockConfig: BlockConfig){
+        
+    }
+    public text(): String {
         return 'TODO';
     }
 
@@ -22,4 +26,7 @@ export class BlockList implements Block {
         return true;
     }
 
+}
+type blockConfig = {
+    TextToSpeech: String
 }
