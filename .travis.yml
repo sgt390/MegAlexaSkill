@@ -23,7 +23,7 @@ jobs:
          name: "Integration tests"
          script: npm run integrationTests
        - stage: deploy
-         script: bash scripts/build.sh
+         script: sudo apt-get install p7zip-full p7zip-rar && bash scripts/build.sh
          deploy:
                provider: lambda
                function_name: "megalexa"
