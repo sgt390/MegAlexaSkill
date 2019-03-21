@@ -10,29 +10,38 @@
 * Stefano Zanatta   || 2019-03-21   || Created file
 */
 import { Workflow } from "../Workflow";
-import axios from 'axios';
+const axios = require('axios');
+import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
 
 export class WorkflowService {
 
-    constructor(private userID: String, private workflowName: String) {
-    }
 
-    public create() {
-        
+    public async create(userID: Promise<String>, workflowName: String): Promise<Workflow> {
+        let config: Promise<blockJSON[]> = this.workflowFromDatabase(userID,workflowName);
+        return config.then(result => new Workflow(result, workflowName)).catch(function(error) {
+            console.log("error while creating the workflow: " + workflowName + ". £££ERROR: "+ error);
+            return new Workflow([], workflowName);
+        });
     }
+    
     /**
      * @description download a workflow from the database using a GET
      */
-    public async workflowFromDatabase(): Promise<{}> {
+    public async workflowFromDatabase(userID: Promise<String>, workflowName: String): Promise<blockJSON[]> {
         
-        let headers = 'userID=' + this.userID + '&workflowName=' + this.workflowName;
+        let _userID: String = await userID;
+        let headers = 'userID=' + _userID + '&workflowName=' + workflowName;
         const URL = 'https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/workflow?'+ headers;
         return axios.get(URL)
-        .then(function(response: {}){
-            return response;
+        .then(function(response: bigFatData){
+            return response.data;
         }).catch(function(error: String){
             console.log('exception while reading the user_id from database. £££ERROR: '+ error);
-            return 1;
+            return [];
         });
     }
+}
+
+type bigFatData = {
+    data: blockJSON[]
 }

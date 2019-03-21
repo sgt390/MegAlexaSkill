@@ -16,7 +16,7 @@
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
 const Alexa = require('ask-sdk');
-import {User} from './lambda/User'
+const User = require('./User');
 
 const AUTENTICATION_MESSAGE = "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Alexa App";
 const WELCOME_MESSAGE = "Welcome to megalexa!"; 
@@ -150,7 +150,7 @@ const InProgressWorkflowIntentHandler = {
  */
 const getUserAccessToken = function(handlerInput){
   //const { accessToken } = handlerInput.requestEnvelope.context.System.user;
-  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
+  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ"; // THIS IS AN ID >:(
 }
 
 const HelpIntentHandler = {

@@ -24,7 +24,7 @@ export class Workflow {
      * @param workflowConfigJSON promise containing a workflow and all his blocks
      */
     constructor(workflowConfigJSON: blockJSON[], workflowName: String) {
-        this.name = workflowName; 
+        this.name = workflowName;
         this._blocks = workflowConfigJSON.map(function(_blockJSON: blockJSON){
                 return Workflow.blockFromJSON(_blockJSON);
         });
