@@ -13,7 +13,7 @@
 //keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
 
 import {Block} from "./Block";
-import {BlockConfig} from './Block'; 
+import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration"; 
 const Parser = require('rss-parser');
 const parser = new Parser();
 

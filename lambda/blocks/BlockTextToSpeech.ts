@@ -10,7 +10,7 @@
 * Matteo Depascale      || 2019-02-25   || Created file
 */
 import {Block} from './Block';
-import {BlockConfig} from './Block';
+import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockTextToSpeech implements Block {
 
