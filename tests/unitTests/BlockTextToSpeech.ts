@@ -36,7 +36,7 @@ describe('BlockTextToSpeech', function(){
         expect(tts.text()).to.not.equal(oracle);
     });
 
-    it('block from configuration - TextToSpeech not found', function(){
+    it('block from configuration - not elicit', function(){
         const objectBlock = {TextToSpeech : ''};
         const tts = new BlockTextToSpeech(objectBlock);
         expect(tts.isElicit()).to.equal(false);
