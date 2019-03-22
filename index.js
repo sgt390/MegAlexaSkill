@@ -16,7 +16,7 @@
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
 const Alexa = require('ask-sdk');
-import {User} from './lambda/User'
+const {User} = require('./User.js');
 
 const AUTENTICATION_MESSAGE = "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Alexa App";
 const WELCOME_MESSAGE = "Welcome to megalexa!"; 
@@ -126,15 +126,19 @@ const InProgressWorkflowIntentHandler = {
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
-    const workflow = await user.workflowFromDatabase(workflowName);
+    const workflow = await user.workflow(workflowName);
     var speechText = "";
     const blocks = workflow.blocks();
 
-    speechText = await blocks.reduce(async function(buffer,block) {
-        return await buffer + await block.text + "; ";
+    /*speechText = blocks.reduce(async function(buffer,block) {
+        return await buffer + await block.text() + "; ";
       },"").catch(function(error){
         console.log(error);
-    });
+    });*/
+    for (let i=0; i<blocks.length; ++i) {
+      speechText += await blocks[i].then(result => result.text()).catch(error => console.log("Exception while creating the response in index.js. ££££££££ "+ error));
+
+    }
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
@@ -150,7 +154,7 @@ const InProgressWorkflowIntentHandler = {
  */
 const getUserAccessToken = function(handlerInput){
   //const { accessToken } = handlerInput.requestEnvelope.context.System.user;
-  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
+  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ"; // THIS IS AN ID >:(
 }
 
 const HelpIntentHandler = {
