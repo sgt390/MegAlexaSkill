@@ -15,7 +15,6 @@ import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
 
 export class WorkflowService {
 
-
     public async create(userID: Promise<String>, workflowName: String): Promise<Workflow> {
         let config: Promise<blockJSON[]> = this.workflowFromDatabase(userID,workflowName);
         return config.then(result => new Workflow(result, workflowName)).catch(function(error) {
@@ -27,7 +26,7 @@ export class WorkflowService {
     /**
      * @description download a workflow from the database using a GET
      */
-    public async workflowFromDatabase(userID: Promise<String>, workflowName: String): Promise<blockJSON[]> {
+    private async workflowFromDatabase(userID: Promise<String>, workflowName: String): Promise<blockJSON[]> {
         
         let _userID: String = await userID;
         let headers = 'userID=' + _userID + '&workflowName=' + workflowName;

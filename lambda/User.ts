@@ -79,7 +79,7 @@ public async workflow (workflowName: String): Promise<Workflow> {
 
 ////////////////////////////// FOREACH DON'T WORK WITH PROMISE ORDER!.!.!.!!!!.!!!!!!!!!11!!!.
 /* 
-let user = new User("amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ");
+
 user.workflow('poc').then(async function(result){
        let el= result.blocks().map((el,index) => el.then(result => result.text()).catch(er => console.log(er)));
     console.log(await el[4].then(el => el).then(er=>er));
@@ -93,4 +93,20 @@ user.workflow('poc').then(async function(result){
 }).catch(function(error){
     console.log('error in test');
 });
+*/
+/*
+let a = async function(){
+    let user = new User("");
+    let speechText = '';
+    const wf = await user.workflow('poc');
+    const blocks = wf.blocks();
+    for (let i=0; i<4; ++i) {
+        speechText += await blocks[i].then(result => result.text()).catch(error => console.log("Exception while creating the response in index.js. ££££££££ "+ error));
+
+    }
+    console.log(speechText);
+    return speechText;
+}
+
+a();
 */
