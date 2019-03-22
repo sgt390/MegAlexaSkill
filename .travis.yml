@@ -1,4 +1,18 @@
 dist: trusty
+
+language: node_js
+
+node_js: '6'
+
+cache: 
+  - npm
+  - directories:
+    - node_modules
+before_script:
+  - npm install
+  - chmod 0777 ./node_modules/.bin/mocha
+  - chmod 0777 ./*
+
 jobs:
     include:
        - stage: "Static tests"
@@ -9,8 +23,14 @@ jobs:
                 token:
                   secure: "$SONAR_TOKEN"
          script: sonar-scanner
+       - stage: "unit tests"
+         name: "Unit tests"
+         script: skip
+       - stage: "Integration tests"
+         name: "Integration tests"
+         script: npm run integrationTests
        - stage: deploy
-         script: bash scripts/deploy.sh
+         script: sudo apt-get install p7zip-full p7zip-rar && bash scripts/build.sh
          deploy:
                provider: lambda
                function_name: "megalexa"
@@ -18,11 +38,8 @@ jobs:
                role: "arn:aws:iam::401184049861:role/service-role/basicpermission"
                runtime: "nodejs8.10"
                handler_name: "handler"
-               zip: "lambda/"
+               zip: "scripts/lambda.zip"
                on:
                   branch: develop
-stages:
-  - "Static tests"
-  - deploy      
 notifications:
   slack: zerosevengroup:awH2p9uSzEPY9plMSyKBtAHF

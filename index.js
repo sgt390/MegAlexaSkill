@@ -7,8 +7,8 @@
 *
 * History:
 * Author                || Date         || Description
-* Stefano Zanatta      || 2019-02-20   || Created file
-*/
+* Stefano Zanatta       || 2019-02-20   || Created file
+*/ 
 
 //N.B: must have a look at https://momentjs.com/
 
@@ -16,32 +16,61 @@
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
 const Alexa = require('ask-sdk');
+import {User} from './lambda/User'
 
+const AUTENTICATION_MESSAGE = "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Alexa App";
+const WELCOME_MESSAGE = "Welcome to megalexa!"; 
+
+
+/**
+ * LaunchRequest and user has already linked his account
+ */
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
-        return handlerInput.requestEnvelope.request.type === 'LaunchRequest';
+        return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
+                && getUserAccessToken(handlerInput); 
       },
       handle(handlerInput) {
-        const speechText = 'Welcome to megalexa!';
-    
+        speechText = WELCOME_MESSAGE;
         return handlerInput.responseBuilder
           .speak(speechText)
           .reprompt(speechText)
           .withSimpleCard('Megalexa', speechText)
           .getResponse();
       }
-    };
+};
 
+/**
+ * user has not linked his account
+ */
+const MissingAccessTokenHandler = {
+  canHandle(handlerInput) {
+    return !getUserAccessToken(handlerInput)
+  },
+  handle(handlerInput) {
+      speechText += AUTENTICATION_MESSAGE;
+      return handlerInput.responseBuilder
+        .speak(speechText)
+        .withLinkAccountCard()
+        .getResponse();
+  }
+};
+
+/**
+ * first workflow interaction
+ */
 const StartedWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest'
       && request.intent.name === 'WorkflowIntent'
       && request.dialogState !== 'COMPLETED'
-      && !request.intent.slots.workflow_name.value;
+      && !request.intent.slots.workflow_name.value
+      && getUserAccessToken(handlerInput);
   },
   handle(handlerInput) {
     //implement multiple speechText using custom Voice Dialog Flow from ADR Document
+    
     const speechText = "what is your workflow?";
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -50,6 +79,8 @@ const StartedWorkflowIntentHandler = {
       .getResponse();
   }
 };
+
+
 
 ////////////////////////////////////////* BEGIN DEMO *////////////////////////////
 /*
@@ -75,8 +106,10 @@ const ElicitInProgressWorkflowIntentHandler = {
             .addElicitSlotDirective("element")
             .getResponse();
   }
+
+
+  // && handlerInput.attributesManager.getSessionAttributes().blockType
 }*/
-const workflow = require("./Workflow");
 
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
@@ -85,15 +118,23 @@ const InProgressWorkflowIntentHandler = {
       && request.intent.name === 'WorkflowIntent'
       && request.dialogState !== 'COMPLETED'
       && request.intent.slots.workflow_name.value
-      && handlerInput.attributesManager.getSessionAttributes().blockType
+      && getUserAccessToken(handlerInput);
   },
-  handle(handlerInput) {
+  async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
-    // to automize with ask data
-    const userID = "AmazonUse56765000";
-    workflow = new workflow(slots.workflow_name.value, userID);
-    
+    const workflowName = slots.workflow_name.value;
+    const userAccessToken = getUserAccessToken(handlerInput);
+    const user = new User(userAccessToken);
+    const workflow = await user.workflowFromDatabase(workflowName);
+    var speechText = "";
+    const blocks = workflow.blocks();
+
+    speechText = await blocks.reduce(async function(buffer,block) {
+        return await buffer + await block.text + "; ";
+      },"").catch(function(error){
+        console.log(error);
+    });
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
@@ -103,16 +144,40 @@ const InProgressWorkflowIntentHandler = {
   }
 };
 
-const CompletedWorkflowIntentHandler = {
+/**
+ * @TODO
+ * @returns AccessToken of the user
+ */
+const getUserAccessToken = function(handlerInput){
+  //const { accessToken } = handlerInput.requestEnvelope.context.System.user;
+  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ";
+}
+
+const HelpIntentHandler = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    return request.type === 'IntentRequest'
-      && request.intent.name === 'WorkflowIntent'
-      && request.dialogState === 'COMPLETED';
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'Workflow';
-    // build the workflow with some function
+    const speechText = 'say your workflow name or create a new one in your MegAlexa app';
+
+    return handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .withSimpleCard('MegAlexa', speechText)
+      .getResponse();
+  }
+};
+
+const CancelAndStopIntentHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'IntentRequest'
+      && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+  },
+  handle(handlerInput) {
+    const speechText = 'Goodbye!';
+
     return handlerInput.responseBuilder
       .speak(speechText)
       .withSimpleCard('MegAlexa', speechText)
@@ -120,75 +185,43 @@ const CompletedWorkflowIntentHandler = {
   }
 };
 
-const HelpIntentHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
-    },
-    handle(handlerInput) {
-      const speechText = 'say your workflow name';
-  
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .reprompt(speechText)
-        .withSimpleCard('MegAlexa', speechText)
-        .getResponse();
-    }
-  };
+const SessionEndedRequestHandler = {
+  canHandle(handlerInput) {
+    return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
+  },
+  handle(handlerInput) {
+    //any cleanup logic goes here
+    return handlerInput.responseBuilder.getResponse();
+  }
+};
 
-  const CancelAndStopIntentHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'IntentRequest'
-        && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-          || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
-    },
-    handle(handlerInput) {
-      const speechText = 'Goodbye!';
-  
-      return handlerInput.responseBuilder
-        .speak(speechText)
-        .withSimpleCard('MegAlexa', speechText)
-        .getResponse();
-    }
-  };
+const ErrorHandler = {
+  canHandle() {
+    return true;
+  },
+  handle(handlerInput, error) {
+    console.log(`Error handled: ${error.message}`);
 
-  const SessionEndedRequestHandler = {
-    canHandle(handlerInput) {
-      return handlerInput.requestEnvelope.request.type === 'SessionEndedRequest';
-    },
-    handle(handlerInput) {
-      //any cleanup logic goes here
-      return handlerInput.responseBuilder.getResponse();
-    }
-  };
+    return handlerInput.responseBuilder
+      .speak('Sorry, I can\'t understand the command. Please say again.')
+      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+      .getResponse();
+  },
+};
 
-  const ErrorHandler = {
-    canHandle() {
-      return true;
-    },
-    handle(handlerInput, error) {
-      console.log(`Error handled: ${error.message}`);
-  
-      return handlerInput.responseBuilder
-        .speak('Sorry, I can\'t understand the command. Please say again.')
-        .reprompt('Sorry, I can\'t understand the command. Please say again.')
-        .getResponse();
-    },
-  };
-
-  let skill;
+let skill;
 
 exports.handler = async function (event, context) {
   console.log(`REQUEST++++${JSON.stringify(event)}`);
   if (!skill) {
     skill = Alexa.SkillBuilders.standard()
       .addRequestHandlers(
+        CancelAndStopIntentHandler,
+        MissingAccessTokenHandler,
         LaunchRequestHandler,
         StartedWorkflowIntentHandler,
         InProgressWorkflowIntentHandler,
-        CompletedWorkflowIntentHandler,
         HelpIntentHandler,
-        CancelAndStopIntentHandler,
         SessionEndedRequestHandler,
       )
       .addErrorHandlers(ErrorHandler)
