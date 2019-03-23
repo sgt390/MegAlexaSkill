@@ -14,8 +14,11 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockWeather implements Block {
 
+    constructor(private state: String, private region: String) {
+
+    }
     public async text(): Promise<String> {
-        return 'TODO';
+        return '';
     }
 
     isElicit(): boolean {
