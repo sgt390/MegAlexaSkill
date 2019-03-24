@@ -8,9 +8,9 @@
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-20   || Created file
+* Stefano Zanatta       || 2019-03-24   || Completed Class
 */
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockFilterable implements Block {
 
