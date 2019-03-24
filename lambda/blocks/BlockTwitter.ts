@@ -16,7 +16,7 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockTwitter /*extends BlockFeedRSS*/ implements Block {
 
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return 'TODO';
     }
 

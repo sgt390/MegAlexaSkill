@@ -14,10 +14,10 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockWeather implements Block {
 
-    constructor(private state: String, private region: String) {
+    constructor(private state: string, private region: string) {
 
     }
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return '';
     }
 

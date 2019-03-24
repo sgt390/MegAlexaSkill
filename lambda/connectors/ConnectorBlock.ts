@@ -13,5 +13,5 @@ import { connectorResult } from "../JSONconfigurations/JSONconfiguration";
 
 export interface ConnectorBlock {
 
-    connect(): Promise<String>;
+    connect(): Promise<string>;
 }

@@ -23,12 +23,12 @@ export class BlockFeedRSS implements Block {
 
     constructor(blockConfig: BlockConfig) {
         const blockFeedRSSConfig: BlockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
-        let URL: String = blockFeedRSSConfig.URL.toString();
+        let URL: string = blockFeedRSSConfig.URL.toString();
         this.connector = new ConnectorBlockFeedRSS(URL);
 
     }
 
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return this.connector.connect();
     }
 

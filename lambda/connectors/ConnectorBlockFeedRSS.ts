@@ -16,10 +16,10 @@ const parser = new Parser();
 
 export class ConnectorBlockFeedRSS implements ConnectorBlock {
 
-    constructor(private URL: String) {
+    constructor(private URL: string) {
     }
 
-    public async connect(): Promise<String> {
+    public async connect(): Promise<string> {
 
         let feed = parser.parseURL(this.URL);
         return feed.then(function(result: connectorFeedRSSResult){
@@ -27,7 +27,7 @@ export class ConnectorBlockFeedRSS implements ConnectorBlock {
             .map(el => el.title + " " + el.content + " ")
             .reduce(((buffer, element) => buffer + element), "")
             .trim();
-        }).catch(function(error: String) {
+        }).catch(function(error: string) {
             console.log(error);
             return "there was an error with the feed rss";
         });

@@ -18,12 +18,12 @@ import { blockJSON } from "./JSONconfigurations/JSONconfiguration";
 export class Workflow {
 
     private _blocks: Promise<Block>[];
-    private name: String;
+    private name: string;
     /**
      *
      * @param workflowConfigJSON promise containing a workflow and all his blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: String) {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string) {
         this.name = workflowName;
         this._blocks = workflowConfigJSON.map(function(_blockJSON: blockJSON){
                 return Workflow.blockFromJSON(_blockJSON);

@@ -15,17 +15,17 @@ import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfigura
 
 export class BlockPIN implements Block {
 
-    private pin: String;
+    private pin: string;
     constructor(pinConfig: BlockConfig) {
         const _pinConfig = <BlockPinConfig> pinConfig;
         this.pin = _pinConfig.pin;
     }
 
-    public text(): String {
+    public text(): string {
         return 'say your pin to continue';
     }
 
-    public check(pin: String) {
+    public check(pin: string) {
         return pin === this.pin;
     }
 

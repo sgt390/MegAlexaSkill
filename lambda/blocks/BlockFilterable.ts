@@ -14,8 +14,16 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockFilterable implements Block {
 
-    public async text(): Promise<String> {
-        return 'TODO';
+    /**
+     * 
+     * @param filterableBlock block that has to be filtrated.
+     * @param limit number of elements that have to be read
+     */
+    public constructor(private filterableBlock: Filterable, private limit: number){}
+    public async text(): Promise<string> {
+        return this.filterableBlock.listRappresentation().filter((element,index) => index < this.limit).reduce(async function(buffer,element){
+            return await buffer + await element;
+        });
     }
 
     isElicit(): boolean {
