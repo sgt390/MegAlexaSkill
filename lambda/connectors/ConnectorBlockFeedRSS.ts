@@ -19,14 +19,16 @@ export class ConnectorBlockFeedRSS implements ConnectorBlock {
     constructor(private URL: string) {
     }
 
-    public async connect(): Promise<string> {
+    public async connect(limit:number = Number.POSITIVE_INFINITY): Promise<string> {
 
         let feed = parser.parseURL(this.URL);
-        return feed.then(function(result: connectorFeedRSSResult){
+        return feed.then(function(result: connectorFeedRSSResult) {
             return result.items
+            .splice(0,limit)
             .map(el => el.title + " " + el.content + " ")
             .reduce(((buffer, element) => buffer + element), "")
             .trim();
+            
         }).catch(function(error: string) {
             console.log(error);
             return "there was an error with the feed rss";

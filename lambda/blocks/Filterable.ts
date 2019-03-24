@@ -9,10 +9,11 @@
 * Author                || Date         || Description
 * Stefano Zanatta       || 2019-03-24   || Created file
 */
-
-interface Filterable {
+import { Block } from "./Block";
+export interface Filterable {
+    
     /**
      * @returns text() in format of a list of Strings
      */
-    listRappresentation():Promise<string>[];
+    filterBlocks(limit:number): Block;
 }
