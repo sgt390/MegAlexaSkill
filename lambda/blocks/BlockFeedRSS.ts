@@ -16,6 +16,7 @@
 import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
+import { Filterable } from "./Filterable";
 
 export class BlockFeedRSS implements Block, Filterable {
     private connector: ConnectorBlockFeedRSS;
