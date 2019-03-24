@@ -14,7 +14,7 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockCalendar implements Block {
 
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return 'TODO';
     }
 

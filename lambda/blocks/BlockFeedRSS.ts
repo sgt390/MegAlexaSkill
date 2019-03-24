@@ -17,18 +17,24 @@ import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
 
-export class BlockFeedRSS implements Block {
+export class BlockFeedRSS implements Block, Filterable {
+    listRappresentation(): Promise<string>[] {
+        throw new Error("Method not implemented.");
+    }
+    toString(): string {
+        throw new Error("Method not implemented.");
+    }
 
     private connector: ConnectorBlockFeedRSS;
 
     constructor(blockConfig: BlockConfig) {
         const blockFeedRSSConfig: BlockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
-        let URL: String = blockFeedRSSConfig.URL.toString();
+        let URL: string = blockFeedRSSConfig.URL.toString();
         this.connector = new ConnectorBlockFeedRSS(URL);
 
     }
 
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return this.connector.connect();
     }
 

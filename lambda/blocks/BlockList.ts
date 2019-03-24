@@ -18,7 +18,7 @@ export class BlockList implements Block {
     constructor(private blockConfig: BlockConfig){
         
     }
-    public text(): String {
+    public text(): string {
         return 'TODO';
     }
 

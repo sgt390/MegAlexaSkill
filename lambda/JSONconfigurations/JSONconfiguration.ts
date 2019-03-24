@@ -12,15 +12,15 @@
 export type BlockConfig = {}
 
 export type BlockPinConfig = {
-    pin: String;
+    pin: string;
 }
 
 export type BlockTTSConfig = {
-    TextToSpeech: String;
+    TextToSpeech: string;
 }
 
 export type BlockFeedRSSConfig = {
-    URL: String;
+    URL: string;
 }
 
 export type BlockListConfig = {
@@ -30,22 +30,26 @@ export type BlockListConfig = {
 export type connectorFeedRSSResult = {
     items: [
         {
-        title: String,
-        content: String
+        title: string,
+        content: string
         }
     ]
 }
 
 export type userJSON = {
-    user_id: String,
-    name: String,
-    email: String,
-    error: String
+    user_id: string,
+    name: string,
+    email: string,
+    error: string
 }
 
 export type blockJSON = {
-    blockType: String,
+    blockType: string,
     config: BlockConfig
 }
 
 export type connectorResult = {}
+
+export type BlockFilterableConfig = {
+    limit:number
+}

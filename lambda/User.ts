@@ -15,11 +15,11 @@ import { userJSON } from "./JSONconfigurations/JSONconfiguration";
 import { WorkflowService } from "./services/WorkflowService";
 
 export class User {
-    private userID: Promise<String>;
-    private name: Promise<String>;
-    private email: Promise<String>;
+    private userID: Promise<string>;
+    private name: Promise<string>;
+    private email: Promise<string>;
 
-    constructor(accessToken: String) {
+    constructor(accessToken: string) {
         /*
         const values = this.credentialsByAccessToken(accessToken)
         .then(function(result){
@@ -56,20 +56,20 @@ export class User {
     //////////////////////////////////////////////////////////////////////////////////////////
 }
 
-private async credentialsByAccessToken(accessToken: String): Promise<userJSON> {
+private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
     
     return axios.get('api.amazon.com/user/profile?access_token=' + accessToken)
     .then(function (result: userJSON) {
         console.log("logged to amazon with success.");
         return result;
     })
-    .catch(function (error: String) {
+    .catch(function (error: string) {
         console.log(error);
         return {'error':'invalidToken'};
     });
 }
 
-public async workflow (workflowName: String): Promise<Workflow> {
+public async workflow (workflowName: string): Promise<Workflow> {
     return new WorkflowService().create(this.userID, workflowName);
 }
 

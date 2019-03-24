@@ -14,7 +14,7 @@ import {BlockConfig, BlockTTSConfig} from "./../JSONconfigurations/JSONconfigura
 
 export class BlockTextToSpeech implements Block {
 
-    private _text: String;
+    private _text: string;
 
     constructor(blockConfig: BlockConfig) {
         const blockTTSConfig = <BlockTTSConfig> blockConfig;
@@ -27,7 +27,7 @@ export class BlockTextToSpeech implements Block {
     /**
      * @TODO
      */
-    public text(): String {
+    public text(): string {
         return this._text;
     }
 

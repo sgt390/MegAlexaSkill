@@ -14,7 +14,7 @@ import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
 
 export class BlockAlarmClock implements Block {
 
-    public async text(): Promise<String> {
+    public async text(): Promise<string> {
         return 'TODO';
     }
 

@@ -9,17 +9,16 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
-
 export interface Block {
 
     /**
      * @description generate the text to speech
-     * @returns Promise containing the text to speech or the actual String
+     * @returns Promise containing the text to speech or the actual string
      */
-    text(): Promise<String> | String;
+    text(): Promise<string> | string;
     /**
      * @description evaluates if the block needs one or more parameters from the user to execute
      */
     isElicit(): boolean; 
-    toString(): String;
+    toString(): string;
 }
