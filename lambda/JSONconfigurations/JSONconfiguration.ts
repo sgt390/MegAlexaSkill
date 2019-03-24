@@ -49,3 +49,7 @@ export type blockJSON = {
 }
 
 export type connectorResult = {}
+
+export type BlockFilterableConfig = {
+    limit:number
+}

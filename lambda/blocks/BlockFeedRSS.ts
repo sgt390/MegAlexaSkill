@@ -17,7 +17,13 @@ import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
 
-export class BlockFeedRSS implements Block {
+export class BlockFeedRSS implements Block, Filterable {
+    listRappresentation(): Promise<string>[] {
+        throw new Error("Method not implemented.");
+    }
+    toString(): string {
+        throw new Error("Method not implemented.");
+    }
 
     private connector: ConnectorBlockFeedRSS;
 

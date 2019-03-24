@@ -14,10 +14,11 @@ import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
 import { blockJSON } from "./JSONconfigurations/JSONconfiguration";
+import { BlockFilter } from "./blocks/BlockFilter";
 
 export class Workflow {
 
-    private _blocks: Promise<Block>[];
+    private _blocks: Promise<Block>[] = [];
     private name: string;
     /**
      *
@@ -25,9 +26,24 @@ export class Workflow {
      */
     constructor(workflowConfigJSON: blockJSON[], workflowName: string) {
         this.name = workflowName;
-        this._blocks = workflowConfigJSON.map(function(_blockJSON: blockJSON){
-                return Workflow.blockFromJSON(_blockJSON);
+        /*
+        this._blocks = workflowConfigJSON.map(function(blockJSON: blockJSON){
+                return Workflow.blockFromJSON(blockJSON);
         });
+        */
+        for (let i = 0, j=0; i < workflowConfigJSON.length; ++i) {
+            try {
+                if ( workflowConfigJSON[i].blockType == 'Filter' ){
+                    this._blocks[i] = Workflow.filteredBlockFromJSON(Workflow.blockFromJSON(workflowConfigJSON[j+1]), workflowConfigJSON[i]);
+                    j = j + 2;
+                }else {
+                    this._blocks[i] = Workflow.blockFromJSON(workflowConfigJSON[j]);
+                    j++;
+                }
+            }catch(error) {
+                throw new Error('error while creating the workflow: ££££££££ERROR:'+ error);
+            }
+        }
     }
 
     public async block(blockPosition: number): Promise<Block> {
@@ -56,9 +72,12 @@ export class Workflow {
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
             default:
-                block = Promise.resolve(new BlockTextToSpeech({TextToSpeech: "error"}));
-                console.log("block not found");
+                throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');
         }
         return block;
+    }
+
+    private static filteredBlockFromJSON(block:Promise<Block>, blockConfig:blockJSON):Promise<Block> {
+        return Promise.resolve(new BlockFilter(block, blockConfig.config));        
     }
 }

@@ -9,7 +9,6 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
-
 export interface Block {
 
     /**
