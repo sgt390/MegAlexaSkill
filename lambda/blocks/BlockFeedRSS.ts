@@ -16,17 +16,12 @@
 import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
+import { Filterable } from "./Filterable";
 
 export class BlockFeedRSS implements Block, Filterable {
-    listRappresentation(): Promise<string>[] {
-        throw new Error("Method not implemented.");
-    }
-    toString(): string {
-        throw new Error("Method not implemented.");
-    }
-
     private connector: ConnectorBlockFeedRSS;
-
+    private _text: Promise<string> | undefined;
+    private limit: number = Number.POSITIVE_INFINITY;
     constructor(blockConfig: BlockConfig) {
         const blockFeedRSSConfig: BlockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
         let URL: string = blockFeedRSSConfig.URL.toString();
@@ -35,11 +30,25 @@ export class BlockFeedRSS implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return this.connector.connect();
+        /**
+         * Simple cache system
+         */
+        if(!this._text){
+            this._text = this.connector.connect(this.limit);
+        }
+        return this._text;
     }
 
     public isElicit(): boolean {
         return false;
     }
-    
+
+    filterBlocks(limit: number): BlockFeedRSS{
+        this.limit = limit;
+        return this;
+    }
+
+    toString(): string {
+        throw new Error("Method not implemented.");
+    }
 }

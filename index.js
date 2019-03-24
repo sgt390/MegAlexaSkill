@@ -127,18 +127,19 @@ const InProgressWorkflowIntentHandler = {
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
     const workflow = await user.workflow(workflowName);
-    var speechText = "";
-    const blocks = workflow.blocks();
+    //var speechText = "";
+    const speechText = await workflow.text();
 
     /*speechText = blocks.reduce(async function(buffer,block) {
         return await buffer + await block.text() + "; ";
       },"").catch(function(error){
         console.log(error);
     });*/
+    /*
     for (let i=0; i<blocks.length; ++i) {
       speechText += await blocks[i].then(result => result.text()).catch(error => console.log("Exception while creating the response in index.js. ££££££££ "+ error));
-
     }
+    */
 
     //handlerInput.attributesManager.setPersistentAttributes(attributes);
     return handlerInput.responseBuilder
