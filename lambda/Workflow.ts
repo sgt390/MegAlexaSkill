@@ -47,6 +47,7 @@ export class Workflow {
             break;
             case 'Stock':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
+            break;
             case 'Sport':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
@@ -67,7 +68,7 @@ export class Workflow {
                 text += await (blocks[i]).text();
             }
             return text;
-        })
+        });
     }
 
     private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
