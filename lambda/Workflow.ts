@@ -61,10 +61,10 @@ export class Workflow {
 
     public async text(): Promise<string> {
         const blocks = this.filter(this._blocks);
-        return blocks.then(function(blocks){
+        return blocks.then(async function(blocks){
             let text = '';
             for(let i=0; i<blocks.length; ++i) {
-                text += (blocks[i]).text();
+                text += await (blocks[i]).text();
             }
             return text;
         })
