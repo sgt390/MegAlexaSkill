@@ -47,6 +47,7 @@ export class Workflow {
             break;
             case 'Stock':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
+            break;
             case 'Sport':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
@@ -61,13 +62,13 @@ export class Workflow {
 
     public async text(): Promise<string> {
         const blocks = this.filter(this._blocks);
-        return blocks.then(function(blocks){
+        return blocks.then(async function(blocks){
             let text = '';
             for(let i=0; i<blocks.length; ++i) {
-                text += (blocks[i]).text();
+                text += await (blocks[i]).text();
             }
             return text;
-        })
+        });
     }
 
     private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
