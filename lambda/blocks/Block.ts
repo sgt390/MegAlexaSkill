@@ -19,6 +19,6 @@ export interface Block {
     /**
      * @description evaluates if the block needs one or more parameters from the user to execute
      */
-    isElicit(): boolean; 
     toString(): string;
+   
 }

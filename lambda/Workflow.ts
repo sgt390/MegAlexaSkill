@@ -13,9 +13,11 @@
 import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
-import { blockJSON } from "./JSONconfigurations/JSONconfiguration";
+import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration";
 import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
+import { ElicitBlock } from "./blocks/ElicitBlock";
+import { BlockPIN } from "./blocks/BlockPIN";
 
 export class Workflow {
 
@@ -54,21 +56,35 @@ export class Workflow {
             case 'Crypto':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
+            case 'PIN':
+                block = Promise.resolve(new BlockPIN(blockConfigurationJSON.config));
+            break;
             default:
                 throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');
         }
         return block;
     }
 
-    public async text(): Promise<string> {
+    public async alexaResponse(): Promise<AlexaResponse> {
         const blocks = this.filter(this._blocks);
-        return blocks.then(async function(blocks){
-            let text = '';
-            for(let i=0; i<blocks.length; ++i) {
+        return  blocks.then(async function(blocks){
+            let text: string = '';
+            let foundSlotElicit: boolean = false;
+            let elicitSlot: string = '';
+            for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
                 text += await (blocks[i]).text();
+                if((blocks[i] instanceof ElicitBlock)) {
+                    elicitSlot = (<ElicitBlock>blocks[i]).typeElicitSlot();
+                    foundSlotElicit=true;
+                }
+            } 
+            
+            return {
+                text: text,
+                elicitSlot:elicitSlot
             }
-            return text;
         });
+        
     }
 
     private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
@@ -84,4 +100,6 @@ export class Workflow {
         }
         return blocks;
     }
+
 }
+

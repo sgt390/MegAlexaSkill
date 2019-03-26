@@ -39,10 +39,6 @@ export class BlockFeedRSS implements Block, Filterable {
         return this._text;
     }
 
-    public isElicit(): boolean {
-        return false;
-    }
-
     filterBlocks(limit: number): BlockFeedRSS{
         this.limit = limit;
         return this;

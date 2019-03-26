@@ -12,7 +12,7 @@
 export type BlockConfig = {}
 
 export type BlockPinConfig = {
-    pin: string;
+    PIN: string;
 }
 
 export type BlockTTSConfig = {
@@ -52,4 +52,9 @@ export type connectorResult = {}
 
 export type BlockFilterableConfig = {
     limit:number
+}
+
+export type  AlexaResponse = {
+    text: string,
+    elicitSlot: string
 }
