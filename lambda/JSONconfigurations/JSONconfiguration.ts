@@ -56,5 +56,6 @@ export type BlockFilterableConfig = {
 
 export type  AlexaResponse = {
     text: string,
-    elicitSlot: string
+    elicitSlot: string,
+    position: number
 }

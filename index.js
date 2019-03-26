@@ -123,6 +123,8 @@ const InProgressWorkflowIntentHandler = {
   async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
+    const attributesManager = handlerInput.attributesManager;
+
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
@@ -132,6 +134,16 @@ const InProgressWorkflowIntentHandler = {
     const speechText = alexaResponse.text;
     const elicitSlot= alexaResponse.elicitSlot;
 
+    /**
+     * set the position of the workflow
+     */
+    const attributes = attributesManager.getSessionAttributes() || {};
+    attributes.workflowPosition = alexaResponse.position;
+    attributesManager.setSessionAttributes(attributes);
+
+    /**
+     * Alexa response output
+     */
     response = (elicitSlot === '')? handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)

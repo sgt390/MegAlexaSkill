@@ -71,17 +71,20 @@ export class Workflow {
             let _text: string = '';
             let foundSlotElicit: boolean = false;
             let elicitSlot: string = '';
+            let position = -1;
             for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
                 _text += await blocks[i].text();
                 if((blocks[i] instanceof ElicitBlock)) {
                     elicitSlot = (<ElicitBlock>blocks[i]).typeElicitSlot();
                     foundSlotElicit=true;
+                    position = i;
                 }
             } 
             
             return {
                 text: _text,
-                elicitSlot:elicitSlot
+                elicitSlot:elicitSlot,
+                position: position
             }
         });
         
