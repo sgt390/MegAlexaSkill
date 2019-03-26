@@ -68,11 +68,11 @@ export class Workflow {
     public async alexaResponse(): Promise<AlexaResponse> {
         const blocks = this.filter(this._blocks);
         return  blocks.then(async function(blocks){
-            let text: string = '';
+            let _text: string = '';
             let foundSlotElicit: boolean = false;
             let elicitSlot: string = '';
             for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
-                text += await (blocks[i]).text();
+                _text += await blocks[i].text();
                 if((blocks[i] instanceof ElicitBlock)) {
                     elicitSlot = (<ElicitBlock>blocks[i]).typeElicitSlot();
                     foundSlotElicit=true;
@@ -80,7 +80,7 @@ export class Workflow {
             } 
             
             return {
-                text: text,
+                text: _text,
                 elicitSlot:elicitSlot
             }
         });
@@ -90,10 +90,13 @@ export class Workflow {
     private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
         let blocks: Promise<Block[]> = Promise.resolve([]);
         for (let i = 0,j = 0; i < filterBlocks.length && j < filterBlocks.length; ++i) {
+            console.log(filterBlocks[j] instanceof Filter);
             if(filterBlocks[j] instanceof Filter){
-                (await blocks).push((<Filterable><unknown>filterBlocks[j+1]).filterBlocks((<Filter> await filterBlocks[j]).limit()));
+                console.log('£££££££££ 5555 $$$$$$$$$$$$$');
+                (await blocks).push(<Block>((<Filterable><unknown>filterBlocks[j+1]).filterBlocks((<Filter> await filterBlocks[j]).limit())));
                 j = j + 2;
             } else {
+                console.log('£££££££££ 123 $$$$$$$$$$$$$');
                 (await blocks).push((<Block> await filterBlocks[j]));
                 ++j;
             }
@@ -103,3 +106,19 @@ export class Workflow {
 
 }
 
+const wf = new Workflow(
+    [
+        {
+          "blockType": "TextToSpeech",
+          "config": {
+            "TextToSpeech": "This is the second block"
+          }
+        },
+        {
+            "blockType": "Filter",
+            "config": {
+              "limit": 5
+            }
+          }
+      ], 'poc');
+wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
