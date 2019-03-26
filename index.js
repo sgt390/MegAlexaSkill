@@ -141,6 +141,7 @@ const InProgressWorkflowIntentHandler = {
     attributes.workflowPosition = alexaResponse.position;
     attributesManager.setSessionAttributes(attributes);
 
+    console.log('----SLOT:'+attributes.workflowPosition);
     /**
      * Alexa response output
      */
