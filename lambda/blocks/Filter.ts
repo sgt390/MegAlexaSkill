@@ -20,7 +20,7 @@ export class Filter {
         this._limit = (<BlockFilterableConfig> config).limit;
     }
 
-    public limit() {
+    public limit(): number {
         return this._limit;
     }
 }

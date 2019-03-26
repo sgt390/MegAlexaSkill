@@ -87,17 +87,15 @@ export class Workflow {
         
     }
 
-    private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
+    private async filter(_filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
         let blocks: Promise<Block[]> = Promise.resolve([]);
-        for (let i = 0,j = 0; i < filterBlocks.length && j < filterBlocks.length; ++i) {
-            console.log(filterBlocks[j] instanceof Filter);
-            if(filterBlocks[j] instanceof Filter){
-                console.log('£££££££££ 5555 $$$$$$$$$$$$$');
-                (await blocks).push(<Block>((<Filterable><unknown>filterBlocks[j+1]).filterBlocks((<Filter> await filterBlocks[j]).limit())));
+        for (let i = 0,j = 0; i < _filterBlocks.length && j < _filterBlocks.length; ++i) {
+            const block = await _filterBlocks[j];
+            if(block instanceof Filter){
+                (await blocks).push(<Block>((await <Filterable><unknown>_filterBlocks[j+1]).filterBlocks((<Filter> block).limit())));
                 j = j + 2;
             } else {
-                console.log('£££££££££ 123 $$$$$$$$$$$$$');
-                (await blocks).push((<Block> await filterBlocks[j]));
+                (await blocks).push((<Block> await _filterBlocks[j]));
                 ++j;
             }
         }
@@ -109,16 +107,16 @@ export class Workflow {
 const wf = new Workflow(
     [
         {
-          "blockType": "TextToSpeech",
-          "config": {
-            "TextToSpeech": "This is the second block"
-          }
-        },
-        {
             "blockType": "Filter",
             "config": {
-              "limit": 5
+                "limit": 2
             }
-          }
+        },
+        {
+            "blockType": "FeedRSS",
+            "config": {
+              "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
+            }
+        }        
       ], 'poc');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
