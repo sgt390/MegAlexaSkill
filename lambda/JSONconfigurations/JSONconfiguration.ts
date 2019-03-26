@@ -12,7 +12,7 @@
 export type BlockConfig = {}
 
 export type BlockPinConfig = {
-    pin: string;
+    PIN: string;
 }
 
 export type BlockTTSConfig = {
