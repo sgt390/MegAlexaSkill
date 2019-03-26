@@ -16,6 +16,7 @@ import {Block} from './blocks/Block'
 import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration";
 import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
+import { ElicitBlock } from "./blocks/ElicitBlock";
 
 export class Workflow {
 
@@ -54,6 +55,9 @@ export class Workflow {
             case 'Crypto':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
+            case 'PIN':
+                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
+            break;
             default:
                 throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');
         }
@@ -68,11 +72,12 @@ export class Workflow {
             let elicitSlot: string = '';
             for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
                 text += await (blocks[i]).text();
-                if(blocks[i].isElicit()){
-                    elicitSlot = blocks[i].typeElicitSlot();
+                if((blocks[i] instanceof ElicitBlock)) {
+                    elicitSlot = (<ElicitBlock>blocks[i]).typeElicitSlot();
                     foundSlotElicit=true;
                 }
-            }
+            } 
+            
             return {
                 text: text,
                 elicitSlot:elicitSlot
@@ -94,12 +99,6 @@ export class Workflow {
         }
         return blocks;
     }
-    
-    public async isElicit(): boolean {
-
-    }
-
-
 
 }
 

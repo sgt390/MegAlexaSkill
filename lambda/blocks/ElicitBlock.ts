@@ -11,7 +11,14 @@
 */
 import {Block} from "./Block";
 
-export interface ElicitBlock extends Block {
-    isElicit(): boolean;
-    typeElicitSlot(): string;
+export class ElicitBlock implements Block {
+    text(): string | Promise<string> {
+        throw new Error("Method not implemented.");
+    }
+    toString(): string {
+        throw new Error("Method not implemented.");
+    }
+    typeElicitSlot(): string{
+        throw new Error("Method not implemented.");
+    }
 }

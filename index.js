@@ -127,28 +127,21 @@ const InProgressWorkflowIntentHandler = {
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
     const workflow = await user.workflow(workflowName);
-    //var speechText = "";
-    const response = await workflow.alexaResponse();
-    const speechText = response.text;
-    const elicitSlot= response.elicitSlot;
 
-    /*speechText = blocks.reduce(async function(buffer,block) {
-        return await buffer + await block.text() + "; ";
-      },"").catch(function(error){
-        console.log(error);
-    });*/
-    /*
-    for (let i=0; i<blocks.length; ++i) {
-      speechText += await blocks[i].then(result => result.text()).catch(error => console.log("Exception while creating the response in index.js. ££££££££ "+ error));
-    }
-    */
+    const alexaResponse = await workflow.alexaResponse();
+    const speechText = alexaResponse.text;
+    const elicitSlot= alexaResponse.elicitSlot;
 
-    //handlerInput.attributesManager.setPersistentAttributes(attributes);
-    return handlerInput.responseBuilder
+    response = (elicitSlot === '')? handlerInput.responseBuilder
+      .speak(speechText)
+      .reprompt(speechText)
+      .getResponse(): 
+      handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
       .addElicitSlotDirective(elicitSlot)
       .getResponse();
+    return response;
   }
 };
 
