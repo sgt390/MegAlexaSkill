@@ -124,24 +124,25 @@ const InProgressWorkflowIntentHandler = {
     const request = handlerInput.requestEnvelope.request;
     const slots = request.intent.slots;
     const attributesManager = handlerInput.attributesManager;
+    const attributes = attributesManager.getSessionAttributes() || {};
 
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
-    const workflow = await user.workflow(workflowName);
+    // >>>>>>>>>>>>>>>>>>>> POSSIBLE ERROR FOR UNDEFINED <<<<<<<<<<<<<<<
+    const workflowPosition = attributes.workflowPosition;
+    const elicitSlot = slots.elicitSlot;
+    let workflow = (workflowPosition === undefined || elicitSlot)? await user.workflow(workflowName, workflowPosition): await user.workflow(workflowName, workflowPosition, workflowPosition, elicitSlot);
 
     const alexaResponse = await workflow.alexaResponse();
     const speechText = alexaResponse.text;
-    const elicitSlot= alexaResponse.elicitSlot;
 
     /**
      * set the position of the workflow
      */
-    const attributes = attributesManager.getSessionAttributes() || {};
     attributes.workflowPosition = alexaResponse.position;
     attributesManager.setSessionAttributes(attributes);
 
-    console.log('----SLOT:'+attributes.workflowPosition);
     /**
      * Alexa response output
      */
@@ -152,7 +153,7 @@ const InProgressWorkflowIntentHandler = {
       handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
-      .addElicitSlotDirective(elicitSlot)
+      .addElicitSlotDirective('elicitSlot')
       .getResponse();
     return response;
   }

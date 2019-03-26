@@ -27,11 +27,11 @@ export class Workflow {
      *
      * @param workflowConfigJSON promise containing a workflow and all his blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: string) {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number, private elicitSlot: String) {
         this.name = workflowName;
         
-        this._blocks = workflowConfigJSON.map(function(blockJSON: blockJSON){
-                return Workflow.blockFromJSON(blockJSON);
+        this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
+            return Workflow.blockFromJSON(blockJSON);
         });
     }
 
@@ -64,7 +64,7 @@ export class Workflow {
         }
         return block;
     }
-
+/////////////////// SET THE ELICIT IN THE BLOCKS
     public async alexaResponse(): Promise<AlexaResponse> {
         const blocks = this.filter(this._blocks);
         return  blocks.then(async function(blocks){
@@ -80,7 +80,6 @@ export class Workflow {
                     position = i;
                 }
             } 
-            
             return {
                 text: _text,
                 elicitSlot:elicitSlot,

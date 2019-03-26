@@ -15,11 +15,10 @@ import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
 
 export class WorkflowService {
 
-    public async create(userID: Promise<string>, workflowName: string): Promise<Workflow> {
+    public async create(userID: Promise<string>, workflowName: string, position: number = -1, slot: String = ''): Promise<Workflow> {
         let config: Promise<blockJSON[]> = this.workflowFromDatabase(userID,workflowName);
-        return config.then(result => new Workflow(result, workflowName)).catch(function(error) {
-            console.log("error while creating the workflow: " + workflowName + ". £££ERROR: "+ error);
-            return new Workflow([], workflowName);
+        return config.then(result => new Workflow(result, workflowName, position, slot)).catch(function(error) {
+            throw new error("error while creating the workflow: " + workflowName + ". £££ERROR: "+ error);
         });
     }
     

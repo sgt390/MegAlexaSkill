@@ -69,8 +69,8 @@ private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
     });
 }
 
-public async workflow (workflowName: string): Promise<Workflow> {
-    return new WorkflowService().create(this.userID, workflowName);
+public async workflow (workflowName: string, position: number = -1, elicitSlot: String = ''): Promise<Workflow> {
+    return new WorkflowService().create(this.userID, workflowName, position, elicitSlot);
 }
 
 }
