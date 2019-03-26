@@ -17,6 +17,7 @@ import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration
 import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
 import { ElicitBlock } from "./blocks/ElicitBlock";
+import { BlockPIN } from "./blocks/BlockPIN";
 
 export class Workflow {
 
@@ -56,7 +57,7 @@ export class Workflow {
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
             break;
             case 'PIN':
-                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
+                block = Promise.resolve(new BlockPIN(blockConfigurationJSON.config));
             break;
             default:
                 throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');
