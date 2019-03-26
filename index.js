@@ -128,7 +128,9 @@ const InProgressWorkflowIntentHandler = {
     const user = new User(userAccessToken);
     const workflow = await user.workflow(workflowName);
     //var speechText = "";
-    const speechText = await workflow.text();
+    const response = await workflow.alexaResponse();
+    const speechText = response.text;
+    const elicitSlot= response.elicitSlot;
 
     /*speechText = blocks.reduce(async function(buffer,block) {
         return await buffer + await block.text() + "; ";
@@ -145,6 +147,7 @@ const InProgressWorkflowIntentHandler = {
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
+      .addElicitSlotDirective(elicitSlot)
       .getResponse();
   }
 };

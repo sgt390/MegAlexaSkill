@@ -10,10 +10,10 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 * Stefano Zanatta       || 2019-03-21   || Updated
 */
-import {Block} from "./Block";
 import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { ElicitBlock } from "./ElicitBlock";
 
-export class BlockPIN implements Block {
+export class BlockPIN implements ElicitBlock {
 
     private pin: string;
     constructor(pinConfig: BlockConfig) {
@@ -31,6 +31,9 @@ export class BlockPIN implements Block {
 
     isElicit(): boolean {
         return true;
+    }
+    typeElicitSlot(): string{
+        return "pin";
     }
 
 }

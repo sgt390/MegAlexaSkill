@@ -13,7 +13,7 @@
 import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
-import { blockJSON } from "./JSONconfigurations/JSONconfiguration";
+import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration";
 import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
 
@@ -60,15 +60,25 @@ export class Workflow {
         return block;
     }
 
-    public async text(): Promise<string> {
+    public async alexaResponse(): Promise<AlexaResponse> {
         const blocks = this.filter(this._blocks);
-        return blocks.then(async function(blocks){
-            let text = '';
-            for(let i=0; i<blocks.length; ++i) {
+        return  blocks.then(async function(blocks){
+            let text: string = '';
+            let foundSlotElicit: boolean = false;
+            let elicitSlot: string = '';
+            for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
                 text += await (blocks[i]).text();
+                if(blocks[i].isElicit()){
+                    elicitSlot = blocks[i].typeElicitSlot();
+                    foundSlotElicit=true;
+                }
             }
-            return text;
+            return {
+                text: text,
+                elicitSlot:elicitSlot
+            }
         });
+        
     }
 
     private async filter(filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
@@ -84,4 +94,12 @@ export class Workflow {
         }
         return blocks;
     }
+    
+    public async isElicit(): boolean {
+
+    }
+
+
+
 }
+

@@ -53,3 +53,8 @@ export type connectorResult = {}
 export type BlockFilterableConfig = {
     limit:number
 }
+
+export type  AlexaResponse = {
+    text: string,
+    elicitSlot: string
+}
