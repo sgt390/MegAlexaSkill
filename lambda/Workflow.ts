@@ -127,7 +127,7 @@ export class Workflow {
     }
 
 }
-
+/*
 const wf = new Workflow(
     [
         {
@@ -156,3 +156,4 @@ const wf = new Workflow(
         }       
       ], 'poc',-1,'');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+*/

@@ -147,7 +147,6 @@ const InProgressWorkflowIntentHandler = {
     /**
      * Alexa response output
      */
-    console.log(elicitSlot);
     response = (!elicitSlot)? handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
