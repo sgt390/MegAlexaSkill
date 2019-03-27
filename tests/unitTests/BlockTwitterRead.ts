@@ -10,10 +10,10 @@
 * Andrea Deidda     || 2019-03-21   ||  Created file
 */
 import {expect} from 'chai';
-import {BlockTwitter} from "../../lambda/blocks/BlockTwitter";
+import {BlockTwitterRead} from "../../lambda/blocks/BlockTwitterRead";
 import { AssertionError } from 'assert';
 
-describe('BlockTwitter', function(){
+describe('BlockTwitterRead', function(){
     it('block from configuration - positive', function(){
         //TODO
     });

@@ -1,18 +1,19 @@
 /*
-* File: BlockTwitter.ts
+* File: BlockTwitterRead.ts
 * Version: 0.0.1
-* Date: 2019-03-20
+* Date: 2019-03-27
 * Author: Matteo Depascale
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
+* Matteo Depascale      || 2019-03-27   || Created file
 */
 import {Block} from "./Block";
 import {BlockConfig} from "../JSONconfigurations/JSONconfiguration";
 
-//N.B. this could use extends BlockFeedRSS, need some studying boy
+//https://www.npmjs.com/package/twitter
+
 
 export class BlockTwitterRead /*extends BlockFeedRSS*/ implements Block {
 
