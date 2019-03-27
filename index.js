@@ -130,16 +130,16 @@ const InProgressWorkflowIntentHandler = {
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
     const workflowPosition = attributes.workflowPosition;
-    const elicitSlot = slots.elicitSlot;
+    const elicitSlot = slots.elicitSlot.value;
     if (workflowPosition === undefined || elicitSlot === undefined) {
       workflow = await user.workflow(workflowName);
     } else {
       ////////////////////////////////// REMOVE //////////////////////////////
-      console.log('position: '+workflowPosition.value);
-      console.log('position: '+elicitSlot.value);
+      console.log('position: '+workflowPosition);
+      console.log('position: '+elicitSlot);
 
 
-      workflow = await user.workflow(workflowName, workflowPosition.value, elicitSlot.value);
+      workflow = await user.workflow(workflowName, workflowPosition, elicitSlot);
     }
 
     const alexaResponse = await workflow.alexaResponse();
