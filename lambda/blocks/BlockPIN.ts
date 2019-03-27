@@ -14,26 +14,46 @@ import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfigura
 import { ElicitBlock } from "./ElicitBlock";
 
 export class BlockPIN implements ElicitBlock {
-
-    private PIN: string;
+    private correctPIN: string;
+    private userPIN: string;
     constructor(pinConfig: BlockConfig) {
         const _pinConfig = <BlockPinConfig> pinConfig;
-        this.PIN = _pinConfig.PIN;
+        this.correctPIN = _pinConfig.PIN;
+        this.userPIN = '';
     }
 
     public text(): string {
-        return 'say your pin to continue';
+        let response = 'say your pin to continue';
+        if(this.userPIN != '') {
+            if(this.check(this.correctPIN, this.userPIN)) {
+                response = 'pin is correct.';
+            } else {
+                response = 'incorrect, please repeat';
+                this.setElicitSlot('');
+            }
+        }
+        return response;
     }
 
-    public check(PIN: string) {
-        return PIN === this.PIN;
+    public check(PIN: string, userPIN: string) {
+        return PIN === userPIN;
     }
 
-    isElicit(): boolean {
-        return true;
+    slotRequired(): boolean {
+        if(this.userPIN == ''){
+            return true;
+        }
+        else{
+            return false;
+        }
     }
-    typeElicitSlot(): string{
+    
+    typeElicitSlot(): string {
         return "PIN";
+    }
+
+    setElicitSlot(slot: string): void {
+        this.userPIN = slot;
     }
 
 }
