@@ -91,7 +91,6 @@ export class Workflow {
                     workflowPosition = i;
                 }
             }
-
             return {
                 text: _text,
                 elicitSlot:elicitSlot,
@@ -112,7 +111,7 @@ export class Workflow {
 
         for (let i = 0,j = 0; i < _filterBlocks.length && j < _filterBlocks.length; ++i) {
             const filterBlock = await _filterBlocks[j];
-            if(filterBlock instanceof Filter){
+            if(filterBlock instanceof Filter) {
                 /**
                  * _filterBlocks[j+1] is the filterable block
                  */
@@ -154,6 +153,6 @@ const wf = new Workflow(
               "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
             }
         }       
-      ], 'poc',-1,'');
+      ], 'poc',1,'1234');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
 */

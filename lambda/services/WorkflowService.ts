@@ -15,7 +15,7 @@ import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
 
 export class WorkflowService {
 
-    public async create(userID: Promise<string>, workflowName: string, position: number = -1, slot: string = ''): Promise<Workflow> {
+    public async create(userID: Promise<string>, workflowName: string, position: number, slot: string): Promise<Workflow> {
         let config: Promise<blockJSON[]> = this.workflowFromDatabase(userID,workflowName);
         return config.then(result => new Workflow(result, workflowName, position, slot)).catch(function(error) {
             throw new error("error while creating the workflow: " + workflowName + ". £££ERROR: "+ error);

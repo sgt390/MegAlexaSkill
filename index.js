@@ -129,11 +129,15 @@ const InProgressWorkflowIntentHandler = {
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
-    // >>>>>>>>>>>>>>>>>>>> POSSIBLE ERROR FOR UNDEFINED <<<<<<<<<<<<<<<
     const workflowPosition = attributes.workflowPosition;
     const elicitSlot = slots.elicitSlot;
-    console.log(workflowPosition === undefined);
-    let workflow = (workflowPosition === undefined || elicitSlot === undefined)? await user.workflow(workflowName): await user.workflow(workflowName, workflowPosition.value, elicitSlot.value);
+    if (workflowPosition !== undefined && elicitSlot !== undefined) {
+      workflow = await user.workflow(workflowName);
+    } else {
+      workflow = await user.workflow(workflowName, workflowPosition.value, elicitSlot.value);
+      ////////////////////////////////// REMOVE //////////////////////////////
+      console.log('WORKFLOW: '+workflow);
+    }
 
     const alexaResponse = await workflow.alexaResponse();
     const speechText = alexaResponse.text;
