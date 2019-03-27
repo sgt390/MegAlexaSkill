@@ -25,9 +25,9 @@ export class Workflow {
     private name: string;
     /**
      *
-     * @param workflowConfigJSON promise containing a workflow and all his blocks
+     * @param workflowConfigJSON promise containing a workflow and all its blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number, private elicitSlot: String) {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number,private elicitSlot:string = '') {
         this.name = workflowName;
         
         this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
@@ -64,37 +64,54 @@ export class Workflow {
         }
         return block;
     }
-/////////////////// SET THE ELICIT IN THE BLOCKS
+
     public async alexaResponse(): Promise<AlexaResponse> {
+
         const blocks = this.filter(this._blocks);
-        return  blocks.then(async function(blocks){
+        const slot = this.elicitSlot;
+        return  blocks.then(async function(blocks) {
             let _text: string = '';
-            let foundSlotElicit: boolean = false;
-            let elicitSlot: string = '';
-            let position = -1;
-            for(let i=0; i<blocks.length && !foundSlotElicit; ++i) {
+            let elicitSlot: boolean = false;
+            let workflowPosition = -1;
+
+            if (slot != '' && (<ElicitBlock>blocks[0]).setElicitSlot){
+                (<ElicitBlock>blocks[0]).setElicitSlot(slot);
+            }
+            // cycle until there are no more blocks or an elicit block is found
+            for(let i=0; i<blocks.length && !elicitSlot; ++i) {
                 _text += await blocks[i].text();
-                if((blocks[i] instanceof ElicitBlock)) {
-                    elicitSlot = (<ElicitBlock>blocks[i]).typeElicitSlot();
-                    foundSlotElicit=true;
-                    position = i;
+                // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
+                if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
+                    elicitSlot = true;
+                    workflowPosition = i;
                 }
-            } 
+            }
+
             return {
                 text: _text,
                 elicitSlot:elicitSlot,
-                position: position
+                position: workflowPosition
             }
         });
-        
     }
 
+    /**
+     * 
+     * @param _filterBlocks list of blocks & filters
+     * @returns list of blocks
+     * @description filters any block that comes after a filter; filters are removed in the process
+     */
     private async filter(_filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
+
         let blocks: Promise<Block[]> = Promise.resolve([]);
+
         for (let i = 0,j = 0; i < _filterBlocks.length && j < _filterBlocks.length; ++i) {
-            const block = await _filterBlocks[j];
-            if(block instanceof Filter){
-                (await blocks).push(<Block>((await <Filterable><unknown>_filterBlocks[j+1]).filterBlocks((<Filter> block).limit())));
+            const filterBlock = await _filterBlocks[j];
+            if(filterBlock instanceof Filter){
+                /**
+                 * _filterBlocks[j+1] is the filterable block
+                 */
+                (await blocks).push(<Block>((await <Filterable><unknown>_filterBlocks[j+1]).filterBlocks((<Filter> filterBlock).limit())));
                 j = j + 2;
             } else {
                 (await blocks).push((<Block> await _filterBlocks[j]));
@@ -106,8 +123,16 @@ export class Workflow {
 
 }
 /*
+
 const wf = new Workflow(
     [
+        
+        {
+            "blockType": "PIN",
+            "config": {
+                "PIN": '1234'
+            }
+        },
         {
             "blockType": "Filter",
             "config": {
@@ -119,7 +144,7 @@ const wf = new Workflow(
             "config": {
               "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
             }
-        }        
-      ], 'poc');
+        }       
+      ], 'poc',-1,'');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
 */

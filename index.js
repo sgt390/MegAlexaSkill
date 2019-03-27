@@ -132,7 +132,8 @@ const InProgressWorkflowIntentHandler = {
     // >>>>>>>>>>>>>>>>>>>> POSSIBLE ERROR FOR UNDEFINED <<<<<<<<<<<<<<<
     const workflowPosition = attributes.workflowPosition;
     const elicitSlot = slots.elicitSlot;
-    let workflow = (workflowPosition === undefined || elicitSlot)? await user.workflow(workflowName, workflowPosition): await user.workflow(workflowName, workflowPosition, workflowPosition, elicitSlot);
+    console.log(workflowPosition === undefined);
+    let workflow = (workflowPosition === undefined || elicitSlot === undefined)? await user.workflow(workflowName): await user.workflow(workflowName, workflowPosition.value, elicitSlot.value);
 
     const alexaResponse = await workflow.alexaResponse();
     const speechText = alexaResponse.text;
@@ -146,7 +147,7 @@ const InProgressWorkflowIntentHandler = {
     /**
      * Alexa response output
      */
-    response = (elicitSlot === '')? handlerInput.responseBuilder
+    response = (!elicitSlot)? handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
       .getResponse(): 

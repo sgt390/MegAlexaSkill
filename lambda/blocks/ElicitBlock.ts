@@ -24,4 +24,7 @@ export class ElicitBlock implements Block {
     setElicitSlot(slot:String): void{
         throw new Error("Method not implemented.");
     }
+    slotRequired(): boolean {
+        throw new Error("Method not implemented.");
+    }
 }
