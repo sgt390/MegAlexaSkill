@@ -25,7 +25,7 @@ export class BlockPIN implements ElicitBlock {
     public text(): string {
         let response = 'say your pin to continue';
         if(this.userPIN != '') {
-            if(this.userPIN === this.correctPIN) {
+            if(this.check(this.correctPIN, this.userPIN)) {
                 response = 'pin is correct.';
             } else {
                 response = 'incorrect, please repeat';
@@ -35,8 +35,8 @@ export class BlockPIN implements ElicitBlock {
         return response;
     }
 
-    public check(PIN: string) {
-        return PIN === this.userPIN;
+    public check(PIN: string, userPIN: string) {
+        return PIN === userPIN;
     }
 
     slotRequired(): boolean {

@@ -27,12 +27,12 @@ export class Workflow {
      *
      * @param workflowConfigJSON promise containing a workflow and all its blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number, private elicitSlot:string = '') {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string,private workflowStartingPosition: number, private elicitSlot:string = '') {
         this.name = workflowName;
         /**
          * workflow starts from workflowStartingPosition
          */
-        this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
+        this._blocks = workflowConfigJSON.filter((el,index) => index >= this.workflowStartingPosition).map(function(blockJSON: blockJSON) {
             return Workflow.blockFromJSON(blockJSON);
         });
     }
@@ -70,12 +70,12 @@ export class Workflow {
     public async alexaResponse(): Promise<AlexaResponse> {
 
         const blocks = this.filter(this._blocks);
+        let workflowPosition:number = this.workflowStartingPosition;
         const slot = this.elicitSlot;
+
         return  blocks.then(async function(blocks) {
             let _text: string = '';
             let elicitSlot: boolean = false;
-            let workflowPosition = -1;
-
             /**
              * if ElicitSlot is not empty, set the slot of the first block 
              */
@@ -88,7 +88,7 @@ export class Workflow {
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
-                    workflowPosition = i;
+                    workflowPosition = workflowPosition + i;
                 }
             }
             return {
