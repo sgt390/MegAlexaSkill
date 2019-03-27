@@ -131,7 +131,7 @@ const InProgressWorkflowIntentHandler = {
     const user = new User(userAccessToken);
     const workflowPosition = attributes.workflowPosition;
     const elicitSlot = slots.elicitSlot;
-    if (workflowPosition !== undefined && elicitSlot !== undefined) {
+    if (workflowPosition === undefined || elicitSlot === undefined) {
       workflow = await user.workflow(workflowName);
     } else {
       workflow = await user.workflow(workflowName, workflowPosition.value, elicitSlot.value);
