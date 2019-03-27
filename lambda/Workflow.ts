@@ -32,6 +32,8 @@ export class Workflow {
         /**
          * workflow starts from workflowStartingPosition
          */
+        ///////////////////////// REMOVE //////////////////////////
+        console.log('parameters: ' + workflowStartingPosition + elicitSlot);
         this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
             return Workflow.blockFromJSON(blockJSON);
         });
@@ -126,7 +128,7 @@ export class Workflow {
     }
 
 }
-/*
+
 const wf = new Workflow(
     [
         {
@@ -155,4 +157,3 @@ const wf = new Workflow(
         }       
       ], 'poc',1,'1234');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/
