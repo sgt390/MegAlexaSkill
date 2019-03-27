@@ -134,11 +134,6 @@ const InProgressWorkflowIntentHandler = {
     if (workflowPosition === undefined || elicitSlot === undefined) {
       workflow = await user.workflow(workflowName);
     } else {
-      ////////////////////////////////// REMOVE //////////////////////////////
-      console.log('position: '+workflowPosition);
-      console.log('position: '+elicitSlot);
-
-
       workflow = await user.workflow(workflowName, workflowPosition, elicitSlot);
     }
 
@@ -152,7 +147,6 @@ const InProgressWorkflowIntentHandler = {
     attributesManager.setSessionAttributes(attributes);
 
     const elicit = alexaResponse.elicitSlot;
-    console.log('elicit: '+ elicit);
     /**
      * Alexa response output
      */

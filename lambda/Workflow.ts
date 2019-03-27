@@ -32,8 +32,6 @@ export class Workflow {
         /**
          * workflow starts from workflowStartingPosition
          */
-        ///////////////////////// REMOVE //////////////////////////
-        console.log('parameters: ' + workflowStartingPosition + elicitSlot);
         this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
             return Workflow.blockFromJSON(blockJSON);
         });
@@ -86,7 +84,7 @@ export class Workflow {
             }
             // cycle until there are no more blocks or an elicit block is found
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
-                _text += await blocks[i].text();
+                _text += await blocks[i].text() + "; ";
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
@@ -129,6 +127,7 @@ export class Workflow {
 
 }
 
+/*
 const wf = new Workflow(
     [
         {
@@ -157,4 +156,4 @@ const wf = new Workflow(
         }       
       ], 'poc',1,'1234');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-
+*/
