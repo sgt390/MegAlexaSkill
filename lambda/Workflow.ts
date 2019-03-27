@@ -27,9 +27,11 @@ export class Workflow {
      *
      * @param workflowConfigJSON promise containing a workflow and all its blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number,private elicitSlot:string = '') {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string, workflowStartingPosition: number, private elicitSlot:string = '') {
         this.name = workflowName;
-        
+        /**
+         * workflow starts from workflowStartingPosition
+         */
         this._blocks = workflowConfigJSON.filter((el,index) => index >= workflowStartingPosition).map(function(blockJSON: blockJSON) {
             return Workflow.blockFromJSON(blockJSON);
         });
@@ -74,7 +76,10 @@ export class Workflow {
             let elicitSlot: boolean = false;
             let workflowPosition = -1;
 
-            if (slot != '' && (<ElicitBlock>blocks[0]).setElicitSlot){
+            /**
+             * if ElicitSlot is not empty, set the slot of the first block 
+             */
+            if (slot != '' &&(<ElicitBlock>blocks[0]).setElicitSlot){
                 (<ElicitBlock>blocks[0]).setElicitSlot(slot);
             }
             // cycle until there are no more blocks or an elicit block is found
@@ -122,11 +127,15 @@ export class Workflow {
     }
 
 }
-/*
 
 const wf = new Workflow(
     [
-        
+        {
+            "blockType": "TextToSpeech",
+            "config": {
+                "TextToSpeech": 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+            }
+        },        
         {
             "blockType": "PIN",
             "config": {
@@ -147,4 +156,3 @@ const wf = new Workflow(
         }       
       ], 'poc',-1,'');
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/
