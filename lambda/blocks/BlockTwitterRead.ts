@@ -15,7 +15,7 @@ import {BlockConfig} from "../JSONconfigurations/JSONconfiguration";
 //https://www.npmjs.com/package/twitter
 
 
-export class BlockTwitterRead /*extends BlockFeedRSS*/ implements Block {
+export class BlockTwitterRead  implements Block {
 
     public async text(): Promise<string> {
         return 'TODO';
