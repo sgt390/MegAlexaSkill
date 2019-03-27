@@ -10,11 +10,11 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 */
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
+import {BlockConfig} from "../JSONconfigurations/JSONconfiguration";
 
 //N.B. this could use extends BlockFeedRSS, need some studying boy
 
-export class BlockTwitter /*extends BlockFeedRSS*/ implements Block {
+export class BlockTwitterRead /*extends BlockFeedRSS*/ implements Block {
 
     public async text(): Promise<string> {
         return 'TODO';
