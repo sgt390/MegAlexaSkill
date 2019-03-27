@@ -151,6 +151,7 @@ const InProgressWorkflowIntentHandler = {
     attributes.workflowPosition = alexaResponse.position;
     attributesManager.setSessionAttributes(attributes);
 
+    elicitSlot = alexaResponse.elicitSlot;
     /**
      * Alexa response output
      */
