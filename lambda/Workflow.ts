@@ -18,6 +18,7 @@ import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
 import { ElicitBlock } from "./blocks/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
+import { BlockList} from "./blocks/BlockList";
 
 export class Workflow {
 
@@ -48,6 +49,9 @@ export class Workflow {
             break;
             case 'FeedRSS':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
+            break;
+            case 'List':
+                block = Promise.resolve(new BlockList(blockConfigurationJSON.config));
             break;
             case 'Stock':
                 block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
@@ -127,19 +131,19 @@ export class Workflow {
 
 }
 
-/*
-const wf = new Workflow(
+
+/*const wf = new Workflow(
     [
         {
-            "blockType": "TextToSpeech",
+            "blockType": "Filter",
             "config": {
-                "TextToSpeech": 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaa'
+                "limit": 2
             }
         },        
         {
-            "blockType": "PIN",
+            "blockType": "List",
             "config": {
-                "PIN": '1234'
+                "List": [ 'uno','due','tre','quattro']
             }
         },
         {
@@ -154,6 +158,5 @@ const wf = new Workflow(
               "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
             }
         }       
-      ], 'poc',1,'1234');
-wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/
+      ], 'poc',0,'1234');
+wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));*/
