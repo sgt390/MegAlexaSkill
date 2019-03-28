@@ -9,20 +9,41 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-27   || Created file
 */
+
 import {Block} from "./Block";
-import {BlockConfig} from "../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
+import {Filterable} from "./Filterable";
+import {ConnectorBlockTwitter} from "../connectors/ConnectorBlockTwitter";
 
 //https://www.npmjs.com/package/twitter
 
 
-export class BlockTwitterRead  implements Block {
+export class BlockTwitterRead implements Block, Filterable {
+    private connector: ConnectorBlockTwitter;
+    private _text: Promise<string> | undefined;
+    private limit: number = Number.POSITIVE_INFINITY;
 
+    constructor(blockConfig: BlockConfig) {
+        const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
+        //let ?something? = BlockTwitterReadConfig;
+        this.connector = new ConnectorBlockTwitter();
+
+    }
     public async text(): Promise<string> {
         return 'TODO';
     }
 
     isElicit(): boolean {
         return false;
+    }
+
+    filterBlocks(limit: number): BlockTwitterRead {
+        this.limit = limit;
+        return this;
+    }
+
+    toString(): string {
+        throw new Error("Method not implemented.");
     }
 
 }

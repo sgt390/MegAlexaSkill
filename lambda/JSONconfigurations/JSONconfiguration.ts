@@ -27,6 +27,11 @@ export type BlockListConfig = {
     list: []
 }
 
+export type BlockTwitterReadConfig = {
+    //careful here, probably going to change
+    userName: string;
+}
+
 export type connectorFeedRSSResult = {
     items: [
         {
