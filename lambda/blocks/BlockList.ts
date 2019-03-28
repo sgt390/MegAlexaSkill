@@ -16,7 +16,6 @@ import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfigur
 import { Filterable } from "./Filterable";
 
 export class BlockList implements Block,Filterable{
-    private _text: string=" ";
     private limit: number = Number.POSITIVE_INFINITY;
     private list :[];
 
@@ -26,15 +25,8 @@ export class BlockList implements Block,Filterable{
     }
 
     public text(): string {
-        /**
-         * Simple cache system
-         */
-        if(this._text == " "){
-            for(let i=0; i<this.limit; i++){
-                this._text += this.list[i]+ " ";
-            }
-        }
-        return this._text;
+        return this.list.filter((el,index) => index<this.limit)
+               .reduce((result,element) => result + " " + element,"");
     }
 
     filterBlocks(limit: number): BlockList{
