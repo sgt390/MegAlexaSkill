@@ -18,6 +18,7 @@ import { Filter } from "./blocks/Filter";
 import { Filterable } from "./blocks/Filterable";
 import { ElicitBlock } from "./blocks/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
+import { BlockTwitterRead } from "./blocks/BlockTwitterRead";
 
 export class Workflow {
 
@@ -60,6 +61,9 @@ export class Workflow {
             break;
             case 'PIN':
                 block = Promise.resolve(new BlockPIN(blockConfigurationJSON.config));
+            break;
+            case 'Twitter':
+                block = Promise.resolve(new BlockTwitterRead(blockConfigurationJSON.config));
             break;
             default:
                 throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');

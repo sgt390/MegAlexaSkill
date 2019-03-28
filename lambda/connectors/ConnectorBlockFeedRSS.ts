@@ -30,7 +30,7 @@ export class ConnectorBlockFeedRSS implements ConnectorBlock {
             .trim();
             
         }).catch(function(error: string) {
-            console.log(error);
+            console.log('there was an error with the feed rss connector: £££££'+ error);
             return "there was an error with the feed rss";
         });
     }

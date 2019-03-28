@@ -1,5 +1,3 @@
 cd scripts
-rm lambda.zip
-rm ../lambda/*.js
-rm ../lambda/*/*.js
-rm ../tests/*/*.js
+sh _clean1.sh
+sh _clean2.sh

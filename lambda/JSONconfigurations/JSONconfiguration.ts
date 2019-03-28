@@ -27,6 +27,14 @@ export type BlockListConfig = {
     list: []
 }
 
+export type BlockTwitterReadConfig = {
+    //careful here, probably going to change
+    consumer_key: string,
+    consumer_secret: string,
+    access_token_key: string,
+    access_token_secret: string
+}
+
 export type connectorFeedRSSResult = {
     items: [
         {
@@ -59,3 +67,10 @@ export type  AlexaResponse = {
     elicitSlot: boolean,
     position: number
 }
+
+export type connectorTwitterTimelineHome =[{
+    text:string, user:{
+        name:string
+    }
+}];
+
