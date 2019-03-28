@@ -21,12 +21,12 @@ import {ConnectorBlockTwitter} from "../connectors/ConnectorBlockTwitter";
 export class BlockTwitterRead implements Block, Filterable {
     private connector: ConnectorBlockTwitter;
     private _text: Promise<string> | undefined;
-    private limit: number = Number.POSITIVE_INFINITY;
+    private limit: number = 10;
 
     constructor(blockConfig: BlockConfig) {
         const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
         //let ?something? = BlockTwitterReadConfig;
-        this.connector = new ConnectorBlockTwitter();
+        this.connector = new ConnectorBlockTwitter(blockTwitterConfig);
 
     }
     public async text(): Promise<string> {
