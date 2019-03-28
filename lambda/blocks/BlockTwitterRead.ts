@@ -25,12 +25,11 @@ export class BlockTwitterRead implements Block, Filterable {
 
     constructor(blockConfig: BlockConfig) {
         const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
-        //let ?something? = BlockTwitterReadConfig;
         this.connector = new ConnectorBlockTwitter(blockTwitterConfig);
 
     }
     public async text(): Promise<string> {
-        return 'TODO';
+        return this.connector.connect(this.limit);
     }
 
     isElicit(): boolean {

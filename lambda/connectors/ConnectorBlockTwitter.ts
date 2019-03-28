@@ -33,16 +33,16 @@ const Twitter = require('twitter');
 
 export class ConnectorBlockTwitter implements ConnectorBlock {
 
-    constructor(blockTwitterConfig:BlockTwitterReadConfig) {
-
+    private user: any;
+    constructor(blockTwitterConfig: BlockTwitterReadConfig) {
+        this.user = new Twitter({
+            consumer_key: blockTwitterConfig.consumer_key,
+            consumer_secret: blockTwitterConfig.consumer_secret,
+            access_token_key: blockTwitterConfig.access_token_key,
+            access_token_secret: blockTwitterConfig.access_token_secret
+        });
     }
 
-    user = new Twitter({
-        consumer_key: 'omCc4IgufpfW8VUu3bq6OwPBo',
-        consumer_secret: 'Ji3e2BoAp4E58DZS8ycT0KoopG1ArPNtjoaZBxfi5jQoAEfhsb',
-        access_token_key: '1110935101561556992-EKUSSnBFOSDZ51dlGg3Bw2wXbir722',
-        access_token_secret: '0AdNyO3f9aTdIJ7CmExVRLXWB49pYF6Wv0HegUpkr6lG8'
-    });
 
     error = function (err: any) {
         console.log('ERROR [%s]', err);
@@ -64,13 +64,10 @@ export class ConnectorBlockTwitter implements ConnectorBlock {
                 });
             })
             .catch(function (error:string) {
-                throw error;
+                throw 'error while creating the twitter connector: £££££££'+ error;
             });
     }
 
 }
 
-let d = {'consumer_key': 'omCc4IgufpfW8VUu3bq6OwPBo',
-'consumer_secret': 'Ji3e2BoAp4E58DZS8ycT0KoopG1ArPNtjoaZBxfi5jQoAEfhsb'};
-let c = new ConnectorBlockTwitter(d);
-c.connect().then(a => console.log(a)).catch(a => console.log('123'));
+
