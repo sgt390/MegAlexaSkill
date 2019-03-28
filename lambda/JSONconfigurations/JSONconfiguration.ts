@@ -59,3 +59,5 @@ export type  AlexaResponse = {
     elicitSlot: boolean,
     position: number
 }
+
+export type connectorTwitter = {}
