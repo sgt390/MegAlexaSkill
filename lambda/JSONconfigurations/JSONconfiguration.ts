@@ -66,5 +66,5 @@ export type  AlexaResponse = {
 }
 
 export type connectorTwitter = {
-    tweets: [];
+    tweets: string;
 }
