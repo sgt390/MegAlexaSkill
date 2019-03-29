@@ -15,7 +15,6 @@ import { AssertionError } from 'assert';
 
 describe('BlockPIN', function(){
     it('block from configuration - positive', function(){
-        //TODO
     });
 
     it('block from configuration - negative TextToSpeech content', function(){
@@ -26,7 +25,7 @@ describe('BlockPIN', function(){
         //TODO
     });
 
-    it('block from configuration - not elicit', function(){
+    it('block from configuration', function(){
         //TODO
     });
 });
