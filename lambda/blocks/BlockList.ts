@@ -9,21 +9,35 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-20   || Created file
 * Andrea Deidda         || 2019-03-21   || Update file
+* Bianca Andreea Ciuche || 2019-03-27   || Update file
 */
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration"; 
+import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { Filterable } from "../utility/Filterable";
 
-export class BlockList implements Block {
+export class BlockList implements Block, Filterable{
+    private limit: number = Number.POSITIVE_INFINITY;
+    private list :[];
 
     constructor(private blockConfig: BlockConfig){
-        
-    }
-    public text(): string {
-        return 'TODO';
+        const blockListConfig: BlockListConfig = <BlockListConfig> blockConfig;
+        this.list = blockListConfig.List;
     }
 
-    isElicit(): boolean {
-        return true;
+    public text(): string {
+        return this.list.filter((el,index) => index<this.limit)
+               .reduce((result,element) => result + " " + element,"");
     }
+
+    filterBlocks(limit: number): BlockList{
+        this.limit = limit;
+        return this;
+    }
+
+    toString(): string {
+        throw new Error("Method not implemented.");
+    }
+
+    
 
 }

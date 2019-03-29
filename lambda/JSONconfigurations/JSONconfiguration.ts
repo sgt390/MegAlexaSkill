@@ -24,7 +24,7 @@ export type BlockFeedRSSConfig = {
 }
 
 export type BlockListConfig = {
-    list: []
+    List: []
 }
 
 export type BlockTwitterReadConfig = {
