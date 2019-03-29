@@ -9,7 +9,7 @@
 * Author                || Date         || Description
 * Bianca Andreea Ciuche     || 2019-03-26   || Created file
 */
-import {Block} from "./Block";
+import {Block} from "../blocks/Block";
 
 export class ElicitBlock implements Block {
     text(): string | Promise<string> {

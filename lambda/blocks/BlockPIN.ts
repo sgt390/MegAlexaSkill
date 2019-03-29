@@ -11,7 +11,7 @@
 * Stefano Zanatta       || 2019-03-21   || Updated
 */
 import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfiguration";
-import { ElicitBlock } from "./ElicitBlock";
+import { ElicitBlock } from "../utility/ElicitBlock";
 
 export class BlockPIN implements ElicitBlock {
     private correctPIN: string;

@@ -14,9 +14,9 @@ import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
 import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration";
-import { Filter } from "./blocks/Filter";
-import { Filterable } from "./blocks/Filterable";
-import { ElicitBlock } from "./blocks/ElicitBlock";
+import { Filter } from "./utility/Filter";
+import { Filterable } from "./utility/Filterable";
+import { ElicitBlock } from "./utility/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
 import { BlockTwitterRead } from "./blocks/BlockTwitterRead";
 
