@@ -134,9 +134,9 @@ export class Workflow {
     }
 
 }
+/*
 
-
-/*const wf = new Workflow(
+const wf = new Workflow(
     [
         {
             "blockType": "Filter",
