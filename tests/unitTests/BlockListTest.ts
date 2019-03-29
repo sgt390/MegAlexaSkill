@@ -11,13 +11,13 @@
 */
 import {expect} from 'chai';
 import {BlockList} from "../../lambda/blocks/BlockList";
-/*
+
 describe('BlockList', function(){
     it('block from configuration - positive', function(){
         const objectBlock = {list : []};
-        const tts = new BlockList(objectBlock);
-        const oracle = 'this is a text block';
-        expect(tts.text()).to.equal(oracle);
+        const blockList = new BlockList(objectBlock);
+        const oracle = ['1','2','3'];
+        expect(blockList.text()).to.equal(oracle);
 
     });
 
@@ -41,4 +41,3 @@ describe('BlockList', function(){
         expect(tts.isElicit()).to.equal(true);
     });
 });
-*/
