@@ -12,7 +12,7 @@
 
 import {Block} from "./Block";
 import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
-import {Filterable} from "./Filterable";
+import {Filterable} from "../utility/Filterable";
 import {ConnectorBlockTwitter} from "../connectors/ConnectorBlockTwitter";
 
 //https://www.npmjs.com/package/twitter

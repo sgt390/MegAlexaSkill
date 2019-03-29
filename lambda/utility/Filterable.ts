@@ -9,7 +9,7 @@
 * Author                || Date         || Description
 * Stefano Zanatta       || 2019-03-24   || Created file
 */
-import { Block } from "./Block";
+import { Block } from "../blocks/Block";
 export interface Filterable {
     
     /**

@@ -39,8 +39,9 @@
     "@types/chai": "^4.1.7",
     "@types/mocha": "^5.2.6",
     "chai": "^4.2.0",
+    "deep-equal-in-any-order": "^1.0.13",
     "mocha": "^6.0.2",
-    "ts-node": "^8.0.3",
-    "deep-equal-in-any-order": "^1.0.13"
+    "sinon": "^7.3.1",
+    "ts-node": "^8.0.3"
   }
 }
