@@ -29,17 +29,16 @@ describe('BlockList', function(){
         expect(blockList.text()).to.not.equal(oracle);
     });
 
-    /*it('block from configuration - List not found', function(){
-        const objectBlock = {error : []};
-        const tts = new BlockList(objectBlock);
-        const oracle: string = "Cannot read property 'filter' of undefined";
-        expect(tts.text()).to.throw(oracle);
-    });*/
-
     it('block from configuration - empty list', function(){
         const objectBlock = {List : []};
-        const tts = new BlockList(objectBlock);
+        const blockList = new BlockList(objectBlock);
         const oracle = '';
-        expect(tts.text()).to.equal(oracle);
+        expect(blockList.text()).to.equal(oracle);
+    });
+    it('block from configuration - filtered list', function(){
+        const objectBlock = {List : ['1','2','3']};
+        const blockList = new BlockList(objectBlock);
+        const oracle = '1';
+        expect(blockList.filterBlocks(1).text()).to.equal(oracle);
     });
 });

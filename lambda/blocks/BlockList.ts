@@ -34,11 +34,6 @@ export class BlockList implements Block, Filterable{
         this.limit = limit;
         return this;
     }
-
-    toString(): string {
-        throw new Error("Method not implemented.");
-    }
-
     
 
 }

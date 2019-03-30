@@ -16,9 +16,5 @@ export interface Block {
      * @returns Promise containing the text to speech or the actual string
      */
     text(): Promise<string> | string;
-    /**
-     * @description evaluates if the block needs one or more parameters from the user to execute
-     */
-    toString(): string;
    
 }
