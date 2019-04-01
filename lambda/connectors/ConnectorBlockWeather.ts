@@ -29,22 +29,26 @@ export class ConnectorBlockweather implements ConnectorBlock {
     }
 
     public async connect(): Promise<string> {
-        return weather.getAllWeather(function(err: string, data: any) {
-            if(err)
-                console.log("error while creating the weather connector: £££££££" + err);
-            else {
-                console.log(data);
-                return "Currently in " + data.name + " is " + data.main.temp + " with " +
-                    data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
-                    " and a low of " + data.main.temp_max;
-            }
-        })
-        .then(function(result: string) {
-            return ""
-        })
-        .catch(function (error: string) {
-            throw 'error while creating the weather connector: £££££££'+ error;
+        return new Promise((resolve, reject) => {
+            weather.getAllWeather(function(err: string, data: any) {
+                if(err) {
+                    reject("error while creating the weather connector: £££££££" + err);
+                }
+                else {
+                    resolve("Currently in " + data.name + " is " + data.main.temp + " with " +
+                        data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
+                        " and a low of " + data.main.temp_max);
+                }
+            });
         });
+        /*
+        .then(function(result) {
+            console.log(result);
+            return result;
+        })
+        .catch(el => el);
+        */
+
 
         /*
             .then(function (weather: connectorWeather) {
@@ -56,14 +60,14 @@ export class ConnectorBlockweather implements ConnectorBlock {
         */
     }
 }
-
+/*
 const weatherconfig = {
     Latitude: "45.4064",
     Longitude: "11.8768"
 }
 const abba = new ConnectorBlockweather(weatherconfig);
-console.log(abba.connect());
-
+abba.connect().then(el => console.log(el));
+*/
 /*
 *   CORRETTOMA NON PROMISE
 *
