@@ -15,12 +15,6 @@ export class ElicitBlock implements Block {
     text(): string | Promise<string> {
         throw new Error("Method not implemented.");
     }
-    toString(): string {
-        throw new Error("Method not implemented.");
-    }
-    typeElicitSlot(): string{
-        throw new Error("Method not implemented.");
-    }
     setElicitSlot(slot:String): void{
         throw new Error("Method not implemented.");
     }
