@@ -34,6 +34,7 @@ const Twitter = require('twitter');
 export class ConnectorBlockTwitter implements ConnectorBlock {
 
     private user: any;
+    
     constructor(blockTwitterConfig: BlockTwitterReadConfig) {
         this.user = new Twitter({
             consumer_key: blockTwitterConfig.consumer_key,

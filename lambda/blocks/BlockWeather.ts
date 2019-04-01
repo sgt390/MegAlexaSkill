@@ -10,19 +10,22 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 */
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockWeatherConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { ConnectorBlockweather } from "../connectors/ConnectorBlockWeather";
+
+//Dark Sky API -> The easiest, most advanced, weather API on the web.
 
 export class BlockWeather implements Block {
+    private connector: ConnectorBlockweather;
+    private _text: Promise<string> | undefined;
 
-    constructor(private state: string, private region: string) {
+    constructor(blockConfig: BlockConfig) {
+        const blockWeatherConfig: BlockWeatherConfig = <BlockWeatherConfig> blockConfig;
+        this.connector = new ConnectorBlockweather(blockWeatherConfig);
 
     }
+
     public async text(): Promise<string> {
         return '';
     }
-
-    isElicit(): boolean {
-        return false;
-    }
-
 }
