@@ -26,6 +26,6 @@ export class BlockWeather implements Block {
     }
 
     public async text(): Promise<string> {
-        return '';
+        return this.connector.connect();
     }
 }

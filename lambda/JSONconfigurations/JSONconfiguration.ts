@@ -41,7 +41,9 @@ export type BlockWeatherConfig = {
 }
 
 export type connectorWeather = {
-    Weather: string
+    summary: string,
+    temperatureHigh: string,
+    temperatureLow: string
 }
 
 export type connectorFeedRSSResult = {

@@ -11,11 +11,10 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorWeather, BlockWeatherConfig } from "../JSONconfigurations/JSONconfiguration";
-const DarkSky = require('dark-sky');
-const https = require('https');
+const weather = require("openweather-apis")
 
 //obviusly not going to stay here
-const API_KEY = "";
+const API_KEY = "4b1ea0b33edc40ba538b366b98484801";
 //const darksky = new DarkSky(process.env.DARK_SKY) // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
  
 export class ConnectorBlockweather implements ConnectorBlock {
@@ -23,26 +22,41 @@ export class ConnectorBlockweather implements ConnectorBlock {
 
     constructor(blockWeatherConfig: BlockWeatherConfig) {
         this.coordinates = "" + blockWeatherConfig.Latitude + "," + blockWeatherConfig.Longitude;
+        weather.setLang('en');
+        weather.setCoordinate(blockWeatherConfig.Latitude, blockWeatherConfig.Longitude);
+        weather.setUnits('metric');
+        weather.setAPPID(API_KEY);
     }
 
     public async connect(): Promise<string> {
 
-        var request = https.get("https://api.darksky.net/forecast/"+API_KEY+"/"+this.coordinates);
-        
-        /*
-        let feed = parser.parseURL(this.URL);
-        return feed.then(function(result: connectorFeedRSSResult) {
-            return result.items
-            .splice(0,limit)
-            .map(el => el.title + " " + el.content + " ")
-            .reduce(((buffer, element) => buffer + element), "")
-            .trim();
-            
-        }).catch(function(error: string) {
-            console.log('there was an error with the feed rss connector: £££££'+ error);
-            return "there was an error with the feed rss";
+        return weather.getAllWeather(function(err: string, data: any){
+            if(err)
+                console.log("error while creating the weather connector: £££££££" + err);
+            else {
+                return "Currently in " + data.name + " is " + data.main.temp + " with " +
+                    data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
+                    " and a low of " + data.main.temp_max;
+            }
         });
+
+        /*
+            .then(function (weather: connectorWeather) {
+                return weather.map(function(tweet:any){
+                    return tweet.user.name +' tweeted '+ tweet.text;
+                });
+            })
+            .catch(function (error:string) {
+                throw 'error while creating the weather connector: £££££££'+ error;
+            });
         */
-       return this.connect();
     }
 }
+/*
+const weatherconfig = {
+    Latitude: "45.4064",
+    Longitude: "11.8768"
+}
+const abba = new ConnectorBlockweather(weatherconfig);
+abba.connect();
+*/
