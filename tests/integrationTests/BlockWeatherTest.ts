@@ -35,7 +35,7 @@ describe.skip('', function(){
     it('block from configuration - positive', function() {
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock.Latitude, objectBlock.Longitude);
+        const tts = new BlockWeather(objectBlock);
         const oracle = '[Place] currently is [°C]';
         expect(tts.text()).to.equal(oracle);
     })
@@ -43,7 +43,7 @@ describe.skip('', function(){
     it('block from configuration - negative TextToSpeech content', function(){
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock.Latitude, objectBlock.Longitude);
+        const tts = new BlockWeather(objectBlock);
         const oracle = 'error';
         expect(tts.text()).to.not.equal(oracle);
     });
@@ -51,7 +51,7 @@ describe.skip('', function(){
     it('block from configuration - TextToSpeech not found', function(){
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock.Latitude, objectBlock.Longitude);
+        const tts = new BlockWeather(objectBlock);
         const oracle = 'this is a text block';
         expect(tts.text()).to.not.equal(oracle);
     });
@@ -59,7 +59,7 @@ describe.skip('', function(){
     it('block from configuration - not elicit', function(){
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock.Latitude, objectBlock.Longitude);
+        const tts = new BlockWeather(objectBlock);
         
     });
     
