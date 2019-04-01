@@ -35,11 +35,37 @@ export type BlockTwitterReadConfig = {
     access_token_secret: string
 }
 
+export type BlockWeatherConfig = {
+    Latitude: string,
+    Longitude: string
+}
+
+export type connectorWeather = {
+    summary: string,
+    temperatureHigh: string,
+    temperatureLow: string
+}
+
+export type connectorWeatherResult = {
+    name: string,
+    main: {
+        temp: string,
+        temp_min: string,
+        temp_max: string
+    }
+    weather: [
+        {
+            description: string
+        }
+    ]
+
+}
+
 export type connectorFeedRSSResult = {
     items: [
         {
-        title: string,
-        content: string
+            title: string,
+            content: string
         }
     ]
 }
@@ -62,14 +88,15 @@ export type BlockFilterableConfig = {
     limit:number
 }
 
-export type  AlexaResponse = {
+export type AlexaResponse = {
     text: string,
     elicitSlot: boolean,
     position: number
 }
 
 export type connectorTwitterTimelineHome =[{
-    text:string, user:{
+    text:string, 
+    user:{
         name:string
     }
 }];
