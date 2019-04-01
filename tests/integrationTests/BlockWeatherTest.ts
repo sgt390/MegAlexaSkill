@@ -8,6 +8,7 @@
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-29   || Created file
+* Matteo Depascale      || 2019-04-01   || Implemented
 */
 
 //import {expect} from 'chai';
@@ -18,16 +19,6 @@ import chaiAsPromised from 'chai-as-promised';
 import { ElicitBlock } from '../../lambda/utility/ElicitBlock';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
-
-const BlockWeatherConfig = [
-    {
-        "blockType": "Weather",
-        "config": {
-            "Latitude": "45.4080",
-            "Longitude": "11.8859"
-        }
-    }
-];
 
 describe('BlockWeather', function(){  
     it('block from configuration - positive BlockWeather', function() {
