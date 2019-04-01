@@ -46,11 +46,26 @@ export type connectorWeather = {
     temperatureLow: string
 }
 
+export type connectorWeatherResult = {
+    name: string,
+    main: {
+        temp: string,
+        temp_min: string,
+        temp_max: string
+    }
+    weather: [
+        {
+            description: string
+        }
+    ]
+
+}
+
 export type connectorFeedRSSResult = {
     items: [
         {
-        title: string,
-        content: string
+            title: string,
+            content: string
         }
     ]
 }

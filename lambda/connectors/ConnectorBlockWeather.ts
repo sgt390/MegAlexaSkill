@@ -10,7 +10,7 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorWeather, BlockWeatherConfig } from "../JSONconfigurations/JSONconfiguration";
+import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
 const weather = require("openweather-apis")
 
 //obviusly not going to stay here
@@ -29,15 +29,21 @@ export class ConnectorBlockweather implements ConnectorBlock {
     }
 
     public async connect(): Promise<string> {
-
-        return weather.getAllWeather(function(err: string, data: any){
+        return weather.getAllWeather(function(err: string, data: any) {
             if(err)
                 console.log("error while creating the weather connector: £££££££" + err);
             else {
+                console.log(data);
                 return "Currently in " + data.name + " is " + data.main.temp + " with " +
                     data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
                     " and a low of " + data.main.temp_max;
             }
+        })
+        .then(function(result: string) {
+            return ""
+        })
+        .catch(function (error: string) {
+            throw 'error while creating the weather connector: £££££££'+ error;
         });
 
         /*
@@ -46,17 +52,28 @@ export class ConnectorBlockweather implements ConnectorBlock {
                     return tweet.user.name +' tweeted '+ tweet.text;
                 });
             })
-            .catch(function (error:string) {
-                throw 'error while creating the weather connector: £££££££'+ error;
-            });
+            
         */
     }
 }
-/*
+
 const weatherconfig = {
     Latitude: "45.4064",
     Longitude: "11.8768"
 }
 const abba = new ConnectorBlockweather(weatherconfig);
-abba.connect();
-*/
+console.log(abba.connect());
+
+/*
+*   CORRETTOMA NON PROMISE
+*
+ return weather.getAllWeather(function(err: string, data: any) {
+            if(err)
+                console.log("error while creating the weather connector: £££££££" + err);
+            else {
+                return "Currently in " + data.name + " is " + data.main.temp + " with " +
+                    data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
+                    " and a low of " + data.main.temp_max;
+            }
+        })
+        */

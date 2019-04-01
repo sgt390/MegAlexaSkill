@@ -13,8 +13,6 @@ import {Block} from "./Block";
 import {BlockConfig, BlockWeatherConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { ConnectorBlockweather } from "../connectors/ConnectorBlockWeather";
 
-//Dark Sky API -> The easiest, most advanced, weather API on the web.
-
 export class BlockWeather implements Block {
     private connector: ConnectorBlockweather;
     private _text: Promise<string> | undefined;
@@ -22,7 +20,6 @@ export class BlockWeather implements Block {
     constructor(blockConfig: BlockConfig) {
         const blockWeatherConfig: BlockWeatherConfig = <BlockWeatherConfig> blockConfig;
         this.connector = new ConnectorBlockweather(blockWeatherConfig);
-
     }
 
     public async text(): Promise<string> {
