@@ -13,7 +13,11 @@
 //import {expect} from 'chai';
 import {BlockWeather} from '../../lambda/blocks/BlockWeather';
 import { Block } from '../../lambda/blocks/Block';
-import {expect} from 'chai';
+import chai from 'chai';
+import chaiAsPromised from 'chai-as-promised';
+import { ElicitBlock } from '../../lambda/utility/ElicitBlock';
+chai.use(chaiAsPromised);
+const expect = chai.expect;
 
 const BlockWeatherConfig = [
     {
@@ -25,41 +29,39 @@ const BlockWeatherConfig = [
     }
 ];
 
-//hold up, i'm gonna implement this one first
-//best practice will never catch me
-
-/**
- * SKIPPED TEST
- */
-describe.skip('', function(){  
-    it('block from configuration - positive', function() {
+describe('BlockWeather', function(){  
+    it('block from configuration - positive BlockWeather', function() {
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock);
-        const oracle = '[Place] currently is [°C]';
-        expect(tts.text()).to.equal(oracle);
+        const weather = new BlockWeather(objectBlock);
+        const oracle = 'Currently in Padova is 16.32 with clear sky, you can expect an hight of 14.44 and a low of 19.44';
+        expect(weather.text()).to.become(oracle);
     })
 
-    it('block from configuration - negative TextToSpeech content', function(){
+    it('block from configuration - negative BlockWeather content', function(){
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock);
-        const oracle = 'error';
-        expect(tts.text()).to.not.equal(oracle);
+        const weather = new BlockWeather(objectBlock);
+        const oracle = "Currently in PLACE is MAIN.TEMP with WEATHER.DESCRIPTION, " +
+        "you can expect an hight of TEMP_MIN and a low of TEMP_MAX";
+        expect(weather.text()).to.not.become(oracle);
     });
 
-    it('block from configuration - TextToSpeech not found', function(){
-        const objectBlock = {Latitude: "45.4080",
-        Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock);
-        const oracle = 'this is a text block';
-        expect(tts.text()).to.not.equal(oracle);
+    it('block from configuration - BlockWeather not found', function(){
+        const objectBlock = {Lat: "45.4080",
+        Long: "11.8859"};
+        const weather = new BlockWeather(objectBlock);
+        const oracle = 'params inside objectBlock not corrects';
+        expect(weather.text()).to.not.equal(oracle);
     });
 
     it('block from configuration - not elicit', function(){
-        const objectBlock = {Latitude: "45.4080",
-        Longitude: "11.8859"};
-        const tts = new BlockWeather(objectBlock);
+        const objectBlock = {Latitude: "",
+        Longitude: ""};
+        const weather = new BlockWeather(objectBlock);
+        expect(weather).to.not.satisfy(function(s:BlockWeather){
+            return s instanceof ElicitBlock;
+        });
         
     });
     
