@@ -101,3 +101,6 @@ export type connectorTwitterTimelineHome =[{
     }
 }];
 
+export type WorkflowData = {
+    data: blockJSON[]
+}

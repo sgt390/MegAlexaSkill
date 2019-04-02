@@ -11,7 +11,7 @@
 */
 import { Workflow } from "../Workflow";
 const axios = require('axios');
-import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
+import { blockJSON, WorkflowData } from "../JSONconfigurations/JSONconfiguration";
 
 export class WorkflowService {
 
@@ -30,15 +30,11 @@ export class WorkflowService {
         let headers = 'userID=' + _userID + '&workflowName=' + workflowName;
         const URL = 'https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/workflow?'+ headers;
         return axios.get(URL)
-        .then(function(response: bigFatData){
+        .then(function(response: WorkflowData){
             return response.data;
         }).catch(function(error: string){
             console.log('exception while reading the user_id from database. £££ERROR: '+ error);
             return [];
         });
     }
-}
-
-type bigFatData = {
-    data: blockJSON[]
 }
