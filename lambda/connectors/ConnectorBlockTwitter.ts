@@ -44,15 +44,6 @@ export class ConnectorBlockTwitter implements ConnectorBlock {
         });
     }
 
-
-    error = function (err: any) {
-        console.log('ERROR [%s]', err);
-        return err;
-	};
-	success = function (data:any) {
-        console.log('Data [%s]', data);
-        return data;
-	};
     //search/tweets
     public async connect(limit:number = 10): Promise<string> {
         const params = {
