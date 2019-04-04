@@ -138,33 +138,33 @@ export class Workflow {
     }
 
 }
-/*
 
+/*
 const wf = new Workflow(
     [
         {
-            "blockType": "Filter",
-            "config": {
-                "limit": 2
-            }
-        },        
-        {
-            "blockType": "List",
-            "config": {
-                "List": [ 'uno','due','tre','quattro']
-            }
+          "blockType": "TextToSpeech",
+          "config": {
+            "TextToSpeech": "This is the second block"
+          }
         },
         {
-            "blockType": "Filter",
-            "config": {
-                "limit": 2
-            }
+          "blockType": "Filter",
+          "config": {
+            "limit": 2
+          }
         },
         {
-            "blockType": "FeedRSS",
-            "config": {
-              "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
-            }
-        }       
-      ], 'poc',0,'1234');
-wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));*/
+          "blockType": "Twitter",
+          "config": {
+            "access_token_key": "1110935101561556992-ffoiWf40Dxqv7HSPv1ypgwnIBNsg2b",
+            "access_token_secret": "biEPNR9mhWG3moMqMAGovFtlL1of6Rh5oIOY6Zm7tBbKw",
+            "consumer_key": "r42Nt9oT2sFoj2Q4AFr08RpX3",
+            "consumer_secret": "jrAXukafl2BAfX0srwQVWuqiQnUm0PVBU97QPxBvQdWwXIjALH",
+            "screenName": "@BillGates"
+          }
+        }
+      ], 'test',0);
+
+wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+*/

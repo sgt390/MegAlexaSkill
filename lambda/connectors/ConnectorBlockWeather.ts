@@ -13,9 +13,7 @@ import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
 const weather = require("openweather-apis")
 
-//obviusly not going to stay here
-const API_KEY = "4b1ea0b33edc40ba538b366b98484801";
-//const darksky = new DarkSky(process.env.DARK_SKY) // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
+//const api key = process.env.API_KEY // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
  
 export class ConnectorBlockweather implements ConnectorBlock {
     private coordinates: string;
@@ -25,7 +23,7 @@ export class ConnectorBlockweather implements ConnectorBlock {
         weather.setLang('en');
         weather.setCoordinate(blockWeatherConfig.Latitude, blockWeatherConfig.Longitude);
         weather.setUnits('metric');
-        weather.setAPPID(API_KEY);
+        weather.setAPPID(blockWeatherConfig.APIKey);
     }
 
     public async connect(): Promise<string> {
