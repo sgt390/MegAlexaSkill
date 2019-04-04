@@ -28,7 +28,7 @@ export class BlockPIN implements ElicitBlock {
             if(this.check(this.correctPIN, this.userPIN)) {
                 response = 'pin is correct.';
             } else {
-                response = 'incorrect, please repeat';
+                response = 'incorrect, please repeat.';
                 this.setElicitSlot('');
             }
         }
@@ -47,11 +47,11 @@ export class BlockPIN implements ElicitBlock {
             return false;
         }
     }
-    
-    typeElicitSlot(): string {
-        return "PIN";
-    }
 
+    /**
+     * 
+     * @param slot user's pin
+     */
     setElicitSlot(slot: string): void {
         this.userPIN = slot;
     }

@@ -19,25 +19,21 @@ export class BlockList implements Block, Filterable{
     private limit: number = Number.POSITIVE_INFINITY;
     private list :[];
 
-    constructor(private blockConfig: BlockConfig){
+    constructor(private blockConfig: BlockConfig) {
         const blockListConfig: BlockListConfig = <BlockListConfig> blockConfig;
         this.list = blockListConfig.List;
     }
 
     public text(): string {
         return this.list.filter((el,index) => index<this.limit)
-               .reduce((result,element) => result + " " + element,"");
+            .reduce((result,element) => result + " " + element,"")
+            .trim();
     }
 
     filterBlocks(limit: number): BlockList{
         this.limit = limit;
         return this;
     }
-
-    toString(): string {
-        throw new Error("Method not implemented.");
-    }
-
     
 
 }

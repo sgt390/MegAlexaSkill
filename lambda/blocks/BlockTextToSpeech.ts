@@ -31,8 +31,4 @@ export class BlockTextToSpeech implements Block {
         return this._text;
     }
 
-    public isElicit(): boolean {
-        return false;
-    }
-
 }

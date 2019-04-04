@@ -11,22 +11,33 @@
 */
 import {expect} from 'chai';
 import {BlockPIN} from "../../lambda/blocks/BlockPIN";
-import { AssertionError } from 'assert';
 
 describe('BlockPIN', function(){
-    it('block from configuration - positive', function(){
-        //TODO
+    it('block from configuration - pin is not set', function(){
+        const blockPIN = new BlockPIN({
+            "PIN": "1234"
+          });
+        expect(blockPIN.text()).to.equal('say your pin to continue');
     });
 
-    it('block from configuration - negative TextToSpeech content', function(){
-        //TODO
+    it('block from configuration - slot required is true', function(){
+        const blockPIN = new BlockPIN({
+            "PIN": "1234"
+          });
+        expect(blockPIN.slotRequired()).to.equal(true);
     });
-
-    it('block from configuration - TextToSpeech not found', function(){
-        //TODO
+    it('block from configuration - pin is set and correct', function(){
+        const blockPIN = new BlockPIN({
+            "PIN": "1234"
+          });
+          blockPIN.setElicitSlot('1234');
+        expect(blockPIN.text()).to.equal('pin is correct.');
     });
-
-    it('block from configuration - not elicit', function(){
-        //TODO
+    it('block from configuration - pin is set and not correct', function(){
+        const blockPIN = new BlockPIN({
+            "PIN": "1234"
+          });
+          blockPIN.setElicitSlot('0000');
+        expect(blockPIN.text()).to.equal('incorrect, please repeat.');
     });
 });
