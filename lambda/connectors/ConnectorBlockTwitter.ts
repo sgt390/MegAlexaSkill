@@ -10,7 +10,8 @@
 * Matteo Depascale      || 2019-03-27   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterTimelineHome, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
+import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
+import { BlockTwitterRead } from "../blocks/BlockTwitterRead";
 const Twitter = require('twitter');
 
 //not best practice, twitter has credential of ZeroSeven, regenerete them at https://developer.twitter.com/en/apps/16179148
@@ -34,6 +35,7 @@ const Twitter = require('twitter');
 export class ConnectorBlockTwitter implements ConnectorBlock {
 
     private user: any;
+    private userNameTwitter: string;
     
     constructor(blockTwitterConfig: BlockTwitterReadConfig) {
         this.user = new Twitter({
@@ -42,24 +44,26 @@ export class ConnectorBlockTwitter implements ConnectorBlock {
             access_token_key: blockTwitterConfig.access_token_key,
             access_token_secret: blockTwitterConfig.access_token_secret
         });
+        this.userNameTwitter = blockTwitterConfig.screenName;
     }
 
-    //search/tweets
+    //search/user_timeline
     public async connect(limit:number = 10): Promise<string> {
         const params = {
-            count: limit
+            count: limit,
+            screen_name: this.userNameTwitter,
+            tweet_mode: "extended"
         };
-        return this.user.get('statuses/home_timeline', params)
-            .then(function (tweets: connectorTwitterTimelineHome) {
-                return tweets.map(function(tweet:any){
-                    return tweet.user.name +' tweeted '+ tweet.text;
+        return this.user.get('statuses/user_timeline', params)
+            .then(function (tweets: connectorTwitterTimelineUser) {
+                return tweets.map(function(tweet:any) {
+                    return tweet.user.name +' tweeted '+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
                 });
             })
             .catch(function (error:string) {
                 throw 'error while creating the twitter connector: £££££££'+ error;
             });
     }
-
 }
 
 
