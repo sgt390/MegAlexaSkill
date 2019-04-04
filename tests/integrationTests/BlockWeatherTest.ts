@@ -20,15 +20,7 @@ import { ElicitBlock } from '../../lambda/utility/ElicitBlock';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-describe('BlockWeather', function(){  
-    it('block from configuration - positive BlockWeather', function() {
-        const objectBlock = {Latitude: "45.4080",
-        Longitude: "11.8859"};
-        const weather = new BlockWeather(objectBlock);
-        const oracle = 'Currently in Padova is 16.32 with clear sky, you can expect an hight of 14.44 and a low of 19.44';
-        expect(weather.text()).to.become(oracle);
-    })
-
+describe('BlockWeather', function(){ 
     it('block from configuration - negative BlockWeather content', function(){
         const objectBlock = {Latitude: "45.4080",
         Longitude: "11.8859"};
