@@ -22,6 +22,7 @@ export class User {
     constructor(accessToken: string) {
         const values = this.credentialsByAccessToken(accessToken)
         .then(function(result){
+            console.log("constructorUSER: " + result.user_id + "name " + result.name + "email " + result.email)
             return [result.user_id, result.name, result.email];
         }).catch(function(error){
             console.log("error in User constructor: "+ error);
@@ -55,10 +56,11 @@ export class User {
 }
 
 private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
-    
+    console.log("accessTokne: " + accessToken);
     return axios.get('api.amazon.com/user/profile?access_token=' + accessToken)
     .then(function (result: userJSON) {
         console.log("logged to amazon with success.");
+        console.log("result: " + result.user_id);
         return result;
     })
     .catch(function (error: string) {
