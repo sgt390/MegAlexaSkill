@@ -57,11 +57,9 @@ export class User {
 
 private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
     console.log("accessTokne: " + accessToken);
-    return axios.get('api.amazon.com/user/profile?access_token=' + accessToken)
-    .then(function (result: userJSON) {
-        console.log("logged to amazon with success.");
-        console.log("result: " + result.user_id);
-        return result;
+    return axios.get('https://api.amazon.com/user/profile?access_token=' + accessToken)
+    .then(function (result: {data:userJSON}) {
+        return result.data;
     })
     .catch(function (error: string) {
         console.log(error);
