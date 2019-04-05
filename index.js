@@ -31,7 +31,7 @@ const LaunchRequestHandler = {
                 && getUserAccessToken(handlerInput); 
       },
       handle(handlerInput) {
-        speechText = WELCOME_MESSAGE;
+        const speechText = WELCOME_MESSAGE;
         return handlerInput.responseBuilder
           .speak(speechText)
           .reprompt(speechText)
@@ -48,7 +48,7 @@ const MissingAccessTokenHandler = {
     return !getUserAccessToken(handlerInput)
   },
   handle(handlerInput) {
-      speechText += AUTENTICATION_MESSAGE;
+      speechText = AUTENTICATION_MESSAGE;
       return handlerInput.responseBuilder
         .speak(speechText)
         .withLinkAccountCard()
@@ -168,8 +168,9 @@ const InProgressWorkflowIntentHandler = {
  * @returns AccessToken of the user
  */
 const getUserAccessToken = function(handlerInput){
-  //const { accessToken } = handlerInput.requestEnvelope.context.System.user;
-  return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ"; // THIS IS AN ID >:(
+  const { accessToken } = handlerInput.requestEnvelope.context.System.user;
+  return accessToken;
+  //return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ"; // THIS IS AN ID >:(
 }
 
 const HelpIntentHandler = {

@@ -20,7 +20,6 @@ export class User {
     private email: Promise<string>;
 
     constructor(accessToken: string) {
-        /*
         const values = this.credentialsByAccessToken(accessToken)
         .then(function(result){
             return [result.user_id, result.name, result.email];
@@ -46,13 +45,12 @@ export class User {
             console.log(error);
             return "";
         });
-        */
-
 
     /////////////////////  DA RIMUOVERE E SCOMMENTARE QUELLO CHE C'E' SOPRA TODO ///////////////////////////////////////////////////
-    this.userID = Promise.resolve('amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ');
+    /*this.userID = Promise.resolve('amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ');
     this.name = Promise.resolve('Africa');
     this.email = Promise.resolve('abc@123.com');
+    */
     //////////////////////////////////////////////////////////////////////////////////////////
 }
 
