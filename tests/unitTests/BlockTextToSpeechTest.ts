@@ -12,7 +12,7 @@
 */
 import {expect} from 'chai';
 import { BlockTextToSpeech } from '../../lambda/blocks/BlockTextToSpeech';
-import { ElicitBlock } from '../../lambda/utility/ElicitBlock';
+import { ElicitBlock } from '../../lambda/blocks/utility/ElicitBlock';
 
 describe('BlockTextToSpeech', function(){
     it('block from configuration - positive', function(){

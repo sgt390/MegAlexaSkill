@@ -13,7 +13,7 @@
 */
 import {Block} from "./Block";
 import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
-import { Filterable } from "../utility/Filterable";
+import { Filterable } from "./utility/Filterable";
 
 export class BlockList implements Block, Filterable{
     private limit: number = Number.POSITIVE_INFINITY;

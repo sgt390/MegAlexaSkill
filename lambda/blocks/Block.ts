@@ -1,4 +1,4 @@
-import { WorkflowElement } from "../utility/WorkflowElement";
+import { WorkflowElement } from "./utility/WorkflowElement";
 
 /*
 * File: Block.ts
