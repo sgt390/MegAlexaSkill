@@ -27,6 +27,7 @@ export class WorkflowService {
      */
     private async workflowFromDatabase(userID: Promise<string>, workflowName: string): Promise<blockJSON[]> {
         let _userID: string = await userID;
+        console.log("inworkflow" + _userID);
         let headers = 'userID=' + _userID + '&workflowName=' + workflowName;
         const URL = 'https://m95485wij9.execute-api.us-east-1.amazonaws.com/beta/workflow?'+ headers;
         return axios.get(URL)
