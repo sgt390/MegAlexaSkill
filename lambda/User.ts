@@ -56,7 +56,6 @@ export class User {
 }
 
 private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
-    console.log("accessTokne: " + accessToken);
     return axios.get('https://api.amazon.com/user/profile?access_token=' + accessToken)
     .then(function (result: {data:userJSON}) {
         return result.data;

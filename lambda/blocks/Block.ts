@@ -1,3 +1,5 @@
+import { WorkflowElement } from "../utility/WorkflowElement";
+
 /*
 * File: Block.ts
 * Version: 0.0.1
@@ -9,7 +11,7 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
 */
-export interface Block {
+export interface Block extends WorkflowElement {
 
     /**
      * @description generate the text to speech

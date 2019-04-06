@@ -128,7 +128,6 @@ const InProgressWorkflowIntentHandler = {
 
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
-    console.log("userAccessToken Index: " + userAccessToken);
     const user = new User(userAccessToken);
     const workflowPosition = attributes.workflowPosition;
     const elicitSlot = slots.elicitSlot.value;
@@ -146,7 +145,6 @@ const InProgressWorkflowIntentHandler = {
      */
     attributes.workflowPosition = alexaResponse.position;
     attributesManager.setSessionAttributes(attributes);
-
     const elicit = alexaResponse.elicitSlot;
     /**
      * Alexa response output
