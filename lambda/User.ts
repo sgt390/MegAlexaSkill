@@ -73,9 +73,6 @@ public async workflow (workflowName: string, position: number = 0, elicitSlot: s
 
 }
 
-
-
-////////////////////////////// FOREACH DON'T WORK WITH PROMISE ORDER!.!.!.!!!!.!!!!!!!!!11!!!.
 /* 
 
 user.workflow('poc').then(async function(result){
