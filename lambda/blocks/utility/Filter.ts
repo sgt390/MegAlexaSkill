@@ -10,9 +10,10 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 * Stefano Zanatta       || 2019-03-24   || Completed Class
 */
-import { BlockConfig, BlockFilterableConfig } from "../JSONconfigurations/JSONconfiguration";
+import { BlockConfig, BlockFilterableConfig } from "../../JSONconfigurations/JSONconfiguration";
+import { WorkflowElement } from "./WorkflowElement";
 
-export class Filter {
+export class Filter implements WorkflowElement {
 
     private _limit: number;
 

@@ -1,4 +1,3 @@
-
 /*
 * File: Filterable.ts
 * Version: 0.0.1
@@ -10,7 +9,7 @@
 * Author                || Date         || Description
 * Stefano Zanatta       || 2019-03-24   || Created file
 */
-import { Block } from "../blocks/Block";
+import { Block } from "../Block";
 export interface Filterable {
     
     /**

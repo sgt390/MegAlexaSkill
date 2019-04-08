@@ -20,9 +20,9 @@ export class User {
     private email: Promise<string>;
 
     constructor(accessToken: string) {
-        /*
         const values = this.credentialsByAccessToken(accessToken)
         .then(function(result){
+            console.log("constructorUSER: " + result.user_id + "name " + result.name + "email " + result.email)
             return [result.user_id, result.name, result.email];
         }).catch(function(error){
             console.log("error in User constructor: "+ error);
@@ -46,22 +46,19 @@ export class User {
             console.log(error);
             return "";
         });
-        */
-
 
     /////////////////////  DA RIMUOVERE E SCOMMENTARE QUELLO CHE C'E' SOPRA TODO ///////////////////////////////////////////////////
-    this.userID = Promise.resolve('amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ');
+    /*this.userID = Promise.resolve('amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ');
     this.name = Promise.resolve('Africa');
     this.email = Promise.resolve('abc@123.com');
+    */
     //////////////////////////////////////////////////////////////////////////////////////////
 }
 
 private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
-    
-    return axios.get('api.amazon.com/user/profile?access_token=' + accessToken)
-    .then(function (result: userJSON) {
-        console.log("logged to amazon with success.");
-        return result;
+    return axios.get('https://api.amazon.com/user/profile?access_token=' + accessToken)
+    .then(function (result: {data:userJSON}) {
+        return result.data;
     })
     .catch(function (error: string) {
         console.log(error);
@@ -75,9 +72,6 @@ public async workflow (workflowName: string, position: number = 0, elicitSlot: s
 
 }
 
-
-
-////////////////////////////// FOREACH DON'T WORK WITH PROMISE ORDER!.!.!.!!!!.!!!!!!!!!11!!!.
 /* 
 
 user.workflow('poc').then(async function(result){

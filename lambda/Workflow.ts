@@ -8,24 +8,40 @@
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-02-25   || Created file
+* Stefano Zanatta       || 2019-04-06   || Changed switch to commands
 */
 'use strict';
 import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
-import { blockJSON, AlexaResponse } from "./JSONconfigurations/JSONconfiguration";
-import { Filter } from "./utility/Filter";
-import { Filterable } from "./utility/Filterable";
-import { ElicitBlock } from "./utility/ElicitBlock";
+import { blockJSON, AlexaResponse, BlockConfig } from "./JSONconfigurations/JSONconfiguration";
+import { Filter } from "./blocks/utility/Filter";
+import { Filterable } from "./blocks/utility/Filterable";
+import { ElicitBlock } from "./blocks/utility/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
 import { BlockTwitterRead } from "./blocks/BlockTwitterRead";
 import { BlockList } from "./blocks/BlockList";
 import { BlockWeather } from "./blocks/BlockWeather";
+import { WorkflowElement } from "./blocks/utility/WorkflowElement";
 
 export class Workflow {
 
-    private _blocks: Promise<Block | Filter>[] = [];
+    private _blocks: Promise<WorkflowElement>[] = [];
     private name: string;
+
+    private static createBlockCommands: any = {
+        'Filter': (config: BlockConfig): Promise<Filter> => Promise.resolve(new Filter(config)),
+        'TextToSpeech': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTextToSpeech(config)),
+        'FeedRSS': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
+        'List': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockList(config)),
+        'Stock': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
+        'Sport': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
+        'Crypto': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
+        'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
+        'Twitter': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterRead(config)),
+        'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config))
+    };
+
     /**
      *
      * @param workflowConfigJSON promise containing a workflow and all its blocks
@@ -40,43 +56,13 @@ export class Workflow {
         });
     }
 
-    private static blockFromJSON(blockConfigurationJSON: blockJSON): Promise<Block> | Promise<Filter> {
-        let block: Promise<Block> | Promise<Filter>;
-        switch(blockConfigurationJSON.blockType) {
-            case 'Filter':
-                block = Promise.resolve(new Filter(blockConfigurationJSON.config));
-            break;
-            case 'TextToSpeech':
-                block = Promise.resolve(new BlockTextToSpeech(blockConfigurationJSON.config));
-            break;
-            case 'FeedRSS':
-                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
-            break;
-            case 'List':
-                block = Promise.resolve(new BlockList(blockConfigurationJSON.config));
-            break;
-            case 'Stock':
-                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
-            break;
-            case 'Sport':
-                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
-            break;
-            case 'Crypto':
-                block = Promise.resolve(new BlockFeedRSS(blockConfigurationJSON.config));
-            break;
-            case 'PIN':
-                block = Promise.resolve(new BlockPIN(blockConfigurationJSON.config));
-            break;
-            case 'Twitter':
-                block = Promise.resolve(new BlockTwitterRead(blockConfigurationJSON.config));
-            break;
-            case 'Weather':
-                block = Promise.resolve(new BlockWeather(blockConfigurationJSON.config));
-            break;
-            default:
-                throw new Error('In class Workflow, ' + blockConfigurationJSON.blockType + ' block not found');
-        }
-        return block;
+    /**
+     * 
+     * @param blockConfigurationJSON block in JSON format, containing its name and default/user configuration 
+     */
+    private static blockFromJSON(blockConfigurationJSON: blockJSON): Promise<WorkflowElement> {
+        
+        return this.createBlockCommands[blockConfigurationJSON.blockType](blockConfigurationJSON.config);
     }
 
     public async alexaResponse(): Promise<AlexaResponse> {
@@ -91,7 +77,7 @@ export class Workflow {
             /**
              * if ElicitSlot is not empty, set the slot of the first block 
              */
-            if (slot != '' &&(<ElicitBlock>blocks[0]).setElicitSlot){
+            if (slot != '' && (<ElicitBlock>blocks[0]).setElicitSlot){
                 (<ElicitBlock>blocks[0]).setElicitSlot(slot);
             }
             // cycle until there are no more blocks or an elicit block is found
@@ -117,11 +103,11 @@ export class Workflow {
      * @returns list of blocks
      * @description filters any block that comes after a filter; filters are removed in the process
      */
-    private async filter(_filterBlocks: Promise<Block | Filter>[]): Promise<Block[]> {
+    private async filter(_filterBlocks: Promise<WorkflowElement>[]): Promise<Block[]> {
 
         let blocks: Promise<Block[]> = Promise.resolve([]);
+        for (let i = 0, j = 0; i < _filterBlocks.length && j < _filterBlocks.length; ++i) {
 
-        for (let i = 0,j = 0; i < _filterBlocks.length && j < _filterBlocks.length; ++i) {
             const filterBlock = await _filterBlocks[j];
             if(filterBlock instanceof Filter) {
                 /**
@@ -138,33 +124,33 @@ export class Workflow {
     }
 
 }
-/*
 
+/*
 const wf = new Workflow(
     [
         {
-            "blockType": "Filter",
-            "config": {
-                "limit": 2
-            }
-        },        
-        {
-            "blockType": "List",
-            "config": {
-                "List": [ 'uno','due','tre','quattro']
-            }
+          "blockType": "TextToSpeech",
+          "config": {
+            "TextToSpeech": "This is the second block"
+          }
         },
         {
-            "blockType": "Filter",
-            "config": {
-                "limit": 2
-            }
+          "blockType": "Filter",
+          "config": {
+            "limit": 2
+          }
         },
         {
-            "blockType": "FeedRSS",
-            "config": {
-              "URL": "https://www.ansa.it/sito/notizie/tecnologia/tecnologia_rss.xml"
-            }
-        }       
-      ], 'poc',0,'1234');
-wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));*/
+          "blockType": "Twitter",
+          "config": {
+            "access_token_key": "",
+            "access_token_secret": "",
+            "consumer_key": "",
+            "consumer_secret": "",
+            "screenName": "@BillGates"
+          }
+        }
+      ], 'test',0);
+
+wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+*/

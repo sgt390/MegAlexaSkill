@@ -32,12 +32,14 @@ export type BlockTwitterReadConfig = {
     consumer_key: string,
     consumer_secret: string,
     access_token_key: string,
-    access_token_secret: string
+    access_token_secret: string,
+    screenName: string
 }
 
 export type BlockWeatherConfig = {
     Latitude: string,
-    Longitude: string
+    Longitude: string,
+    APIKey: string
 }
 
 export type connectorWeather = {
@@ -94,10 +96,10 @@ export type AlexaResponse = {
     position: number
 }
 
-export type connectorTwitterTimelineHome =[{
-    text:string, 
-    user:{
-        name:string
+export type connectorTwitterTimelineUser =[{
+    text: string, 
+    user: {
+        name: string
     }
 }];
 
