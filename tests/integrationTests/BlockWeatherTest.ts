@@ -16,7 +16,7 @@ import {BlockWeather} from '../../lambda/blocks/BlockWeather';
 import { Block } from '../../lambda/blocks/Block';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
-import { ElicitBlock } from '../../lambda/utility/ElicitBlock';
+import { ElicitBlock } from '../../lambda/blocks/utility/ElicitBlock';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
