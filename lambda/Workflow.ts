@@ -19,10 +19,11 @@ import { Filter } from "./blocks/utility/Filter";
 import { Filterable } from "./blocks/utility/Filterable";
 import { ElicitBlock } from "./blocks/utility/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
-import { BlockTwitterRead } from "./blocks/BlockTwitterRead";
+import { BlockTwitterReadUserTL } from "./blocks/BlockTwitterReadUserTL";
 import { BlockList } from "./blocks/BlockList";
 import { BlockWeather } from "./blocks/BlockWeather";
 import { WorkflowElement } from "./blocks/utility/WorkflowElement";
+import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
 
 export class Workflow {
 
@@ -38,8 +39,10 @@ export class Workflow {
         'Sport': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'Crypto': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
-        'Twitter': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterRead(config)),
-        'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config))
+        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
+        'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
+        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config))
+
     };
 
     /**
@@ -125,7 +128,7 @@ export class Workflow {
 
 }
 
-/*
+
 const wf = new Workflow(
     [
         {
@@ -143,14 +146,13 @@ const wf = new Workflow(
         {
           "blockType": "Twitter",
           "config": {
-            "access_token_key": "",
-            "access_token_secret": "",
-            "consumer_key": "",
-            "consumer_secret": "",
+            "access_token_key": "1110935101561556992-b9BpCfXw3NqSbzhEpMtvmvbVMqGE2N",
+            "access_token_secret": "OMVvSqVFjCOC0uFQkelIycpvCgUvOWFht8COIkXSUWXUH",
+            "consumer_key": "Bdc0zcGkYm6ykEoiw4NJUZxMO",
+            "consumer_secret": "FSgU3qIVe6gvLg4NLkKnZYIHFWQHNLMrKYCGoHR5pjUz0IPaRP",
             "screenName": "@BillGates"
           }
         }
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/

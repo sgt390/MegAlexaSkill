@@ -11,7 +11,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
-import { BlockTwitterRead } from "../blocks/BlockTwitterRead";
+import { BlockTwitterReadUserTL } from "../blocks/BlockTwitterReadUserTL";
 const Twitter = require('twitter');
 
 //not best practice, twitter has credential of ZeroSeven, regenerete them at https://developer.twitter.com/en/apps/16179148
@@ -32,7 +32,7 @@ const Twitter = require('twitter');
 //const access_token = oauth.Token(user.access_token, user.access_token_secret);
 //const client = oauth.Client(consumer, access_token);
 
-export class ConnectorBlockTwitter implements ConnectorBlock {
+export class ConnectorBlockTwitterUserTL implements ConnectorBlock {
 
     private user: any;
     private userNameTwitter: string;
@@ -54,6 +54,11 @@ export class ConnectorBlockTwitter implements ConnectorBlock {
             screen_name: this.userNameTwitter,
             tweet_mode: "extended"
         };
+
+        this.user.get('search/tweets', {q: 'node.js'}, function(error:any, tweets:any, response:any) {
+            console.log(tweets);
+         });
+
         return this.user.get('statuses/user_timeline', params)
             .then(function (tweets: connectorTwitterTimelineUser) {
                 return tweets.map(function(tweet:any) {
