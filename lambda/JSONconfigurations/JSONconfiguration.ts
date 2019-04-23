@@ -36,6 +36,15 @@ export type BlockTwitterReadConfig = {
     screenName: string
 }
 
+export type BlockTwitterReadHashtagConfig = {
+    //careful here, probably going to change
+    consumer_key: string,
+    consumer_secret: string,
+    access_token_key: string,
+    access_token_secret: string,
+    hashtag: string
+}
+
 export type BlockWeatherConfig = {
     Latitude: string,
     Longitude: string,
@@ -102,6 +111,17 @@ export type connectorTwitterTimelineUser =[{
         name: string
     }
 }];
+
+export type connectorTwitterHashtag ={
+    statuses: [
+            {
+            text: string, 
+            user: {
+                name: string
+            }
+        }
+    ]
+};
 
 export type WorkflowData = {
     data: blockJSON[]

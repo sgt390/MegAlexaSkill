@@ -10,8 +10,8 @@
 * Matteo Depascale      || 2019-03-27   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
-import { BlockTwitterRead } from "../blocks/BlockTwitterRead";
+import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig } from "../JSONconfigurations/JSONconfiguration";
+import { BlockTwitterReadHashtag } from "../blocks/BlockTwitterReadHashtag";
 const Twitter = require('twitter');
 
 //not best practice, twitter has credential of ZeroSeven, regenerete them at https://developer.twitter.com/en/apps/16179148
@@ -32,32 +32,34 @@ const Twitter = require('twitter');
 //const access_token = oauth.Token(user.access_token, user.access_token_secret);
 //const client = oauth.Client(consumer, access_token);
 
-export class ConnectorBlockTwitter implements ConnectorBlock {
+export class ConnectorBlockTwitterHashtag implements ConnectorBlock {
 
     private user: any;
-    private userNameTwitter: string;
+    private hashtagTwitter: string;
     
-    constructor(blockTwitterConfig: BlockTwitterReadConfig) {
+    constructor(blockTwitterConfig: BlockTwitterReadHashtagConfig) {
         this.user = new Twitter({
             consumer_key: blockTwitterConfig.consumer_key,
             consumer_secret: blockTwitterConfig.consumer_secret,
             access_token_key: blockTwitterConfig.access_token_key,
             access_token_secret: blockTwitterConfig.access_token_secret
         });
-        this.userNameTwitter = blockTwitterConfig.screenName;
+        this.hashtagTwitter = blockTwitterConfig.hashtag;
     }
 
     //search/user_timeline
     public async connect(limit:number = 10): Promise<string> {
         const params = {
             count: limit,
-            screen_name: this.userNameTwitter,
-            tweet_mode: "extended"
+            q: this.hashtagTwitter,
+            tweet_mode: "extended",
+            lang: "en"
         };
-        return this.user.get('statuses/user_timeline', params)
-            .then(function (tweets: connectorTwitterTimelineUser) {
-                return tweets.map(function(tweet:any) {
-                    return tweet.user.name +' tweeted '+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
+
+        return this.user.get('search/tweets', params)
+            .then(function (tweets: connectorTwitterHashtag) {
+                return tweets.statuses.map(function(tweet:any) {
+                    return tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').trim();
                 });
             })
             .catch(function (error:string) {

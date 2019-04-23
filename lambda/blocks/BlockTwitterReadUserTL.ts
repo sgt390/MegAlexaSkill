@@ -13,21 +13,21 @@
 import {Block} from "./Block";
 import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
 import {Filterable} from "./utility/Filterable";
-import {ConnectorBlockTwitter} from "../connectors/ConnectorBlockTwitter";
+import {ConnectorBlockTwitterUserTL} from "../connectors/ConnectorBlockTwitterUserTL";
 
 //https://www.npmjs.com/package/twitter
 
 
-export class BlockTwitterRead implements Block, Filterable {
-    private connector: ConnectorBlockTwitter;
+export class BlockTwitterReadUserTL implements Block, Filterable {
+    private connector: ConnectorBlockTwitterUserTL;
     private _text: Promise<string> | undefined;
     private limit: number = 10;
 
     constructor(blockConfig: BlockConfig) {
         const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
-        this.connector = new ConnectorBlockTwitter(blockTwitterConfig);
-
+        this.connector = new ConnectorBlockTwitterUserTL(blockTwitterConfig);
     }
+
     public async text(): Promise<string> {
         return this.connector.connect(this.limit);
     }
@@ -36,7 +36,7 @@ export class BlockTwitterRead implements Block, Filterable {
         return false;
     }
 
-    filterBlocks(limit: number): BlockTwitterRead {
+    filterBlocks(limit: number): BlockTwitterReadUserTL {
         this.limit = limit;
         return this;
     }

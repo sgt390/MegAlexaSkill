@@ -19,10 +19,11 @@ import { Filter } from "./blocks/utility/Filter";
 import { Filterable } from "./blocks/utility/Filterable";
 import { ElicitBlock } from "./blocks/utility/ElicitBlock";
 import { BlockPIN } from "./blocks/BlockPIN";
-import { BlockTwitterRead } from "./blocks/BlockTwitterRead";
+import { BlockTwitterReadUserTL } from "./blocks/BlockTwitterReadUserTL";
 import { BlockList } from "./blocks/BlockList";
 import { BlockWeather } from "./blocks/BlockWeather";
 import { WorkflowElement } from "./blocks/utility/WorkflowElement";
+import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
 
 export class Workflow {
 
@@ -38,8 +39,10 @@ export class Workflow {
         'Sport': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'Crypto': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
-        'Twitter': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterRead(config)),
-        'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config))
+        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
+        'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
+        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config))
+
     };
 
     /**
@@ -141,13 +144,13 @@ const wf = new Workflow(
           }
         },
         {
-          "blockType": "Twitter",
+          "blockType": "TwitterHashtag",
           "config": {
             "access_token_key": "",
             "access_token_secret": "",
             "consumer_key": "",
             "consumer_secret": "",
-            "screenName": "@BillGates"
+            "hashtag": "#trump"
           }
         }
       ], 'test',0);

@@ -10,7 +10,7 @@
 * Andrea Deidda     || 2019-03-21   ||  Created file
 */
 import {expect} from 'chai';
-import {BlockTwitterRead} from "../../lambda/blocks/BlockTwitterRead";
+import {BlockTwitterReadUserTL} from "../../lambda/blocks/BlockTwitterReadUserTL";
 import { AssertionError } from 'assert';
 
 describe('BlockTwitterRead', function(){
