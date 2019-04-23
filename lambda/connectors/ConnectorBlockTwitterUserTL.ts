@@ -10,7 +10,7 @@
 * Matteo Depascale      || 2019-03-27   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
+import { connectorTwitterTimelineUser, BlockTwitterReadConfig, connectorTwitterHashtag } from "../JSONconfigurations/JSONconfiguration";
 import { BlockTwitterReadUserTL } from "../blocks/BlockTwitterReadUserTL";
 const Twitter = require('twitter');
 
@@ -52,12 +52,9 @@ export class ConnectorBlockTwitterUserTL implements ConnectorBlock {
         const params = {
             count: limit,
             screen_name: this.userNameTwitter,
-            tweet_mode: "extended"
+            tweet_mode: "extended",
+            lang: "en"
         };
-
-        this.user.get('search/tweets', {q: 'node.js'}, function(error:any, tweets:any, response:any) {
-            console.log(tweets);
-         });
 
         return this.user.get('statuses/user_timeline', params)
             .then(function (tweets: connectorTwitterTimelineUser) {

@@ -128,7 +128,7 @@ export class Workflow {
 
 }
 
-
+/*
 const wf = new Workflow(
     [
         {
@@ -144,15 +144,16 @@ const wf = new Workflow(
           }
         },
         {
-          "blockType": "Twitter",
+          "blockType": "TwitterHashtag",
           "config": {
-            "access_token_key": "1110935101561556992-b9BpCfXw3NqSbzhEpMtvmvbVMqGE2N",
-            "access_token_secret": "OMVvSqVFjCOC0uFQkelIycpvCgUvOWFht8COIkXSUWXUH",
-            "consumer_key": "Bdc0zcGkYm6ykEoiw4NJUZxMO",
-            "consumer_secret": "FSgU3qIVe6gvLg4NLkKnZYIHFWQHNLMrKYCGoHR5pjUz0IPaRP",
-            "screenName": "@BillGates"
+            "access_token_key": "",
+            "access_token_secret": "",
+            "consumer_key": "",
+            "consumer_secret": "",
+            "hashtag": "#trump"
           }
         }
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+*/

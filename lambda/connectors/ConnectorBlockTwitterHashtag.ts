@@ -10,7 +10,7 @@
 * Matteo Depascale      || 2019-03-27   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
+import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig } from "../JSONconfigurations/JSONconfiguration";
 import { BlockTwitterReadHashtag } from "../blocks/BlockTwitterReadHashtag";
 const Twitter = require('twitter');
 
@@ -37,32 +37,29 @@ export class ConnectorBlockTwitterHashtag implements ConnectorBlock {
     private user: any;
     private hashtagTwitter: string;
     
-    constructor(blockTwitterConfig: BlockTwitterReadConfig) {
+    constructor(blockTwitterConfig: BlockTwitterReadHashtagConfig) {
         this.user = new Twitter({
             consumer_key: blockTwitterConfig.consumer_key,
             consumer_secret: blockTwitterConfig.consumer_secret,
             access_token_key: blockTwitterConfig.access_token_key,
             access_token_secret: blockTwitterConfig.access_token_secret
         });
-        this.hashtagTwitter = blockTwitterConfig.screenName;
+        this.hashtagTwitter = blockTwitterConfig.hashtag;
     }
 
     //search/user_timeline
     public async connect(limit:number = 10): Promise<string> {
         const params = {
             count: limit,
-            screen_name: this.hashtagTwitter,
-            tweet_mode: "extended"
+            q: this.hashtagTwitter,
+            tweet_mode: "extended",
+            lang: "en"
         };
 
-        this.user.get('search/tweets', {q: 'node.js'}, function(error:any, tweets:any, response:any) {
-            console.log(tweets);
-         });
-
-        return this.user.get('statuses/user_timeline', params)
-            .then(function (tweets: connectorTwitterTimelineUser) {
-                return tweets.map(function(tweet:any) {
-                    return tweet.user.name +' tweeted '+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
+        return this.user.get('search/tweets', params)
+            .then(function (tweets: connectorTwitterHashtag) {
+                return tweets.statuses.map(function(tweet:any) {
+                    return tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').trim();
                 });
             })
             .catch(function (error:string) {
