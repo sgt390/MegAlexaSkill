@@ -11,7 +11,7 @@
 */
 
 import {Block} from "./Block";
-import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockTwitterReadConfig, BlockTwitterReadHashtagConfig} from "../JSONconfigurations/JSONconfiguration";
 import {Filterable} from "./utility/Filterable";
 import {ConnectorBlockTwitterHashtag} from "../connectors/ConnectorBlockTwitterHashtag";
 
@@ -24,7 +24,7 @@ export class BlockTwitterReadHashtag implements Block, Filterable {
     private limit: number = 10;
 
     constructor(blockConfig: BlockConfig) {
-        const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
+        const blockTwitterConfig: BlockTwitterReadHashtagConfig = <BlockTwitterReadHashtagConfig> blockConfig;
         this.connector = new ConnectorBlockTwitterHashtag(blockTwitterConfig);
     }
     
