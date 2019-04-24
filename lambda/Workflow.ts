@@ -26,6 +26,7 @@ import { WorkflowElement } from "./blocks/utility/WorkflowElement";
 import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
 import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
 import { BlockEmail } from "./blocks/BlockEmail";
+import { BlockTwitterReadHomeTL } from "./blocks/BlockTwitterReadHomeTL";
 
 export class Workflow {
 
@@ -41,8 +42,9 @@ export class Workflow {
         'Sport': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'Crypto': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
-        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
         'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
+        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
+        'TwitterHomeTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadHomeTL(config)),
         'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config)),
         'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config)),
         'Email': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockEmail(config))
@@ -145,7 +147,13 @@ const wf = new Workflow(
           "config": {
             "TextToSpeech": "This is the second block"
           }
-        }
+        },
+        {
+            "blockType": "TwitterHomeTL",
+            "config": {
+              
+            }
+          }
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
