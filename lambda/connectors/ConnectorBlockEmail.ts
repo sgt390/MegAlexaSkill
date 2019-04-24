@@ -11,42 +11,65 @@
 */
 
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig } from "../JSONconfigurations/JSONconfiguration";
+import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig, tokenGoogleApi } from "../JSONconfigurations/JSONconfiguration";
 import { BlockEmail } from "../blocks/BlockEmail";
 
 const {google} = require('googleapis');
-
-const YOUR_CLIENT_ID = ""
-const YOUR_CLIENT_SECRET = ""
-
 import { auth } from 'google-oauth2-node';
- 
-const clientId = YOUR_CLIENT_ID;
-const clientSecret = YOUR_CLIENT_SECRET;
-const scope = 'https://www.googleapis.com/auth/analytics.readonly';
- 
-auth({ clientId, clientSecret, scope }).then(res => console.log(res), err => console.error(err));
 
-/*
-export class ConnectorBlockEmail implements ConnectorBlock {
+ 
 
-    private user: any;
-    
-    constructor(blockTwitterConfig: BlockTwitterReadHashtagConfig) {
+
+
+//////////////////////////////////////////////////////////////////////////////////////
+
+/**
+ * Retrieve Messages in user's mailbox matching query.
+ *
+ * @param  {String} userId User's email address. The special value 'me'
+ * can be used to indicate the authenticated user.
+ * @param  {String} query String used to filter the Messages listed.
+ * @param  {Function} callback Function to call when the request is complete.
+ */
+
+export class ConnectorBlockEmail {
+
+    private oAuth2Client:any;
+    private limit: number = 10;
+
+    /////////////////////// CREATE CREDENTIALS TYPE! ///////////////////////////
+    constructor(token: tokenGoogleApi, credentials:any){
+        this.oAuth2Client = this.authorize(token, credentials);
     }
 
-    //search/user_timeline
-    public async connect(limit:number = 10): Promise<string> {
+    private authorize(token: tokenGoogleApi, credentials:any): any {
+        const {client_secret, client_id, redirect_uris} = credentials.installed;
+        const oAuth2Client = new google.auth.OAuth2(
+        client_id, client_secret, redirect_uris[0]);
+      
+        oAuth2Client.setCredentials(token);
+        console.log(oAuth2Client);
+        return oAuth2Client;
+        
+    }
 
-        return this.user.get('????', "?")
-            .then(function (tweets: connectorTwitterHashtag) {
-                return tweets.statuses.map(function(tweet:any) {
-                    return tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '').trim();
-                });
-            })
-            .catch(function (error:string) {
-                throw 'error while creating the twitter connector: £££££££'+ error;
-            });
+    public connect(): Promise<string>{
+        return this.listMessages(this.oAuth2Client, 'label:unread', (el:any) => console.log(el));
+    }
+    
+    private listMessages(auth:any, query:string, callback:any): Promise<string> {
+        const gmail = google.gmail({version: 'v1', auth});
+        return gmail.users.messages.list({
+            'userId': 'me',
+            'q': query
+            }).then(async function(res:any){
+                return await res.data.messages.reduce(async function(buffer:string, messageInfo:any){
+                    let msg = await gmail.users.messages.get({
+                        'userId': 'me',
+                        'id': messageInfo.id
+                    });
+                    return buffer + Buffer.from(msg.data.payload.parts[0].body.data,'ascii');
+                }, '');
+            }).catch((err:string) => {throw err});
     }
 }
-*/
