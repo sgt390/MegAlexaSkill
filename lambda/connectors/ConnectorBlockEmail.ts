@@ -11,15 +11,11 @@
 */
 
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig, tokenGoogleApi } from "../JSONconfigurations/JSONconfiguration";
+import { tokenGoogleApi, credentials } from "../JSONconfigurations/JSONconfiguration";
 import { BlockEmail } from "../blocks/BlockEmail";
 
 const {google} = require('googleapis');
 import { auth } from 'google-oauth2-node';
-
- 
-
-
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -32,12 +28,12 @@ import { auth } from 'google-oauth2-node';
  * @param  {Function} callback Function to call when the request is complete.
  */
 
-export class ConnectorBlockEmail {
+export class ConnectorBlockEmail implements ConnectorBlock {
 
     private oAuth2Client:any;
 
     /////////////////////// CREATE CREDENTIALS TYPE! ///////////////////////////
-    constructor(token: tokenGoogleApi, credentials:any){
+    constructor(token: tokenGoogleApi, credentials: credentials){
         this.oAuth2Client = this.authorize(token, credentials);
     }
 
@@ -68,9 +64,10 @@ export class ConnectorBlockEmail {
                         'id': messageInfo.id
                     });
                     const email_content = Buffer.from(msg.data.payload.parts[0].body.data,'Base64').toString('ascii');
-                    const sender = msg.data.payload.headers.filter((el:any) => el.name === 'From')[0].value;
+                    //const email_content = msg.data.snippet;
+                    const sender = msg.data.payload.headers.filter((el:any) => el.name === 'From')[0].value.replace("@", " at ");
                     const subject = msg.data.payload.headers.filter((el:any) => el.name === 'Subject')[0].value;
-                    return await response + "sender: " + sender + ", subject: "+ subject+ ", email: " + email_content +"; ";
+                    return await response + ("sender: " + sender + ", subject: "+ subject+ ", email: " + email_content +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
             }).catch((err:string) => {throw err});
     }

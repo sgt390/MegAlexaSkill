@@ -25,6 +25,7 @@ import { BlockWeather } from "./blocks/BlockWeather";
 import { WorkflowElement } from "./blocks/utility/WorkflowElement";
 import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
 import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
+import { BlockEmail } from "./blocks/BlockEmail";
 
 export class Workflow {
 
@@ -43,8 +44,8 @@ export class Workflow {
         'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
         'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
         'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config)),
-        'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config))
-
+        'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config)),
+        'Email': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockEmail(config))
     };
 
     /**
@@ -103,7 +104,7 @@ export class Workflow {
                 position: workflowPosition
             };
         }).catch(async function(error){
-            throw 'Workflow.ts: Error while creating the workflow';
+            throw 'Workflow.ts: Error while creating the workflow' + error;
         });
     }
 
@@ -136,7 +137,7 @@ export class Workflow {
 
 }
 
-/*
+
 const wf = new Workflow(
     [
         {
@@ -144,24 +145,7 @@ const wf = new Workflow(
           "config": {
             "TextToSpeech": "This is the second block"
           }
-        },
-        {
-          "blockType": "Filter",
-          "config": {
-            "limit": 2
-          }
-        },
-        {
-          "blockType": "TwitterHashtag",
-          "config": {
-            "access_token_key": "",
-            "access_token_secret": "",
-            "consumer_key": "",
-            "consumer_secret": "",
-            "hashtag": "#trump"
-          }
         }
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/
