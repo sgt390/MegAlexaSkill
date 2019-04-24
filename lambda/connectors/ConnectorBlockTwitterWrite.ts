@@ -10,39 +10,31 @@
 * Stefano Zanatta       || 2019-04-23   || Created file
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterWrite,connectorTwitterTimelineUser, BlockTwitterReadConfig, connectorTwitterHashtag } from "../JSONconfigurations/JSONconfiguration";
+import { BlockTwitterWriteConfig } from "../JSONconfigurations/JSONconfiguration";
 const Twitter = require('twitter');
 
 export class ConnectorBlockTwitterWrite implements ConnectorBlock {
 
     private user: any;
-    private userNameTwitter: string;
     
-    constructor(blockTwitterConfig: BlockTwitterReadConfig) {
+    constructor(blockTwitterConfig: BlockTwitterWriteConfig) {
         this.user = new Twitter({
             consumer_key: blockTwitterConfig.consumer_key,
             consumer_secret: blockTwitterConfig.consumer_secret,
             access_token_key: blockTwitterConfig.access_token_key,
             access_token_secret: blockTwitterConfig.access_token_secret
         });
-        this.userNameTwitter = blockTwitterConfig.screenName;
     }
 
     //search/user_timeline
-    public async connect(limit:number = 10): Promise<string> {
+    public async connect(tweet:string = ''): Promise<string> {
         const params = {
-            count: limit,
-            screen_name: this.userNameTwitter,
-            tweet_mode: "extended",
-            lang: "en"
+            status: tweet
         };
 
-        // WRITE THE TWEET. TODO!!!
-        return this.user.get('statuses/user_timeline', params)
-            .then(function (tweets: connectorTwitterTimelineUser) {
-                return tweets.map(function(tweet:any) {
-                    return tweet.user.name +' tweeted '+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
-                });
+        return this.user.post('statuses/update', params)
+            .then(function () {
+                return 'your tweet was posted';
             })
             .catch(function (error:string) {
                 throw 'error while creating the twitter connector: £££££££'+ error;

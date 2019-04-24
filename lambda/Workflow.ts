@@ -24,6 +24,7 @@ import { BlockList } from "./blocks/BlockList";
 import { BlockWeather } from "./blocks/BlockWeather";
 import { WorkflowElement } from "./blocks/utility/WorkflowElement";
 import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
+import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
 
 export class Workflow {
 
@@ -41,7 +42,8 @@ export class Workflow {
         'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
         'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
         'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
-        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config))
+        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config)),
+        'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config))
 
     };
 
@@ -64,8 +66,10 @@ export class Workflow {
      * @param blockConfigurationJSON block in JSON format, containing its name and default/user configuration 
      */
     private static blockFromJSON(blockConfigurationJSON: blockJSON): Promise<WorkflowElement> {
-        
-        return this.createBlockCommands[blockConfigurationJSON.blockType](blockConfigurationJSON.config);
+        if ( this.createBlockCommands[blockConfigurationJSON.blockType])
+            return this.createBlockCommands[blockConfigurationJSON.blockType](blockConfigurationJSON.config);
+        else
+            return Promise.resolve(new BlockTextToSpeech({TextToSpeech:'there was en error while processing the block: '+blockConfigurationJSON.blockType}));
     }
 
     public async alexaResponse(): Promise<AlexaResponse> {
@@ -86,6 +90,7 @@ export class Workflow {
             // cycle until there are no more blocks or an elicit block is found
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
                 _text += await blocks[i].text() + "; ";
+
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
@@ -96,7 +101,9 @@ export class Workflow {
                 text: _text,
                 elicitSlot:elicitSlot,
                 position: workflowPosition
-            }
+            };
+        }).catch(async function(error){
+            throw 'Workflow.ts: Error while creating the workflow';
         });
     }
 
@@ -116,6 +123,7 @@ export class Workflow {
                 /**
                  * _filterBlocks[j+1] is the filterable block
                  */
+                (await blocks).push(new BlockTextToSpeech({TextToSpeech:''}));
                 (await blocks).push(<Block>((await <Filterable><unknown>_filterBlocks[j+1]).filterBlocks((<Filter> filterBlock).limit())));
                 j = j + 2;
             } else {

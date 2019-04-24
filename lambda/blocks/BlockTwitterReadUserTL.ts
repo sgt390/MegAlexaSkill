@@ -22,6 +22,7 @@ export class BlockTwitterReadUserTL implements Block, Filterable {
     private connector: ConnectorBlockTwitterUserTL;
     private _text: Promise<string> | undefined;
     private limit: number = 10;
+    private filtered: boolean = false;
 
     constructor(blockConfig: BlockConfig) {
         const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;

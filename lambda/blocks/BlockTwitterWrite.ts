@@ -18,7 +18,7 @@ import { ElicitBlock } from "./utility/ElicitBlock";
 //https://www.npmjs.com/package/twitter
 
 
-export class BlockTwitterReadUserTL implements Block, ElicitBlock {
+export class BlockTwitterWrite implements Block, ElicitBlock {
 
     private connector: ConnectorBlockTwitterWrite;
     private _text: Promise<string> | undefined;
@@ -30,7 +30,10 @@ export class BlockTwitterReadUserTL implements Block, ElicitBlock {
     }
 
     public async text(): Promise<string> {
-        let response = (this.userTweet != '') ? this.userTweet: 'say your tweet';
+        let response: Promise<string> = Promise.resolve('say your tweet');
+        if (this.userTweet != '') {
+            response = this.connector.connect(this.userTweet);
+        }
         return response;
     }
 
