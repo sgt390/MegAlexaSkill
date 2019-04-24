@@ -141,3 +141,8 @@ export type tokenGoogleApi = {
     token_type: string,
     expiry_date: number
 }
+
+export type BlockEmailConfig = {
+    token: tokenGoogleApi
+    credentials: {}
+}

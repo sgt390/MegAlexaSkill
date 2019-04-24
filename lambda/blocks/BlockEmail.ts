@@ -10,16 +10,19 @@
 * Matteo Depascale      || 2019-03-20   || Created file
 */
 import {Block} from "./Block";
-import {BlockConfig} from "./../JSONconfigurations/JSONconfiguration"; 
+import {BlockConfig, BlockEmailConfig} from "./../JSONconfigurations/JSONconfiguration"; 
+import { ConnectorBlockEmail } from "../connectors/ConnectorBlockEmail";
 
 export class BlockEmail implements Block {
 
-    public async text(): Promise<string> {
-        return 'TODO';
+    private connector: ConnectorBlockEmail;
+    constructor(blockConfig:BlockConfig){
+        let config = <BlockEmailConfig> blockConfig;
+        this.connector = new ConnectorBlockEmail(config.token, config.credentials);
     }
 
-    isElicit(): boolean {
-        return false;
+    public async text(): Promise<string> {
+        return this.connector.connect();
     }
 
 }

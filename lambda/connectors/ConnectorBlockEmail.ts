@@ -35,7 +35,6 @@ import { auth } from 'google-oauth2-node';
 export class ConnectorBlockEmail {
 
     private oAuth2Client:any;
-    private limit: number = 10;
 
     /////////////////////// CREATE CREDENTIALS TYPE! ///////////////////////////
     constructor(token: tokenGoogleApi, credentials:any){
@@ -52,25 +51,27 @@ export class ConnectorBlockEmail {
         
     }
 
-    public connect(): Promise<string>{
-        return this.listMessages(this.oAuth2Client, 'label:unread', (el:any) => console.log(el));
+    public connect(limit:number=5): Promise<string>{
+        return this.listMessages(this.oAuth2Client, 'label:unread', (el:any) => console.log(el),limit);
     }
     
-    private listMessages(auth:any, query:string, callback:any): Promise<string> {
+    private listMessages(auth:any, query:string, callback:any,limit:number): Promise<string> {
         const gmail = google.gmail({version: 'v1', auth});
         return gmail.users.messages.list({
             'userId': 'me',
-            'q': query
+            'q': query,
+            'maxResults': limit
             }).then(async function(res:any){
-                return await res.data.messages.reduce(async function(buffer:string, messageInfo:any){
+                return await res.data.messages.reduce(async function(response:string, messageInfo:any){
                     let msg = await gmail.users.messages.get({
                         'userId': 'me',
                         'id': messageInfo.id
                     });
-                    return buffer + Buffer.from(msg.data.payload.parts[0].body.data,'ascii');
+                    const email_content = Buffer.from(msg.data.payload.parts[0].body.data,'Base64').toString('ascii');
+                    const sender = msg.data.payload.headers.filter((el:any) => el.name === 'From')[0].value;
+                    const subject = msg.data.payload.headers.filter((el:any) => el.name === 'Subject')[0].value;
+                    return await response + "sender: " + sender + ", subject: "+ subject+ ", email: " + email_content +"; ";
                 }, '');
             }).catch((err:string) => {throw err});
     }
 }
-
-
