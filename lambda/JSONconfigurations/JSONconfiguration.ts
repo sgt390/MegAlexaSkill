@@ -166,3 +166,8 @@ export type BlockEmailConfig = {
     credentials: credentials,
     token: tokenGoogleApi
 }
+
+export type BlockCalendarConfig = {
+    credentials: credentials,
+    token: tokenGoogleApi
+}

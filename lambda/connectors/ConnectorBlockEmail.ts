@@ -72,3 +72,5 @@ export class ConnectorBlockEmail implements ConnectorBlock {
             }).catch((err:string) => {throw err});
     }
 }
+
+const credentials = {"installed":{"client_id":"974570768081-p3e8rfbsmd25ae4r445edsv3niugh72u.apps.googleusercontent.com","project_id":"megalexa-1556132707047","auth_uri":"https://accounts.google.com/o/oauth2/auth","token_uri":"https://oauth2.googleapis.com/token","auth_provider_x509_cert_url":"https://www.googleapis.com/oauth2/v1/certs","client_secret":"MA-aItkDN3-dEQovlvtq3Mph","redirect_uris":["urn:ietf:wg:oauth:2.0:oob","http://localhost"]}}
