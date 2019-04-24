@@ -27,6 +27,7 @@ import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
 import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
 import { BlockEmail } from "./blocks/BlockEmail";
 import { BlockTwitterReadHomeTL } from "./blocks/BlockTwitterReadHomeTL";
+import { BlockCalendar } from "./blocks/BlockCalendar";
 
 export class Workflow {
 
@@ -47,7 +48,8 @@ export class Workflow {
         'TwitterHomeTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadHomeTL(config)),
         'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config)),
         'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config)),
-        'Email': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockEmail(config))
+        'Email': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockEmail(config)),
+        'Calendar': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockCalendar(config))
     };
 
     /**
