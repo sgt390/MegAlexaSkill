@@ -16,8 +16,8 @@ import { BlockEmail } from "../blocks/BlockEmail";
 
 const {google} = require('googleapis');
 
-const YOUR_CLIENT_ID = "1048781954504-4et458uubfu4chmgonlus6bv9c5ale1l.apps.googleusercontent.com"
-const YOUR_CLIENT_SECRET = "VaZ9zKVqg4MHfslwmwXzlFVD"
+const YOUR_CLIENT_ID = ""
+const YOUR_CLIENT_SECRET = ""
 
 import { auth } from 'google-oauth2-node';
  
