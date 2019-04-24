@@ -1,3 +1,4 @@
+"use strict";
 /*
 * File: ConnectorBlockEmail.ts
 * Version: 0.0.1
@@ -9,24 +10,15 @@
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-20   || Created file
 */
-
-import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig } from "../JSONconfigurations/JSONconfiguration";
-import { BlockEmail } from "../blocks/BlockEmail";
-
-const {google} = require('googleapis');
-
-const YOUR_CLIENT_ID = "1048781954504-4et458uubfu4chmgonlus6bv9c5ale1l.apps.googleusercontent.com"
-const YOUR_CLIENT_SECRET = "VaZ9zKVqg4MHfslwmwXzlFVD"
-
-import { auth } from 'google-oauth2-node';
- 
-const clientId = YOUR_CLIENT_ID;
-const clientSecret = YOUR_CLIENT_SECRET;
-const scope = 'https://www.googleapis.com/auth/analytics.readonly';
- 
-auth({ clientId, clientSecret, scope }).then(res => console.log(res), err => console.error(err));
-
+Object.defineProperty(exports, "__esModule", { value: true });
+var google = require('googleapis').google;
+var YOUR_CLIENT_ID = "1048781954504-4et458uubfu4chmgonlus6bv9c5ale1l.apps.googleusercontent.com";
+var YOUR_CLIENT_SECRET = "VaZ9zKVqg4MHfslwmwXzlFVD";
+var google_oauth2_node_1 = require("google-oauth2-node");
+var clientId = YOUR_CLIENT_ID;
+var clientSecret = YOUR_CLIENT_SECRET;
+var scope = 'https://www.googleapis.com/auth/analytics.readonly';
+google_oauth2_node_1.auth({ clientId: clientId, clientSecret: clientSecret, scope: scope }).then(function (res) { return console.log(res); }, function (err) { return console.error(err); });
 /*
 export class ConnectorBlockEmail implements ConnectorBlock {
 
