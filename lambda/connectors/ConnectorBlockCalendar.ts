@@ -64,8 +64,8 @@ export class ConnectorBlockCalendar implements ConnectorBlock {
                 return await res.data.items.reduce(async function(response:string, event:any) {
                     let startTime = event.start.dateTime;
                     let startTimeConv = "" + startTime.substring(0, startTime.indexOf("T")) + " at " + startTime.substring(startTime.indexOf("T")+1, startTime.indexOf("+"));
-                    let location : string = !event.location ? "there is no location specified" : ", location: " + event.location;
-                    return await response + ("On " + startTimeConv + ", subject: "+ event.summary + location +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
+                    let location : string = !event.location ? " there is no location specified" : ", location: " + event.location;
+                    return await response + ("On " + startTimeConv + ", "+ event.summary + location +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
             }).catch((err:string) => {throw err});
     }
