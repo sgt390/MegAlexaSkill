@@ -48,7 +48,6 @@ export class ConnectorBlockEmail {
         client_id, client_secret, redirect_uris[0]);
       
         oAuth2Client.setCredentials(token);
-        console.log(oAuth2Client);
         return oAuth2Client;
         
     }
@@ -73,3 +72,5 @@ export class ConnectorBlockEmail {
             }).catch((err:string) => {throw err});
     }
 }
+
+
