@@ -36,6 +36,13 @@ export type BlockTwitterReadConfig = {
     screenName: string
 }
 
+export type BlockTwitterWriteConfig = {
+    consumer_key: string,
+    consumer_secret: string,
+    access_token_key: string,
+    access_token_secret: string
+}
+
 export type BlockTwitterReadHashtagConfig = {
     //careful here, probably going to change
     consumer_key: string,

@@ -22,6 +22,7 @@ export class BlockTwitterReadHashtag implements Block, Filterable {
     private connector: ConnectorBlockTwitterHashtag;
     private _text: Promise<string> | undefined;
     private limit: number = 10;
+    private filtered:boolean = false;
 
     constructor(blockConfig: BlockConfig) {
         const blockTwitterConfig: BlockTwitterReadHashtagConfig = <BlockTwitterReadHashtagConfig> blockConfig;
