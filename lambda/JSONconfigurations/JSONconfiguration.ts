@@ -133,3 +133,11 @@ export type connectorTwitterHashtag ={
 export type WorkflowData = {
     data: blockJSON[]
 }
+
+export type tokenGoogleApi = {
+    access_token: string,
+    refresh_token: string,
+    scope: string,
+    token_type: string,
+    expiry_date: number
+}
