@@ -141,3 +141,20 @@ export type tokenGoogleApi = {
     token_type: string,
     expiry_date: number
 }
+
+export type credentials = {
+    installed: {
+        auth_provider_x509_cert_url: string,
+        auth_uri: string,
+        client_id: string,
+        client_secret: string,
+        project_id: string,
+        redirect_uris: string[],
+        token_uri: string
+    }
+}
+
+export type BlockEmailConfig = {
+    credentials: credentials,
+    token: tokenGoogleApi
+}
