@@ -36,6 +36,13 @@ export type BlockTwitterReadConfig = {
     screenName: string
 }
 
+export type BlockTwitterWriteConfig = {
+    consumer_key: string,
+    consumer_secret: string,
+    access_token_key: string,
+    access_token_secret: string
+}
+
 export type BlockTwitterReadHashtagConfig = {
     //careful here, probably going to change
     consumer_key: string,
@@ -43,6 +50,14 @@ export type BlockTwitterReadHashtagConfig = {
     access_token_key: string,
     access_token_secret: string,
     hashtag: string
+}
+
+export type BlockTwitterReadHTLConfig = {
+    //careful here, probably going to change
+    consumer_key: string,
+    consumer_secret: string,
+    access_token_key: string,
+    access_token_secret: string
 }
 
 export type BlockWeatherConfig = {
@@ -125,4 +140,34 @@ export type connectorTwitterHashtag ={
 
 export type WorkflowData = {
     data: blockJSON[]
+}
+
+export type tokenGoogleApi = {
+    access_token: string,
+    refresh_token: string,
+    scope: string,
+    token_type: string,
+    expiry_date: number
+}
+
+export type credentials = {
+    installed: {
+        auth_provider_x509_cert_url: string,
+        auth_uri: string,
+        client_id: string,
+        client_secret: string,
+        project_id: string,
+        redirect_uris: string[],
+        token_uri: string
+    }
+}
+
+export type BlockEmailConfig = {
+    credentials: credentials,
+    token: tokenGoogleApi
+}
+
+export type BlockCalendarConfig = {
+    credentials: credentials,
+    token: tokenGoogleApi
 }

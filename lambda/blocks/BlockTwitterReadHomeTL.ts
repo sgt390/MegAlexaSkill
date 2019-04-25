@@ -11,34 +11,38 @@
 */
 
 import {Block} from "./Block";
-import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockTwitterReadHTLConfig} from "../JSONconfigurations/JSONconfiguration";
 import {Filterable} from "./utility/Filterable";
-import {ConnectorBlockTwitterUserTL} from "../connectors/ConnectorBlockTwitterUserTL";
+import {ConnectorBlockTwitterHomeTL} from "../connectors/ConnectorBlockTwitterHomeTL";
 
 //https://www.npmjs.com/package/twitter
 
 
-export class BlockTwitterReadUserTL implements Block, Filterable {
-    private connector: ConnectorBlockTwitterUserTL;
+export class BlockTwitterReadHomeTL implements Block, Filterable {
+    private connector: ConnectorBlockTwitterHomeTL;
     private _text: Promise<string> | undefined;
     private limit: number = 10;
     private filtered: boolean = false;
 
     constructor(blockConfig: BlockConfig) {
-        const blockTwitterConfig: BlockTwitterReadConfig = <BlockTwitterReadConfig> blockConfig;
-        this.connector = new ConnectorBlockTwitterUserTL(blockTwitterConfig);
+        const blockTwitterReadHTLConfig: BlockTwitterReadHTLConfig = <BlockTwitterReadHTLConfig> blockConfig;
+        this.connector = new ConnectorBlockTwitterHomeTL(blockTwitterReadHTLConfig);
     }
 
     public async text(): Promise<string> {
         return this.connector.connect(this.limit);
     }
 
-    isElicit(): boolean {
-        return false;
-    }
-
-    filterBlocks(limit: number): BlockTwitterReadUserTL {
+    filterBlocks(limit: number): BlockTwitterReadHomeTL {
         this.limit = limit;
         return this;
     }
 }
+
+/*
+const tconf = {
+    
+}
+let a = new ConnectorBlockTwitterHomeTL(tconf);
+a.connect().then(el => console.log(el));
+*/

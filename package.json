@@ -31,6 +31,8 @@
     "ask-sdk-model": "^1.12.0",
     "axios": "^0.18.0",
     "chai-as-promised": "^7.1.1",
+    "google-oauth2-node": "0.0.3",
+    "googleapis": "^39.2.0",
     "oauth": "^0.9.15",
     "openweather-apis": "^4.0.0",
     "rss-parser": "^3.6.3",

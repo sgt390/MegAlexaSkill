@@ -53,7 +53,7 @@ export class BlockPIN implements ElicitBlock {
      * @param slot user's pin
      */
     setElicitSlot(slot: string): void {
-        this.userPIN = slot;
+        this.userPIN = slot.replace(/\s/g, '');
     }
 
 }

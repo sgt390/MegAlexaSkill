@@ -24,6 +24,10 @@ import { BlockList } from "./blocks/BlockList";
 import { BlockWeather } from "./blocks/BlockWeather";
 import { WorkflowElement } from "./blocks/utility/WorkflowElement";
 import { BlockTwitterReadHashtag } from "./blocks/BlockTwitterReadHashtag";
+import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
+import { BlockEmail } from "./blocks/BlockEmail";
+import { BlockTwitterReadHomeTL } from "./blocks/BlockTwitterReadHomeTL";
+import { BlockCalendar } from "./blocks/BlockCalendar";
 
 export class Workflow {
 
@@ -39,10 +43,13 @@ export class Workflow {
         'Sport': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'Crypto': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockFeedRSS(config)),
         'PIN': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockPIN(config)),
-        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
         'Weather': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockWeather(config)),
-        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config))
-
+        'TwitterUserTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadUserTL(config)),
+        'TwitterHomeTL': (config: BlockConfig): Promise<Block>  => Promise.resolve(new BlockTwitterReadHomeTL(config)),
+        'TwitterHashtag': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterReadHashtag(config)),
+        'TwitterWrite': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockTwitterWrite(config)),
+        'Email': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockEmail(config)),
+        'Calendar': (config: BlockConfig): Promise<Block> => Promise.resolve(new BlockCalendar(config))
     };
 
     /**
@@ -64,8 +71,10 @@ export class Workflow {
      * @param blockConfigurationJSON block in JSON format, containing its name and default/user configuration 
      */
     private static blockFromJSON(blockConfigurationJSON: blockJSON): Promise<WorkflowElement> {
-        
-        return this.createBlockCommands[blockConfigurationJSON.blockType](blockConfigurationJSON.config);
+        if ( this.createBlockCommands[blockConfigurationJSON.blockType])
+            return this.createBlockCommands[blockConfigurationJSON.blockType](blockConfigurationJSON.config);
+        else
+            return Promise.resolve(new BlockTextToSpeech({TextToSpeech:'there was en error while processing the block: '+blockConfigurationJSON.blockType}));
     }
 
     public async alexaResponse(): Promise<AlexaResponse> {
@@ -86,6 +95,7 @@ export class Workflow {
             // cycle until there are no more blocks or an elicit block is found
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
                 _text += await blocks[i].text() + "; ";
+
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
@@ -96,7 +106,9 @@ export class Workflow {
                 text: _text,
                 elicitSlot:elicitSlot,
                 position: workflowPosition
-            }
+            };
+        }).catch(async function(error){
+            throw 'Workflow.ts: Error while creating the workflow' + error;
         });
     }
 
@@ -116,6 +128,7 @@ export class Workflow {
                 /**
                  * _filterBlocks[j+1] is the filterable block
                  */
+                (await blocks).push(new BlockTextToSpeech({TextToSpeech:''}));
                 (await blocks).push(<Block>((await <Filterable><unknown>_filterBlocks[j+1]).filterBlocks((<Filter> filterBlock).limit())));
                 j = j + 2;
             } else {
@@ -128,7 +141,7 @@ export class Workflow {
 
 }
 
-/*
+
 const wf = new Workflow(
     [
         {
@@ -138,22 +151,11 @@ const wf = new Workflow(
           }
         },
         {
-          "blockType": "Filter",
-          "config": {
-            "limit": 2
+            "blockType": "TwitterHomeTL",
+            "config": {
+              
+            }
           }
-        },
-        {
-          "blockType": "TwitterHashtag",
-          "config": {
-            "access_token_key": "",
-            "access_token_secret": "",
-            "consumer_key": "",
-            "consumer_secret": "",
-            "hashtag": "#trump"
-          }
-        }
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-*/
