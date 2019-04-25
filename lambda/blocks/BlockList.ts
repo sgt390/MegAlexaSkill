@@ -14,26 +14,44 @@
 import {Block} from "./Block";
 import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { Filterable } from "./utility/Filterable";
+import { ElicitBlock } from "./utility/ElicitBlock";
 
-export class BlockList implements Block, Filterable{
+export class BlockList implements Block, Filterable, ElicitBlock{
+    
     private limit: number = Number.POSITIVE_INFINITY;
     private list :[];
+    private elicitSlot: string;
 
     constructor(private blockConfig: BlockConfig) {
         const blockListConfig: BlockListConfig = <BlockListConfig> blockConfig;
         this.list = blockListConfig.List;
+        this.elicitSlot = '';
     }
 
     public text(): string {
-        return this.list.filter((el,index) => index<this.limit)
-            .reduce((result,element) => result + " " + element,"")
-            .trim();
+        
+        let text = '';
+        if (this.elicitSlot === '') {
+            text = this.list.filter((el,index) => index<this.limit)
+                .reduce((result,element) => result + " " + element,"")
+                .trim();
+        } else if (!(this.elicitSlot === 'done')) {//else call method to add or remove elements to the list in the Database)
+            text = 'added ' + this.elicitSlot;
+        }
+        return text;
     }
 
     filterBlocks(limit: number): BlockList{
         this.limit = limit;
         return this;
     }
-    
+
+    setElicitSlot(slot: string): void {
+        this.elicitSlot = slot;
+    }
+
+    slotRequired(): boolean {
+        return this.elicitSlot === 'done'? false: true;
+    }
 
 }

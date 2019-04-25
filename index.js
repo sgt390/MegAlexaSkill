@@ -136,7 +136,7 @@ const InProgressWorkflowIntentHandler = {
     } else {
       workflow = await user.workflow(workflowName, workflowPosition, elicitSlot);
     }
-
+    
     const alexaResponse = await workflow.alexaResponse();
     const speechText = alexaResponse.text;
 

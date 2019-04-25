@@ -97,6 +97,9 @@ export class Workflow {
                     workflowPosition = workflowPosition + i;
                 }
             }
+            if (!elicitSlot) {
+                _text += 'Workflow is over, you can start with a new one;'
+            }
             return {
                 text: _text,
                 elicitSlot:elicitSlot,
