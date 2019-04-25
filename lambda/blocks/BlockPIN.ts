@@ -11,6 +11,7 @@
 * Stefano Zanatta       || 2019-03-21   || Updated
 */
 import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { ElicitBlock } from "./utility/ElicitBlock";
 
 export class BlockPIN implements ElicitBlock {
@@ -23,12 +24,12 @@ export class BlockPIN implements ElicitBlock {
     }
 
     public text(): string {
-        let response = 'say your pin to continue';
+        let response = PhrasesGenerator.randomPinBlockStartSentence();
         if(this.userPIN != '') {
             if(this.check(this.correctPIN, this.userPIN)) {
-                response = 'pin is correct.';
+                response = PhrasesGenerator.randomCorrectPinSentence();
             } else {
-                response = 'incorrect, please repeat.';
+                response = PhrasesGenerator.randomWrongPinSentence();
                 this.setElicitSlot('');
             }
         }

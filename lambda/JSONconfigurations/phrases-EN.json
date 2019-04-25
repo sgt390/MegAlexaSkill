@@ -27,6 +27,15 @@
         "Pin is correct",
         "Perfect, the pin is correct"
     ],
+    "readList":[
+        "These are the elements that you have in your list: ",
+        "The items on your list are these: ",
+        "Your list has these elements: "
+    ],
+    "readlEmail":[
+        "These are your new emails"
+    ]
+
     "readTwitter":[
         "Those are your tweets"
     ],

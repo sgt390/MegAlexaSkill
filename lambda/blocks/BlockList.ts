@@ -13,6 +13,7 @@
 */
 import {Block} from "./Block";
 import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { Filterable } from "./utility/Filterable";
 import { ElicitBlock } from "./utility/ElicitBlock";
 
@@ -32,9 +33,10 @@ export class BlockList implements Block, Filterable, ElicitBlock{
         
         let text = '';
         if (this.elicitSlot === '') {
-            text = this.list.filter((el,index) => index<this.limit)
+            text = PhrasesGenerator.randomReadListSentence().concat(
+                this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
-                .trim();
+                .trim());
         } else if (!(this.elicitSlot === 'done')) {//else call method to add or remove elements to the list in the Database)
             text = 'added ' + this.elicitSlot;
         }

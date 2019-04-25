@@ -1,110 +1,121 @@
 
-const json = require ('../../JSONconfigurations/phrases.json');
 export class PhrasesGenerator {
-     /**
-      * * generate a random integer between min and max
-      * * @param {Number} min 
-      *  * @param {Number} max
-      * * @return {Number} random generated integer 
-      * */
-    
-    private static language:string="en-US";
+    /**
+     * * generate a random integer between min and max
+     * * @param {Number} min 
+     *  * @param {Number} max
+     * * @return {Number} random generated integer 
+     * */
+   
+   private static language:string="en-US";
+   private static JSON:any=require  ('../../JSONconfigurations/phrases-EN.json');
 
+   public static setLanguage(lng:string){
+       this.language=lng;
+       if(this.language=="it-IT") 
+       PhrasesGenerator.JSON= require ('../../JSONconfigurations/phrases-IT.json');
+       else PhrasesGenerator.JSON= require  ('../../JSONconfigurations/phrases-EN.json');
+   }
 
+   private static randomInt(min: number, max :number): number{
+         return Math.floor(Math.random() * (max - min + 1)) + min;
+       }
 
-    private static randomInt(min: number, max :number): number{
-          return Math.floor(Math.random() * (max - min + 1)) + min;
-        }
+   static randomStartSkillSentence():string{
+      var randomNumber: number=this.randomInt(0,PhrasesGenerator.JSON.skillStart.length-1);
+      let s: string=PhrasesGenerator.JSON.skillStart[randomNumber];
+      return s;
+   }
+   
+   static randomWorkflowStartSentence():string{
+   var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.workflowStart.length-1);
+      let s: string=PhrasesGenerator.JSON.workflowStart[randomNumber];
+      return s;
+   }
+     
+   static randomPinBlockStartSentence(): string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.pinBlockStart.length-1);
+          let s: string=PhrasesGenerator.JSON.pinBlockStart[randomNumber];
+          return s;
+       }
 
-    static randomStartSkillSentence():String{
-       var randomNumber: number=this.randomInt(0,json.skillStart.length-1);
-       let s=json.skillStart[randomNumber];
+   static randomWrongPinSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.wrongPin.length-1);
+       let s: string=PhrasesGenerator.JSON.wrongPin[randomNumber];
        return s;
-    }
-    
-    randomWorkflowStartSentence():String{
-    var randomNumber: number=PhrasesGenerator.randomInt(0,json.workflowStart.length-1);
-       let s=json.workflowStart[randomNumber];
+       }
+   static randomCorrectPinSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.correctPin.length-1);
+       let s: string=PhrasesGenerator.JSON.correctPin[randomNumber];
        return s;
-    }
-      
-    randomPinBlockStartSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.pinBlockStart.length-1);
-           let s=json.pinBlockStart[randomNumber];
-           return s;
-        }
-
-    randomWrongPinSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.wrongPin.length-1);
-        let s=json.wrongPin[randomNumber];
-        return s;
-        }
-    randomCorrectPinSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.correctPin.length-1);
-        let s=json.correctPin[randomNumber];
-        return s;
-        }
-    randomReadTwitterSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.readTwitter.length-1);
-        let s=json.readTwitter[randomNumber];
-        return s;
-        }
-    randomFeedRssSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.feedRss.length-1);
-        let s=json.feedRss[randomNumber];
-        return s;
-        }
-    randomWeatherStartSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.weatherStart.length-1);
-        let s=json.weatherStart[randomNumber];
-        return s;
-    }   
-    randomWeatherGradeSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.weatherGrade.length-1);
-        let s=json.weatherGrade[randomNumber];
-        return s;
-    } 
-    randomWeatherDetailsSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.weatherDetails.length-1);
-        let s=json.weatherDetails[randomNumber];
-        return s;
-    } 
-    randomWeatherHighSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.weatherHigh.length-1);
-        let s=json.weatherHigh[randomNumber];
-        return s;
-    }
-    randomWeatherLowSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.weatherLow.length-1);
-        let s=json.weatherLow[randomNumber];
-        return s;
-    }
-    randomNewsSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.news.length-1);
-        let s=json.news[randomNumber];
-        return s;
-    }
-    randomSportSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.sport.length-1);
-        let s=json.sport[randomNumber];
-        return s;
-    }
-    randomStockSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.stock.length-1);
-        let s=json.stock[randomNumber];
-        return s;
-    }
-    randomCryptoSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.crypto.length-1);
-        let s=json.crypto[randomNumber];
-        return s;
-    }
-    randomWorkflowDoneSentence():String{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,json.workflowDone.length-1);
-        let s=json.workflowDone[randomNumber];
-        return s;
-    }
+       }
+   static randomReadListSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.readList.length-1);
+       let s: string=PhrasesGenerator.JSON.readList[randomNumber];
+       return s;
+       }
+       
+   static randomReadTwitterSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.readTwitter.length-1);
+       let s: string=PhrasesGenerator.JSON.readTwitter[randomNumber];
+       return s;
+       }
+   static randomFeedRssSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.feedRss.length-1);
+       let s: string=PhrasesGenerator.JSON.feedRss[randomNumber];
+       return s;
+       }
+   static randomWeatherStartSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.weatherStart.length-1);
+       let s: string=PhrasesGenerator.JSON.weatherStart[randomNumber];
+       return s;
+   }   
+   static randomWeatherGradeSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.weatherGrade.length-1);
+       let s: string=PhrasesGenerator.JSON.weatherGrade[randomNumber];
+       return s;
+   } 
+   static randomWeatherDetailsSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.weatherDetails.length-1);
+       let s: string=PhrasesGenerator.JSON.weatherDetails[randomNumber];
+       return s;
+   } 
+   static randomWeatherHighSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.weatherHigh.length-1);
+       let s: string=PhrasesGenerator.JSON.weatherHigh[randomNumber];
+       return s;
+   }
+   static randomWeatherLowSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.weatherLow.length-1);
+       let s: string=PhrasesGenerator.JSON.weatherLow[randomNumber];
+       return s;
+   }
+   static randomNewsSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.news.length-1);
+       let s: string=PhrasesGenerator.JSON.news[randomNumber];
+       return s;
+   }
+   static randomSportSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.sport.length-1);
+       let s: string=PhrasesGenerator.JSON.sport[randomNumber];
+       return s;
+   }
+   static randomStockSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.stock.length-1);
+       let s: string=PhrasesGenerator.JSON.stock[randomNumber];
+       return s;
+   }
+   static randomCryptoSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.crypto.length-1);
+       let s: string=PhrasesGenerator.JSON.crypto[randomNumber];
+       return s;
+   }
+   static randomWorkflowDoneSentence():string{
+       var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.JSON.workflowDone.length-1);
+       let s: string=PhrasesGenerator.JSON.workflowDone[randomNumber];
+       return s;
+   }
 
 
- };
+};
 
