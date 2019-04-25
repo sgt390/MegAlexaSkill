@@ -1,0 +1,75 @@
+{
+    "skillStart":[
+        "Welcome to MegAlexa, how can I help you",
+        "Hi, welcome back to MegAlexa,",
+        "Which workflow would you like to open?"],
+
+    "workflowStart":[
+        "Your worklflow are",
+        "These are the workflows you have created",
+        "You can chose one of these workflows"
+    ],
+    "pinBlockStart":[
+        "Say your pin to continue",
+        "What's you Pin?",
+        "Tell me your secret code",
+        "Let me know your Pin to continue",
+        "Confess me your secret code",
+        "Whisper your four digits number"
+    ],
+    "wrongPin":[
+        "Incorrect, please repeat",
+        "Wrong, try again",
+        "Wrong, retry"
+    ],
+
+    "correctPin":[
+        "Pin is correct",
+        "Perfect, the pin is correct"
+    ],
+    "readTwitter":[
+        "Those are your tweets"
+    ],
+
+    "feedRss":[
+        "Here is your feed",
+        "This is your feed"
+    ],
+    "weatherStart":[
+        "Currently in"
+    ],
+    "weatherGrade":[
+        "is"
+    ],
+    "weatherDetails":[
+        "with"
+    ],
+    "weatherHigh":[
+        "you can expect an high of"
+    ],
+    "weatherLow":[
+        "and a low of "
+    ],
+    "news":[
+        "Here is your flash briefing",
+        "Here are the news"
+    ],
+    "sport":[
+        "Here is your sport flash briefing"
+    ],
+    "stock":[
+        "Here are your stock-market news"
+    ],
+    "crypto":[
+        "Here are your cryptocurrency related news"
+    ],
+    "workflowDone":[
+        "Your workflow is completed"
+    ]
+
+
+
+
+
+
+}
