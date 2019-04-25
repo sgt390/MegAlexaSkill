@@ -1,0 +1,91 @@
+{
+    "skillStart":[
+        "Benvenuto in MegAleza, come posso aiutarti?",
+        "Quale workflow desideri aprire?",
+        "Con quale workflow vuoi iniziare?",
+        "Da quale workflow partiamo?"],
+
+    "workflowStart":[
+        "I tuoi workflow sono i seguenti ",
+        "Hai a disposizione i segienti workflow"
+    ],
+    "pinBlockStart":[
+        "Qual è il tuo codice?",
+        "Dimmi il tuo codice segreto",
+        "Confessami il tuo codice per continuare",
+        "Qual è il tuo PIN",
+        "Dimmi le quattro cifre segrete"
+    ],
+    "wrongPin":[
+        "Sbagliato, riprova",
+        "Codice non corretto, riprova"
+    ],
+
+    "correctPin":[
+        "Il Pin è corretto",
+        "Splendido, il Pin è corretto",
+        "Corretto"
+    ],
+    "readList":[
+        "Questi sono gli elementi nella lista: ",
+        "Ecco gli elementi nella lista: ",
+        "La tua lista contiene i seguenti elementi: "
+    ],
+    "readTwitter":[
+        "Questi sono i tweet",
+        "Questi sono i tweet richiesti",
+        "Ecco i tweet",
+        "Questi sono i tuoi tweet"
+    ],
+
+    "feedRss":[
+        "Questi sono gli aggiornamenti dei siti che segui",
+        "Gli aggoirnamenti dei siti che segui sono i seguenti",
+        "Gli ultimi aggiornamenti dei siti che segui sono i seguenti"
+    ],
+    "weatherStart":[
+        "Attualmente in ",
+        "In ",
+        "Oggi in"
+    ],
+    "weatherGrade":[
+        "ci sono",
+        "sono presenti"
+    ],
+    "weatherDetails":[
+        "ci sarà"
+    ],
+    "weatherHigh":[
+        "con una massima di "
+    ],
+    "weatherLow":[
+        "e una minima di "
+    ],
+    "news":[
+        "Questo è il tuo sommario quotidiano",
+        "Eccoti le notizie quotidiane",
+        "Le notizie di oggi sono le seguenti"
+    ],
+    "sport":[
+        "Questo è il tuo sommario quotidiano sportivo",
+        "Queste sono le seguenti notizie sportive",
+        "Le notizie sportive sono le seguenti"
+    ],
+    "stock":[
+        "Ecco le notizie sul mercato finanziario",
+        "Queste sono le notizie sul mercato finanziario"
+    ],
+    "crypto":[
+        "Ecco le notizie relative alla criptovaluta"
+    ],
+    "workflowDone":[
+        "Il tuo workflow è completato",
+        "Il workflow è finito"
+    ]
+
+
+
+
+
+
+}
