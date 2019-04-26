@@ -1,28 +1,28 @@
 /*
 * File: ConnectorBlockWeather.ts
 * Version: 1.0.0
-* Date: 2019-03-27
+* Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-27   || Created file
-* Matteo Depascale      || 2019-04-24   || Implemented
-* Bianca Ciuche         || 2019-04-26   || Verified
-* Matteo Depascale      || 2019-04-26   || Approved
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Matteo Depascale          || 2019-03-27   || Implemented clasd
+* Stefano Zanatta           || 2019-03-28   || Verified
+* Matteo Depascale          || 2019-04-10   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
+import { BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
 import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const weather = require("openweather-apis")
-
+ 
 export class ConnectorBlockweather implements ConnectorBlock {
     private coordinates: string;
 
     constructor(blockWeatherConfig: BlockWeatherConfig) {
         this.coordinates = "" + blockWeatherConfig.Latitude + "," + blockWeatherConfig.Longitude;
-        weather.setLang('en');
+        this.setLanguage();
         weather.setCoordinate(blockWeatherConfig.Latitude, blockWeatherConfig.Longitude);
         weather.setUnits('metric');
         weather.setAPPID(blockWeatherConfig.APIKey);
@@ -41,6 +41,13 @@ export class ConnectorBlockweather implements ConnectorBlock {
                 }
             });
         });
+    }
+
+    private setLanguage() {
+        if(PhrasesGenerator.getLanguage()==='en-US')
+            weather.setLang('en');
+        else
+            weather.setLang('it');
     }
 }
 /*
