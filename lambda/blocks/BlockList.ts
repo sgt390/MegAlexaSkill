@@ -11,16 +11,17 @@
 * Andrea Deidda         || 2019-03-21   || Update file
 * Bianca Andreea Ciuche || 2019-03-27   || Update file
 */
-import {Block} from "./Block";
-import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
-import { PhrasesGenerator } from "./utility/PhrasesGenerator";
+import {BlockConfig, BlockListConfig, blockListJSON} from "./../JSONconfigurations/JSONconfiguration";
 import { Filterable } from "./utility/Filterable";
 import { ElicitBlock } from "./utility/ElicitBlock";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
+import { BlockService } from "../services/BlockService";
+import { Workflow } from "../Workflow";
 
-export class BlockList implements Block, Filterable, ElicitBlock{
+export class BlockList implements Filterable, ElicitBlock{
     
     private limit: number = Number.POSITIVE_INFINITY;
-    private list :[];
+    private list : string[];
     private elicitSlot: string;
 
     constructor(private blockConfig: BlockConfig) {
@@ -36,8 +37,10 @@ export class BlockList implements Block, Filterable, ElicitBlock{
             text = PhrasesGenerator.randomReadListSentence()+" "+this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
-        } else if (!(this.elicitSlot === 'done')) {//else call method to add or remove elements to the list in the Database)
-            text =PhrasesGenerator.randomAddListSentence()+" "+ this.elicitSlot;
+        } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto')) {//else call method to add or remove elements to the list in the Database)
+
+            BlockService.modifyBlock(this.createNewBlockList(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
+            text = PhrasesGenerator.randomAddListSentence() + this.elicitSlot;
         }
         return text;
     }
@@ -52,7 +55,20 @@ export class BlockList implements Block, Filterable, ElicitBlock{
     }
 
     slotRequired(): boolean {
-        return this.elicitSlot === 'done'? false: true;
+        return this.elicitSlot === 'done' || this.elicitSlot === 'fatto'? false: true;
+    }
+
+    private createNewBlockList(userList:string[], newElement: string): blockListJSON {
+
+        userList.push(newElement);
+
+        let newBlockList =  {
+            "blockType": "List",
+            "config": {
+              "List": userList
+            }
+        };
+        return newBlockList;
     }
 
 }
