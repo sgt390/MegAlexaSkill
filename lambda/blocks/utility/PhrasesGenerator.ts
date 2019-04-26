@@ -26,7 +26,7 @@ export class PhrasesGenerator {
 
     public static setLanguage(languagePassed:string) {
         this.language=languagePassed;
-        if(this.language=="it-IT") 
+        if(this.language==="it-IT") 
             PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
     }
 
@@ -143,6 +143,12 @@ export class PhrasesGenerator {
     static randomWeatherHighSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherHigh.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.weatherHigh[randomNumber];
+        return s;
+    }
+    
+    static randomWeatherCelsiusSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherHigh.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.weatherCelsius[randomNumber];
         return s;
     }
 

@@ -71,8 +71,8 @@
         "Questi sono gli eventi presenti sul tuo calendario"
     ],
     "weatherStart":[
-        "Attualmente in ",
-        "In ",
+        "Attualmente in",
+        "In",
         "Oggi in"
     ],
     "weatherGrade":[
@@ -83,10 +83,13 @@
         "ci sarà"
     ],
     "weatherHigh":[
-        "con una massima di"
+        "e una massima di"
     ],
     "weatherLow":[
-        "e una minima di"
+        "con una minima di"
+    ],
+    "weatherCelsius": [
+        "gradi centigradi"
     ],
     "news":[
         "Questo è il tuo sommario quotidiano",

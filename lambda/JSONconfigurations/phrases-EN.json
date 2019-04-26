@@ -80,6 +80,9 @@
     "weatherLow":[
         "and a low of"
     ],
+    "weatherCelsius": [
+        "celsius degree"
+    ],
     "news":[
         "Here is your flash briefing",
         "Here are the news"
