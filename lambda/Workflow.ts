@@ -84,7 +84,7 @@ export class Workflow {
 
         const blocks = this.filter(this._blocks);
         const slot = this.elicitSlot;
-
+        const startingPoistion = Workflow.getWorkflowPosition();
         return  blocks.then(async function(blocks) {
             let _text: string = '';
             let elicitSlot: boolean = false;
@@ -96,16 +96,18 @@ export class Workflow {
             }
             // cycle until there are no more blocks or an elicit block is found
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
+                Workflow.workflowStartingPosition = startingPoistion + i;
 
+                _text += await blocks[i].text() + "; ";
+                
+                Workflow.workflowStartingPosition++;
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
-                    Workflow.workflowStartingPosition += i;
                 }
 
-                _text += await blocks[i].text() + "; ";
-
             }
+            
             if (!elicitSlot) {
                 _text += 'Workflow is over, you can start with a new one;'
             }
