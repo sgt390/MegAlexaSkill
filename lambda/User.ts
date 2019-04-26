@@ -29,11 +29,13 @@ export class User {
             return[];
         });
 
+        
         this.userID = values.then(response => response[0])
         .catch(error => {
             console.log(error);
             return "";
         });
+        User.setUserID(this.userID);
 
         this.name = values.then(response => response[1])
         .catch(error => {
@@ -46,13 +48,6 @@ export class User {
             console.log(error);
             return "";
         });
-
-    /////////////////////  DA RIMUOVERE E SCOMMENTARE QUELLO CHE C'E' SOPRA TODO ///////////////////////////////////////////////////
-    /*this.userID = Promise.resolve('amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ');
-    this.name = Promise.resolve('Africa');
-    this.email = Promise.resolve('abc@123.com');
-    */
-    //////////////////////////////////////////////////////////////////////////////////////////
 }
 
 private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
@@ -67,7 +62,29 @@ private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
 }
 
 public async workflow (workflowName: string, position: number = 0, elicitSlot: string = ''): Promise<Workflow> {
+    User.setWorkflowName(workflowName);
     return new WorkflowService().create(this.userID, workflowName, position, elicitSlot);
+}
+
+// useful static methods
+private static userInformation = {
+    "userID": "",
+    "workflowName": "" 
+};
+
+public static getUserID() {
+    return User.userInformation.userID;
+}
+
+public static getWorkflowName() {
+    return User.userInformation.workflowName;
+}
+public static async setUserID(userID: Promise<string>) {
+    User.userInformation.userID = await userID;
+}
+
+public static setWorkflowName(workflowName: string) {
+    User.userInformation.workflowName = workflowName;
 }
 
 }

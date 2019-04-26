@@ -11,12 +11,12 @@
 * Andrea Deidda         || 2019-03-21   || Update file
 * Bianca Andreea Ciuche || 2019-03-27   || Update file
 */
-import {Block} from "./Block";
 import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { Filterable } from "./utility/Filterable";
 import { ElicitBlock } from "./utility/ElicitBlock";
+import { BlockService } from "../services/BlockService";
 
-export class BlockList implements Block, Filterable, ElicitBlock{
+export class BlockList implements Filterable, ElicitBlock{
     
     private limit: number = Number.POSITIVE_INFINITY;
     private list :[];
@@ -35,7 +35,17 @@ export class BlockList implements Block, Filterable, ElicitBlock{
             text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
-        } else if (!(this.elicitSlot === 'done')) {//else call method to add or remove elements to the list in the Database)
+        } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto')) {//else call method to add or remove elements to the list in the Database)
+            ////////////////////// 
+            const a =  {
+                "blockType": "TextToSpeech",
+                "config": {
+                  "TextToSpeech": "devo modificarmi"
+                }
+            };
+            ////////////////////////
+
+            BlockService.modifyBlock(a,3);
             text = 'added ' + this.elicitSlot;
         }
         return text;
