@@ -37,14 +37,22 @@ export class BlockList implements Filterable, ElicitBlock{
             text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
-        } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto' || this.elicitSlot.includes('remove'))) {
-            BlockService.modifyBlock(this.createNewBlockListAdd(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
+        } else if (this.elicitSlot.includes('add' || 'insert' || "aggiungi" || 'inserisci')) {
+            let newElement = this.elicitSlot.replace('add ','');
+            newElement = this.elicitSlot.replace('inserisci ','');
+            newElement = this.elicitSlot.replace('insert ','');
+            newElement = this.elicitSlot.replace('aggiungi ','');
+            BlockService.modifyBlock(this.createNewBlockListAdd(this.list,newElement),Workflow.getWorkflowPosition());
             text = this.elicitSlot + " " + PhrasesGenerator.randomAddListSentence();
-        } else if(this.elicitSlot.includes('remove')) {
-            let newElement = this.elicitSlot.replace('remove ','');
-            BlockService.modifyBlock(this.createNewBlockListDelete(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
-            this.elicitSlot + " " + PhrasesGenerator.randomDeleteListSentence();
+        } else if(this.elicitSlot.includes('delete' || 'remove' || 'elimina' || 'rimuovi')) {
+            let newElement = this.elicitSlot.replace('delete ','');
+            newElement = this.elicitSlot.replace('remove ','');
+            newElement = this.elicitSlot.replace('elimina ','');
+            newElement = this.elicitSlot.replace('rimuovi ','');
+            BlockService.modifyBlock(this.createNewBlockListDelete(this.list,newElement),Workflow.getWorkflowPosition());
+            text = this.elicitSlot + " " + PhrasesGenerator.randomDeleteListSentence();
         }
+        
         return text;
     }
 
