@@ -30,6 +30,10 @@ export class PhrasesGenerator {
             PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
     }
 
+    public static getLanguage() {
+        return this.language;
+    }
+
     private static randomInt(min: number, max :number): number{
         return Math.floor(Math.random() * (max - min + 1)) + min;
     }

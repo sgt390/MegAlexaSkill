@@ -1,27 +1,28 @@
 /*
 * File: ConnectorBlockWeather.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Matteo Depascale          || 2019-03-27   || Implemented clasd
+* Stefano Zanatta           || 2019-03-28   || Verified
+* Matteo Depascale          || 2019-04-10   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
+import { BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
 import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const weather = require("openweather-apis")
-
-//const api key = process.env.API_KEY // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
  
 export class ConnectorBlockweather implements ConnectorBlock {
     private coordinates: string;
 
     constructor(blockWeatherConfig: BlockWeatherConfig) {
         this.coordinates = "" + blockWeatherConfig.Latitude + "," + blockWeatherConfig.Longitude;
-        weather.setLang('en');
+        this.setLanguage();
         weather.setCoordinate(blockWeatherConfig.Latitude, blockWeatherConfig.Longitude);
         weather.setUnits('metric');
         weather.setAPPID(blockWeatherConfig.APIKey);
@@ -40,23 +41,13 @@ export class ConnectorBlockweather implements ConnectorBlock {
                 }
             });
         });
-        /*
-        .then(function(result) {
-            console.log(result);
-            return result;
-        })
-        .catch(el => el);
-        */
+    }
 
-
-        /*
-            .then(function (weather: connectorWeather) {
-                return weather.map(function(tweet:any){
-                    return tweet.user.name +' tweeted '+ tweet.text;
-                });
-            })
-            
-        */
+    private setLanguage() {
+        if(PhrasesGenerator.getLanguage()==='en-US')
+            weather.setLang('en');
+        else
+            weather.setLang('it');
     }
 }
 /*
