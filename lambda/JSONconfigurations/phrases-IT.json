@@ -3,8 +3,8 @@
         "Benvenuto in MegAlexa, come posso aiutarti?",
         "Quale workflow desideri aprire?",
         "Con quale workflow vuoi iniziare?",
-        "Da quale workflow partiamo?"],
-
+        "Da quale workflow partiamo?"
+    ],
     "workflowStart":[
         "I tuoi workflow sono i seguenti ",
         "Hai a disposizione i segienti workflow"
@@ -42,8 +42,7 @@
     "readlEmail":[
         "Queste sono le tue email"
     ],
-
-    "readTweeter":[
+    "readTwitter":[
         "Questi sono i tweet",
         "Questi sono i tweet richiesti",
         "Ecco i tweet",
@@ -71,16 +70,17 @@
         "Questi sono gli eventi presenti sul tuo calendario"
     ],
     "weatherStart":[
-        "Attualmente in",
-        "In",
-        "Oggi in"
+        "Attualmente a",
+        "A",
+        "Oggi a",
+        "In questo momento a"
     ],
     "weatherGrade":[
         "ci sono",
         "sono presenti"
     ],
     "weatherDetails":[
-        "ci sarà"
+        "con"
     ],
     "weatherHigh":[
         "e una massima di"
@@ -89,7 +89,7 @@
         "con una minima di"
     ],
     "weatherCelsius": [
-        "gradi centigradi"
+        "gradi"
     ],
     "news":[
         "Questo è il tuo sommario quotidiano",

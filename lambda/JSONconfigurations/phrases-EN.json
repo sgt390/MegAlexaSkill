@@ -2,8 +2,8 @@
     "skillStart":[
         "Welcome to MegAlexa, how can I help you?",
         "Hi, welcome back to MegAlexa",
-        "Which workflow would you like to open?"],
-
+        "Which workflow would you like to open?"
+    ],
     "workflowStart":[
         "Your worklflow are",
         "These are the workflows you have created",
@@ -22,7 +22,6 @@
         "Wrong, try again",
         "Wrong, retry"
     ],
-
     "correctPin":[
         "Pin is correct",
         "Perfect, the pin is correct"
@@ -43,7 +42,6 @@
     "readlEmail":[
         "These are your new emails"
     ],
-
     "readTwitter":[
         "These are the tweets required"
     ],
@@ -64,24 +62,26 @@
         "These are the events you have planned",
         "These are the events on your calendar"
     ],
-
     "weatherStart":[
-        "Currently in"
+        "Currently in",
+        "Right now in"
     ],
     "weatherGrade":[
-        "is"
+        "there is"
     ],
     "weatherDetails":[
         "with"
     ],
     "weatherHigh":[
-        "you can expect an high of"
+        "and an high of"
     ],
     "weatherLow":[
-        "and a low of"
+        "you can expect a low of"
     ],
     "weatherCelsius": [
-        "celsius degree"
+        "degree celsius",
+        "degree",
+        "degree"
     ],
     "news":[
         "Here is your flash briefing",
