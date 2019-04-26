@@ -24,7 +24,7 @@ export class BlockList implements Filterable, ElicitBlock{
     private list : string[];
     private elicitSlot: string;
 
-    constructor(private blockConfig: BlockConfig) {
+    constructor(blockConfig: BlockConfig) {
         const blockListConfig: BlockListConfig = <BlockListConfig> blockConfig;
         this.list = blockListConfig.List;
         this.elicitSlot = '';
