@@ -1,13 +1,19 @@
 /*
 * File: router.ts
-* Version: 0.0.1
-* Date: Date: 2019-02-28
+* Version: 1.0.0
+* Date: Date: 2019-04-21
 * Author: Stefano Zanatta
 * License:
 *
 * History:
 * Author            || Date         || Description
-* Stefano Zanatta   || 2019-02-28   || Created file
+* Stefano Zanatta       || 2019-04-21   || Created file
+* Stefano Zanatta       || 2019-04-21   || Implemented
+* Bianca Ciuche         || 2019-04-22   || Verified
+* Matteo Depascale      || 2019-04-24   || added credentialsByToken method
+* Matteo Depascale      || 2019-04-23   || added static methods
+* Bianca Ciuche         || 2019-04-22   || Verified
+* Matteo Depascale      || 2019-04-30   || Approved
 */
 const axios = require("axios");
 import {Workflow} from "./Workflow";

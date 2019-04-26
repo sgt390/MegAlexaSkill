@@ -1,21 +1,22 @@
 /*
 * File: ConnectorBlockWeather.ts
-* Version: 0.0.1
-* Date: 2019-03-20
+* Version: 1.0.0
+* Date: 2019-03-27
 * Author: Matteo Depascale
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
+* Matteo Depascale      || 2019-03-27   || Created file
+* Matteo Depascale      || 2019-04-24   || Implemented
+* Bianca Ciuche         || 2019-04-26   || Verified
+* Matteo Depascale      || 2019-04-26   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
 import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const weather = require("openweather-apis")
 
-//const api key = process.env.API_KEY // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
- 
 export class ConnectorBlockweather implements ConnectorBlock {
     private coordinates: string;
 
@@ -40,23 +41,6 @@ export class ConnectorBlockweather implements ConnectorBlock {
                 }
             });
         });
-        /*
-        .then(function(result) {
-            console.log(result);
-            return result;
-        })
-        .catch(el => el);
-        */
-
-
-        /*
-            .then(function (weather: connectorWeather) {
-                return weather.map(function(tweet:any){
-                    return tweet.user.name +' tweeted '+ tweet.text;
-                });
-            })
-            
-        */
     }
 }
 /*
@@ -79,4 +63,4 @@ abba.connect().then(el => console.log(el));
                     " and a low of " + data.main.temp_max;
             }
         })
-        */
+*/

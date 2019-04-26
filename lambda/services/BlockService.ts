@@ -1,13 +1,16 @@
 /*
 * File: ListService.ts
-* Version: 0.0.1
-* Date: Date: 2019-04-26
+* Version: 1.0.0
+* Date: Date: 2019-04-21
 * Author: Stefano Zanatta
 * License:
 *
 * History:
 * Author            || Date         || Description
-* Stefano Zanatta   || 2019-04-26   || Created file
+* Stefano Zanatta       || 2019-04-21   || Created file
+* Stefano Zanatta       || 2019-04-21   || Implemented
+* Bianca Ciuche         || 2019-04-22   || Verified
+* Matteo Depascale      || 2019-04-30   || Approved
 */
 const axios = require('axios');
 import { blockJSON } from "../JSONconfigurations/JSONconfiguration";
