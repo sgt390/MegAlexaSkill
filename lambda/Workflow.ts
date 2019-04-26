@@ -99,15 +99,13 @@ export class Workflow {
                 Workflow.workflowStartingPosition = startingPoistion + i;
 
                 _text += await blocks[i].text() + "; ";
-                
-                Workflow.workflowStartingPosition++;
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
                 }
 
             }
-            
+
             if (!elicitSlot) {
                 _text += 'Workflow is over, you can start with a new one;'
             }
