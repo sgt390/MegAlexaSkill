@@ -35,6 +35,10 @@
         "è stato aggiunto",
         "correttamente aggiunto"
     ],
+    "deleteList": [
+        "è stato rimosso",
+        "correttamente rimosso"
+    ],
     "readlEmail":[
         "Queste sono le tue email"
     ],
