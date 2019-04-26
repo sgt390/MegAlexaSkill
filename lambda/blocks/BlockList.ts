@@ -54,7 +54,7 @@ export class BlockList implements Filterable, ElicitBlock{
     }
 
     slotRequired(): boolean {
-        return this.elicitSlot === 'done'? false: true;
+        return this.elicitSlot === 'done' || this.elicitSlot === 'fatto'? false: true;
     }
 
     private createNewBlockList(userList:string[], newElement: string): blockListJSON {
