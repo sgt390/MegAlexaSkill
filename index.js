@@ -64,7 +64,6 @@ const StartedWorkflowIntentHandler = {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest'
       && request.intent.name === 'WorkflowIntent'
-      && request.dialogState !== 'COMPLETED'
       && !request.intent.slots.workflow_name.value
       && getUserAccessToken(handlerInput);
   },
@@ -116,7 +115,6 @@ const InProgressWorkflowIntentHandler = {
     const request = handlerInput.requestEnvelope.request;
     return request.type === 'IntentRequest'
       && request.intent.name === 'WorkflowIntent'
-      && request.dialogState !== 'COMPLETED'
       && request.intent.slots.workflow_name.value
       && getUserAccessToken(handlerInput);
   },
