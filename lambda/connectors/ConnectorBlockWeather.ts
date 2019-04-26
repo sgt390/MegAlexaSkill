@@ -11,6 +11,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorWeather, BlockWeatherConfig} from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const weather = require("openweather-apis")
 
 //const api key = process.env.API_KEY // Your API KEY can be hardcoded, but I recommend setting it as an env variable.
@@ -33,9 +34,9 @@ export class ConnectorBlockweather implements ConnectorBlock {
                     reject("error while creating the weather connector: £££££££" + err);
                 }
                 else {
-                    resolve("Currently in " + data.name + " is " + data.main.temp + " with " +
-                        data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
-                        " and a low of " + data.main.temp_max);
+                    resolve(PhrasesGenerator.randomWeatherStartSentence()+" "+ data.name + PhrasesGenerator.randomWeatherGradeSentence()+" "+ data.main.temp + PhrasesGenerator.randomWeatherDetailsSentence()+" "+
+                        data.weather[0].description + PhrasesGenerator.randomWeatherLowSentence()+" "+ data.main.temp_min + 
+                        PhrasesGenerator.randomWeatherHighSentence()+" "+ data.main.temp_max);
                 }
             });
         });

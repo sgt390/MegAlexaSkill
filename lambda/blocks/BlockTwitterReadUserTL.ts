@@ -12,6 +12,7 @@
 
 import {Block} from "./Block";
 import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import {Filterable} from "./utility/Filterable";
 import {ConnectorBlockTwitterUserTL} from "../connectors/ConnectorBlockTwitterUserTL";
 
@@ -30,7 +31,7 @@ export class BlockTwitterReadUserTL implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return this.connector.connect(this.limit);
+        return PhrasesGenerator.randomReadTwitterSentence()+" "+this.connector.connect(this.limit);
     }
 
     isElicit(): boolean {

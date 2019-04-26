@@ -12,6 +12,7 @@
 import {Block} from "./Block";
 import {BlockConfig, BlockEmailConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { ConnectorBlockEmail } from "../connectors/ConnectorBlockEmail";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { Filterable } from "./utility/Filterable";
 
 export class BlockEmail implements Block, Filterable {
@@ -30,6 +31,6 @@ export class BlockEmail implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return this.connector.connect(this.limit);
+        return PhrasesGenerator.randomReadEmailSentence()+" "+this.connector.connect(this.limit);
     }
 }
