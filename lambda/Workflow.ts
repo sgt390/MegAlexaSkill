@@ -1,14 +1,20 @@
 /*
 * File: Workflow.ts
 * Version: 0.0.1
-* Date: 2019-02-25
+* Date: 2019-02-22
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-02-25   || Created file
-* Stefano Zanatta       || 2019-04-06   || Changed switch to commands
+* Author            || Date         || Description
+* Stefano Zanatta       || 2019-02-22   || Created file
+* Stefano Zanatta       || 2019-02-23   || Implemented
+* Stefano Zanatta       || 2019-02-25   || added filter method
+* Matteo Depascale      || 2019-02-27   || Verified
+* Bianca Ciuche         || 2019-04-26   || added italian language
+* Matteo Depascale      || 2019-04-22   || modified alexaResponse method
+* Stefano Zanatta       || 2019-04-26   || Verified
+* Matteo Depascale      || 2019-04-30   || Approved
 */
 'use strict';
 import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";

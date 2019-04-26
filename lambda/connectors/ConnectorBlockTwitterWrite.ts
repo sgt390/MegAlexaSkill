@@ -1,13 +1,16 @@
 /*
 * File: ConnectorBlockTwitterWrite.ts
-* Version: 0.0.1
-* Date: 2019-04-23
+* Version: 1.0.0
+* Date: 2019-03-27
 * Author: Stefano Zanatta
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Stefano Zanatta       || 2019-04-23   || Created file
+* Matteo Depascale      || 2019-03-27   || Created file
+* Stefano Zanatta       || 2019-04-24   || Implemented clasd
+* Matteo Depascale      || 2019-04-29   || Verified
+* Matteo Depascale      || 2019-04-30   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { BlockTwitterWriteConfig } from "../JSONconfigurations/JSONconfiguration";

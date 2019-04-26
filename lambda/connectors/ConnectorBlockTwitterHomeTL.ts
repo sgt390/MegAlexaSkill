@@ -1,13 +1,17 @@
 /*
 * File: ConnectorBlockTwitter.ts
-* Version: 0.0.1
-* Date: 2019-03-20
+* Version: 1.0.0
+* Date: 2019-03-27
 * Author: Matteo Depascale
 * License:
 *
 * History:
 * Author                || Date         || Description
 * Matteo Depascale      || 2019-03-27   || Created file
+* Stefano Zanatta       || 2019-04-14   || Implemented
+* Matteo Depascale      || 2019-04-14   || fixed connect
+* Matteo Depascale      || 2019-04-15   || Verified
+* Matteo Depascale      || 2019-04-26   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { BlockTwitterReadHTLConfig, connectorTwitterTimelineUser } from "../JSONconfigurations/JSONconfiguration";

@@ -1,13 +1,15 @@
 /*
 * File: JSONConfiguration.ts
-* Version: 0.0.1
-* Date: 2019-03-21
+* Version: 1.0.0
+* Date: 2019-04-24
 * Author: Stefano Zanatta
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Stefano Zanatta       || 2019-03-21   || Created file
+* Stefano Zanatta           || 2019-04-24   || created file
+* Matteo Depascale          || 2019-04-29   || Verified
+* Matteo Depascale          || 2019-04-30   || Approved
 */
 export type BlockConfig = {}
 

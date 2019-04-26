@@ -1,21 +1,22 @@
 /*
 * File: ConnectorBlockEmail.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
 * Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
+* Stefano Zanatta       || 2019-03-20   || Created file
+* Stefano Zanatta       || 2019-04-24   || Implemented clasd
+* Matteo Depascale      || 2019-04-25   || Verified
+* Matteo Depascale      || 2019-04-30   || Approved
 */
 
 import { ConnectorBlock } from "./ConnectorBlock";
 import { tokenGoogleApi, credentials } from "../JSONconfigurations/JSONconfiguration";
-import { BlockEmail } from "../blocks/BlockEmail";
 
 const {google} = require('googleapis');
-import { auth } from 'google-oauth2-node';
 
 //////////////////////////////////////////////////////////////////////////////////////
 
@@ -31,8 +32,6 @@ import { auth } from 'google-oauth2-node';
 export class ConnectorBlockEmail implements ConnectorBlock {
 
     private oAuth2Client:any;
-
-    /////////////////////// CREATE CREDENTIALS TYPE! ///////////////////////////
     constructor(token: tokenGoogleApi, credentials: credentials){
         this.oAuth2Client = this.authorize(token, credentials);
     }
