@@ -83,7 +83,6 @@ export class Workflow {
     public async alexaResponse(): Promise<AlexaResponse> {
 
         const blocks = this.filter(this._blocks);
-        let workflowPosition:number = Workflow.workflowStartingPosition;
         const slot = this.elicitSlot;
 
         return  blocks.then(async function(blocks) {
@@ -113,7 +112,7 @@ export class Workflow {
             return {
                 text: _text,
                 elicitSlot:elicitSlot,
-                position: workflowPosition
+                position: Workflow.workflowStartingPosition
             };
         }).catch(async function(error){
             throw 'Workflow.ts: Error while creating the workflow' + error;
