@@ -53,11 +53,16 @@ export class PhrasesGenerator {
        let s: string=PhrasesGenerator.jsonPhrases.readList[randomNumber];
        return s;
        }
-    static randomAddListSentence():string{
+       static randomAddListSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addList.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.addList[randomNumber];
         return s;
         }
+    static randomDeleteListSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addList.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.deleteList[randomNumber];
+        return s;
+    }
     static randomReadEmailSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.readEmail.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.readEmail[randomNumber];

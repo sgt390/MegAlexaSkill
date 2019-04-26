@@ -36,6 +36,10 @@
         "has been added",
         "successfully added"
     ],
+    "deleteList": [
+        "has been removed",
+        "successfully deleted"
+    ],
     "readlEmail":[
         "These are your new emails"
     ],
