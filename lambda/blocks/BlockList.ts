@@ -11,15 +11,16 @@
 * Andrea Deidda         || 2019-03-21   || Update file
 * Bianca Andreea Ciuche || 2019-03-27   || Update file
 */
-import {BlockConfig, BlockListConfig} from "./../JSONconfigurations/JSONconfiguration";
+import {BlockConfig, BlockListConfig, blockListJSON} from "./../JSONconfigurations/JSONconfiguration";
 import { Filterable } from "./utility/Filterable";
 import { ElicitBlock } from "./utility/ElicitBlock";
 import { BlockService } from "../services/BlockService";
+import { Workflow } from "../Workflow";
 
 export class BlockList implements Filterable, ElicitBlock{
     
     private limit: number = Number.POSITIVE_INFINITY;
-    private list :[];
+    private list : string[];
     private elicitSlot: string;
 
     constructor(private blockConfig: BlockConfig) {
@@ -36,16 +37,8 @@ export class BlockList implements Filterable, ElicitBlock{
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
         } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto')) {//else call method to add or remove elements to the list in the Database)
-            ////////////////////// 
-            const a =  {
-                "blockType": "TextToSpeech",
-                "config": {
-                  "TextToSpeech": "devo modificarmi"
-                }
-            };
-            ////////////////////////
 
-            BlockService.modifyBlock(a,3);
+            BlockService.modifyBlock(this.createNewBlockList(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
             text = 'added ' + this.elicitSlot;
         }
         return text;
@@ -62,6 +55,19 @@ export class BlockList implements Filterable, ElicitBlock{
 
     slotRequired(): boolean {
         return this.elicitSlot === 'done'? false: true;
+    }
+
+    private createNewBlockList(userList:string[], newElement: string): blockListJSON {
+
+        userList.push(newElement);
+
+        let newBlockList =  {
+            "blockType": "List",
+            "config": {
+              "List": userList
+            }
+        };
+        return newBlockList;
     }
 
 }

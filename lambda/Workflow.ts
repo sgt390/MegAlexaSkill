@@ -33,6 +33,7 @@ export class Workflow {
 
     private _blocks: Promise<WorkflowElement>[] = [];
     private name: string;
+    private static workflowStartingPosition: number = 0;
 
     private static createBlockCommands: any = {
         'Filter': (config: BlockConfig): Promise<Filter> => Promise.resolve(new Filter(config)),
@@ -56,12 +57,13 @@ export class Workflow {
      *
      * @param workflowConfigJSON promise containing a workflow and all its blocks
      */
-    constructor(workflowConfigJSON: blockJSON[], workflowName: string,private workflowStartingPosition: number, private elicitSlot:string = '') {
+    constructor(workflowConfigJSON: blockJSON[], workflowName: string,workflowStartingPosition: number, private elicitSlot:string = '') {
+        Workflow.workflowStartingPosition = workflowStartingPosition;
         this.name = workflowName;
         /**
          * workflow starts from workflowStartingPosition
          */
-        this._blocks = workflowConfigJSON.filter((el,index) => index >= this.workflowStartingPosition).map(function(blockJSON: blockJSON) {
+        this._blocks = workflowConfigJSON.filter((el,index) => index >= Workflow.workflowStartingPosition).map(function(blockJSON: blockJSON) {
             return Workflow.blockFromJSON(blockJSON);
         });
     }
@@ -80,7 +82,7 @@ export class Workflow {
     public async alexaResponse(): Promise<AlexaResponse> {
 
         const blocks = this.filter(this._blocks);
-        let workflowPosition:number = this.workflowStartingPosition;
+        let workflowPosition:number = Workflow.workflowStartingPosition;
         const slot = this.elicitSlot;
 
         return  blocks.then(async function(blocks) {
@@ -94,13 +96,15 @@ export class Workflow {
             }
             // cycle until there are no more blocks or an elicit block is found
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
-                _text += await blocks[i].text() + "; ";
 
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
-                    workflowPosition = workflowPosition + i;
+                    Workflow.workflowStartingPosition += i;
                 }
+
+                _text += await blocks[i].text() + "; ";
+
             }
             if (!elicitSlot) {
                 _text += 'Workflow is over, you can start with a new one;'
@@ -142,9 +146,13 @@ export class Workflow {
         return blocks;
     }
 
+    public static getWorkflowPosition() {
+        return Workflow.workflowStartingPosition;
+    }
+
 }
 
-
+/*
 const wf = new Workflow(
     [
         {
@@ -162,3 +170,4 @@ const wf = new Workflow(
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+*/

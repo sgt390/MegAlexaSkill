@@ -24,7 +24,7 @@ export type BlockFeedRSSConfig = {
 }
 
 export type BlockListConfig = {
-    List: []
+    List: string[]
 }
 
 export type BlockTwitterReadConfig = {
@@ -106,6 +106,11 @@ export type userJSON = {
 export type blockJSON = {
     blockType: string,
     config: BlockConfig
+}
+
+export type blockListJSON = {
+    blockType: string,
+    config: BlockListConfig
 }
 
 export type connectorResult = {}
