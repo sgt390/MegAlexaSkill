@@ -38,21 +38,15 @@ export class BlockList implements Filterable, ElicitBlock{
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
         } else if (this.elicitSlot.includes('add' || 'insert' || "aggiungi" || 'inserisci')) {
-            let newElement = this.elicitSlot.replace('add ','');
-            newElement = this.elicitSlot.replace('inserisci ','');
-            newElement = this.elicitSlot.replace('insert ','');
-            newElement = this.elicitSlot.replace('aggiungi ','');
-            BlockService.modifyBlock(this.createNewBlockListAdd(this.list,newElement),Workflow.getWorkflowPosition());
-            text = this.elicitSlot + " " + PhrasesGenerator.randomAddListSentence();
+            let newElement = this.elicitSlot.replace(/add\s|insert\s|inserisci\s|aggiungi\s/,'');
+            BlockService.modifyBlock(this.createNewBlockListAdd(this.list, newElement),Workflow.getWorkflowPosition());
+            text = newElement + " " + PhrasesGenerator.randomAddListSentence();
         } else if(this.elicitSlot.includes('delete' || 'remove' || 'elimina' || 'rimuovi')) {
-            let newElement = this.elicitSlot.replace('delete ','');
-            newElement = this.elicitSlot.replace('remove ','');
-            newElement = this.elicitSlot.replace('elimina ','');
-            newElement = this.elicitSlot.replace('rimuovi ','');
+            let newElement = this.elicitSlot.replace(/delete\s|remove\s|elimina\s|rimuovi\s/,'');
             BlockService.modifyBlock(this.createNewBlockListDelete(this.list,newElement),Workflow.getWorkflowPosition());
-            text = this.elicitSlot + " " + PhrasesGenerator.randomDeleteListSentence();
+            text = newElement + " " + PhrasesGenerator.randomDeleteListSentence();
         }
-        
+
         return text;
     }
 
@@ -82,7 +76,7 @@ export class BlockList implements Filterable, ElicitBlock{
         return newBlockList;
     }
 
-    public createNewBlockListDelete(userList:string[], newElement: string): blockListJSON {
+    private createNewBlockListDelete(userList:string[], newElement: string): blockListJSON {
 
         userList = userList.filter((element) => !(element === newElement));
 
