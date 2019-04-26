@@ -8,8 +8,8 @@
 * History:
 * Author                    || Date         || Description
 * Stefano Zanatta           || 2019-04-08   || Created file
-* Matteo Depascale          || 2019-04-08   || Implemented clasd
-* Stefano Zanatta           || 2019-04-09   || Verified
+* Stefano Zanatta           || 2019-04-08   || Implemented clasd
+* Matteo Depascale          || 2019-04-09   || Verified
 * Matteo Depascale          || 2019-04-10   || Approved
 */
 
