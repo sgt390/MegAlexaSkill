@@ -32,7 +32,8 @@
         "La tua lista contiene i seguenti elementi: "
     ],
     "addList":[
-        "aggiunto"
+        "è stato aggiunto",
+        "correttamente aggiunto"
     ],
     "readlEmail":[
         "Queste sono le tue email"
