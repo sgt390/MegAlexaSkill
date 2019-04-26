@@ -37,10 +37,13 @@ export class BlockList implements Filterable, ElicitBlock{
             text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
-        } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto')) {//else call method to add or remove elements to the list in the Database)
-
-            BlockService.modifyBlock(this.createNewBlockList(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
-            text = PhrasesGenerator.randomAddListSentence() + this.elicitSlot;
+        } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto' || this.elicitSlot.includes('remove'))) {
+            BlockService.modifyBlock(this.createNewBlockListAdd(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
+            text = this.elicitSlot + " " + PhrasesGenerator.randomAddListSentence();
+        } else if(this.elicitSlot.includes('remove')) {
+            let newElement = this.elicitSlot.replace('remove ','');
+            BlockService.modifyBlock(this.createNewBlockListDelete(this.list,this.elicitSlot),Workflow.getWorkflowPosition());
+            this.elicitSlot + " " + PhrasesGenerator.randomDeleteListSentence();
         }
         return text;
     }
@@ -58,9 +61,22 @@ export class BlockList implements Filterable, ElicitBlock{
         return this.elicitSlot === 'done' || this.elicitSlot === 'fatto'? false: true;
     }
 
-    private createNewBlockList(userList:string[], newElement: string): blockListJSON {
+    private createNewBlockListAdd(userList:string[], newElement: string): blockListJSON {
 
         userList.push(newElement);
+
+        let newBlockList =  {
+            "blockType": "List",
+            "config": {
+              "List": userList
+            }
+        };
+        return newBlockList;
+    }
+
+    public createNewBlockListDelete(userList:string[], newElement: string): blockListJSON {
+
+        userList = userList.filter((element) => !(element === newElement));
 
         let newBlockList =  {
             "blockType": "List",
