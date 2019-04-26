@@ -33,7 +33,8 @@
         "Your list has these elements"
     ],
     "addList":[
-        "added"
+        "has been added",
+        "successfully added"
     ],
     "readlEmail":[
         "These are your new emails"
