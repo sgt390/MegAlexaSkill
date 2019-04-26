@@ -11,6 +11,7 @@
 */
 import {Block} from "./Block";
 import {BlockConfig, BlockCalendarConfig} from "./../JSONconfigurations/JSONconfiguration"; 
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { Filterable } from "./utility/Filterable";
 import { ConnectorBlockCalendar } from "../connectors/ConnectorBlockCalendar";
 
@@ -30,7 +31,7 @@ export class BlockCalendar implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return this.connector.connect(this.limit);
+        return PhrasesGenerator.randomCalendarSentence()+" "+this.connector.connect(this.limit);
     }
 }
 

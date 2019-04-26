@@ -11,6 +11,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { BlockTwitterWriteConfig } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const Twitter = require('twitter');
 
 export class ConnectorBlockTwitterWrite implements ConnectorBlock {
@@ -34,7 +35,7 @@ export class ConnectorBlockTwitterWrite implements ConnectorBlock {
 
         return this.user.post('statuses/update', params)
             .then(function () {
-                return 'your tweet was posted';
+                return PhrasesGenerator.randomSuccessTwitterSentence();
             })
             .catch(function (error:string) {
                 throw 'error while creating the twitter connector: £££££££'+ error;

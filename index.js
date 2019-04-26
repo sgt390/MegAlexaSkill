@@ -122,6 +122,9 @@ const InProgressWorkflowIntentHandler = {
   },
   async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+
     const slots = request.intent.slots;
     const attributesManager = handlerInput.attributesManager;
     const attributes = attributesManager.getSessionAttributes() || {};

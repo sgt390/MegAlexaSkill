@@ -1,7 +1,7 @@
 {
     "skillStart":[
-        "Welcome to MegAlexa, how can I help you",
-        "Hi, welcome back to MegAlexa,",
+        "Welcome to MegAlexa, how can I help you?",
+        "Hi, welcome back to MegAlexa",
         "Which workflow would you like to open?"],
 
     "workflowStart":[
@@ -28,22 +28,38 @@
         "Perfect, the pin is correct"
     ],
     "readList":[
-        "These are the elements that you have in your list: ",
-        "The items on your list are these: ",
-        "Your list has these elements: "
+        "These are the elements that you have in your list",
+        "The items on your list are these",
+        "Your list has these elements"
+    ],
+    "addList":[
+        "added"
     ],
     "readlEmail":[
         "These are your new emails"
-    ]
-
-    "readTwitter":[
-        "Those are your tweets"
     ],
 
+    "readTwitter":[
+        "These are the tweets required"
+    ],
+    "writeTwitter":[
+        "Say your tweet to continue",
+        "Tell me the tweet you want to post",
+        "Say the tweet you want to post"
+    ],
+    "successTwitter":[
+        "Your tweet is posted successfully",
+        "excellent, the tweet was posted"
+    ],
     "feedRss":[
         "Here is your feed",
         "This is your feed"
     ],
+    "calendar":[
+        "These are the events you have planned",
+        "These are the events on your calendar"
+    ],
+
     "weatherStart":[
         "Currently in"
     ],
@@ -57,7 +73,7 @@
         "you can expect an high of"
     ],
     "weatherLow":[
-        "and a low of "
+        "and a low of"
     ],
     "news":[
         "Here is your flash briefing",

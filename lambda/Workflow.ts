@@ -29,6 +29,7 @@ import { BlockEmail } from "./blocks/BlockEmail";
 import { BlockTwitterReadHomeTL } from "./blocks/BlockTwitterReadHomeTL";
 import { BlockCalendar } from "./blocks/BlockCalendar";
 
+
 export class Workflow {
 
     private _blocks: Promise<WorkflowElement>[] = [];
@@ -144,7 +145,7 @@ export class Workflow {
 
 }
 
-
+/*
 const wf = new Workflow(
     [
         {
@@ -154,11 +155,11 @@ const wf = new Workflow(
           }
         },
         {
-            "blockType": "TwitterHomeTL",
+            "blockType": "List",
             "config": {
-              
+              "List": ["uno","due"]
             }
           }
       ], 'test',0);
 
-wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
+wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));*/

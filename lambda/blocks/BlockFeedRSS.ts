@@ -15,6 +15,7 @@
 
 import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
 import { Filterable } from "./utility/Filterable";
 
@@ -36,7 +37,7 @@ export class BlockFeedRSS implements Block, Filterable {
         if(!this._text){
             this._text = this.connector.connect(this.limit);
         }
-        return this._text;
+        return PhrasesGenerator.randomFeedRssSentence()+" "+this._text;
     }
 
     filterBlocks(limit: number): BlockFeedRSS{

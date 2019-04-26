@@ -33,12 +33,11 @@ export class BlockList implements Block, Filterable, ElicitBlock{
         
         let text = '';
         if (this.elicitSlot === '') {
-            text = PhrasesGenerator.randomReadListSentence().concat(
-                this.list.filter((el,index) => index<this.limit)
+            text = PhrasesGenerator.randomReadListSentence()+" "+this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
-                .trim());
+                .trim();
         } else if (!(this.elicitSlot === 'done')) {//else call method to add or remove elements to the list in the Database)
-            text = 'added ' + this.elicitSlot;
+            text =PhrasesGenerator.randomAddListSentence()+" "+ this.elicitSlot;
         }
         return text;
     }

@@ -12,6 +12,7 @@
 const axios = require("axios");
 import {Workflow} from "./Workflow";
 import { userJSON } from "./JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./blocks/utility/PhrasesGenerator";
 import { WorkflowService } from "./services/WorkflowService";
 
 export class User {
@@ -68,6 +69,10 @@ private async credentialsByAccessToken(accessToken: string): Promise<userJSON> {
 
 public async workflow (workflowName: string, position: number = 0, elicitSlot: string = ''): Promise<Workflow> {
     return new WorkflowService().create(this.userID, workflowName, position, elicitSlot);
+}
+
+public static language(language: string): void{
+    PhrasesGenerator.setLanguage(language);
 }
 
 }
