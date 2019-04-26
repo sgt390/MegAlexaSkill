@@ -32,6 +32,9 @@
         "The items on your list are these",
         "Your list has these elements"
     ],
+    "addList":[
+        "added"
+    ],
     "readlEmail":[
         "These are your new emails"
     ],

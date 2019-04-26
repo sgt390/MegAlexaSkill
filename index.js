@@ -122,7 +122,8 @@ const InProgressWorkflowIntentHandler = {
   },
   async handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
-    const language=request.locale;
+    const language = request.locale;
+    User.language(language);
 
     const slots = request.intent.slots;
     const attributesManager = handlerInput.attributesManager;
@@ -131,7 +132,6 @@ const InProgressWorkflowIntentHandler = {
     const workflowName = slots.workflow_name.value;
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
-    user.setLanguage(language);
     const workflowPosition = attributes.workflowPosition;
     const elicitSlot = slots.elicitSlot.value;
     if (workflowPosition === undefined || elicitSlot === undefined) {
