@@ -31,7 +31,7 @@ export class BlockCalendar implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return PhrasesGenerator.randomCalendarSentence()+" "+this.connector.connect(this.limit);
+        return this.connector.connect(this.limit);
     }
 }
 

@@ -37,7 +37,7 @@ export class BlockFeedRSS implements Block, Filterable {
         if(!this._text){
             this._text = this.connector.connect(this.limit);
         }
-        return PhrasesGenerator.randomFeedRssSentence()+" "+this._text;
+        return this._text;
     }
 
     filterBlocks(limit: number): BlockFeedRSS{

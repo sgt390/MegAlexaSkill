@@ -31,7 +31,7 @@ export class BlockTwitterWrite implements Block, ElicitBlock {
     }
 
     public async text(): Promise<string> {
-        let response: Promise<string> = Promise.resolve(PhrasesGenerator.randomWriteTwitterSentence()+" ");
+        let response: Promise<string> = Promise.resolve(PhrasesGenerator.randomWriteTwitterSentence());
         if (this.userTweet != '') {
             response = this.connector.connect(this.userTweet);
         }

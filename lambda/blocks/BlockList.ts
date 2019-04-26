@@ -34,7 +34,7 @@ export class BlockList implements Filterable, ElicitBlock{
         
         let text = '';
         if (this.elicitSlot === '') {
-            text = PhrasesGenerator.randomReadListSentence()+" "+this.list.filter((el,index) => index<this.limit)
+            text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")
                 .trim();
         } else if (!(this.elicitSlot === 'done' || this.elicitSlot === 'fatto')) {//else call method to add or remove elements to the list in the Database)

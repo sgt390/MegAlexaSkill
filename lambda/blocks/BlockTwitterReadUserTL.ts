@@ -31,7 +31,7 @@ export class BlockTwitterReadUserTL implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return PhrasesGenerator.randomReadTwitterSentence()+" "+this.connector.connect(this.limit);
+        return this.connector.connect(this.limit);
     }
 
     isElicit(): boolean {

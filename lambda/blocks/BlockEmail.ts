@@ -31,6 +31,6 @@ export class BlockEmail implements Block, Filterable {
     }
 
     public async text(): Promise<string> {
-        return PhrasesGenerator.randomReadEmailSentence()+" "+this.connector.connect(this.limit);
+        return this.connector.connect(this.limit);
     }
 }

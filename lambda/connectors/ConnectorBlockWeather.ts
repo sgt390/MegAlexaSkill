@@ -34,8 +34,8 @@ export class ConnectorBlockweather implements ConnectorBlock {
                     reject("error while creating the weather connector: £££££££" + err);
                 }
                 else {
-                    resolve(PhrasesGenerator.randomWeatherStartSentence()+" "+ data.name + PhrasesGenerator.randomWeatherGradeSentence()+" "+ data.main.temp + PhrasesGenerator.randomWeatherDetailsSentence()+" "+
-                        data.weather[0].description + PhrasesGenerator.randomWeatherLowSentence()+" "+ data.main.temp_min + 
+                    resolve(PhrasesGenerator.randomWeatherStartSentence()+" "+ data.name + " " + PhrasesGenerator.randomWeatherGradeSentence()+" "+ data.main.temp + PhrasesGenerator.randomWeatherDetailsSentence()+" "+
+                        data.weather[0].description + " " + PhrasesGenerator.randomWeatherLowSentence()+" "+ data.main.temp_min + " " +
                         PhrasesGenerator.randomWeatherHighSentence()+" "+ data.main.temp_max);
                 }
             });
