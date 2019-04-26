@@ -1,28 +1,28 @@
 /*
 * File: BlockFeedRSS.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-02-25
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-02-25   || Created file
-* Stefano Zanatta       || 2019-03-21   || Update
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-02-25   || Created file
+* Stefano Zanatta           || 2019-03-25   || Implemented clasd
+* Matteo Depascale          || 2019-03-28   || Verified
+* Matteo Depascale          || 2019-04-10   || Approved
 */
-
-//keep an eye on https://github.com/alexa/skill-sample-nodejs-feed/blob/master/lambda/custom
-
 import {Block} from "./Block";
 import {BlockConfig, BlockFeedRSSConfig} from "./../JSONconfigurations/JSONconfiguration";
-import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import {ConnectorBlockFeedRSS} from './../connectors/ConnectorBlockFeedRSS'
 import { Filterable } from "./utility/Filterable";
 
 export class BlockFeedRSS implements Block, Filterable {
+
     private connector: ConnectorBlockFeedRSS;
     private _text: Promise<string> | undefined;
     private limit: number = Number.POSITIVE_INFINITY;
+
     constructor(blockConfig: BlockConfig) {
         const blockFeedRSSConfig: BlockFeedRSSConfig = <BlockFeedRSSConfig> blockConfig;
         let URL: string = blockFeedRSSConfig.URL.toString();

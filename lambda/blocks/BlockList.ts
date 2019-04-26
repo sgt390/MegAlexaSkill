@@ -1,15 +1,19 @@
 /*
 * File: BlockList.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
-* Andrea Deidda         || 2019-03-21   || Update file
-* Bianca Andreea Ciuche || 2019-03-27   || Update file
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Andrea Deidda             || 2019-03-21   || Implemented class
+* Bianca Andreea Ciuche     || 2019-03-27   || Update 
+* Matteo Depascale          || 2019-03-28   || Verified
+* Stefano Zanatta           || 2019-04-27   || Update
+* Matteo Depascale          || 2019-04-28   || Verified
+* Matteo Depascale          || 2019-04-30   || Approved
 */
 import {BlockConfig, BlockListConfig, blockListJSON} from "./../JSONconfigurations/JSONconfiguration";
 import { Filterable } from "./utility/Filterable";
@@ -35,6 +39,7 @@ export class BlockList implements Filterable, ElicitBlock{
         let add = ["add", "insert", "aggiungi", "inserisci"];
         let remove = ['delete', 'remove', 'elimina', 'rimuovi']; 
         let text = '';
+
         if (this.elicitSlot === '') {
             text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element,"")

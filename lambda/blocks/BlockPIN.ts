@@ -1,14 +1,16 @@
 /*
 * File: BlockPIN.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
-* Stefano Zanatta       || 2019-03-21   || Updated
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Stefano Zanatta           || 2019-03-27   || Implemented clasd
+* Stefano Zanatta           || 2019-03-28   || Verified
+* Matteo Depascale          || 2019-04-10   || Approved
 */
 import {BlockConfig, BlockPinConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { PhrasesGenerator } from "./utility/PhrasesGenerator";
@@ -17,6 +19,7 @@ import { ElicitBlock } from "./utility/ElicitBlock";
 export class BlockPIN implements ElicitBlock {
     private correctPIN: string;
     private userPIN: string;
+
     constructor(pinConfig: BlockConfig) {
         const _pinConfig = <BlockPinConfig> pinConfig;
         this.correctPIN = _pinConfig.PIN;

@@ -1,3 +1,17 @@
+/*
+* File: PhrasesGenerator.ts
+* Version: 1.0.0
+* Date: 2019-03-24
+* Author: Stefano Zanatta
+* License:
+*
+* History:
+* Author                    || Date         || Description
+* Bianca Andrea Ciuche      || 2019-04-24   || Created file
+* Bianca Andrea Ciuche      || 2019-04-24   || Implemented clasd
+* Stefano Zanatta           || 2019-04-29   || Verified
+* Matteo Depascale          || 2019-04-30   || Approved
+*/
 
 export class PhrasesGenerator {
     /**
@@ -27,7 +41,7 @@ export class PhrasesGenerator {
     }
    
     static randomWorkflowStartSentence():string{
-    var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.workflowStart.length-1);
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.workflowStart.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.workflowStart[randomNumber];
         return s;
     }

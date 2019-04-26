@@ -15,12 +15,15 @@
 import {Block} from "../Block";
 
 export class ElicitBlock implements Block {
+
     text(): string | Promise<string> {
         throw new Error("Method not implemented.");
     }
+
     setElicitSlot(slot:string): void{
         throw new Error("Method not implemented.");
     }
+    
     slotRequired(): boolean {
         throw new Error("Method not implemented.");
     }

@@ -1,28 +1,26 @@
 /*
 * File: BlockTwitterWrite.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-04-23
 * Author: Stefano Zanatta
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Stefano Zanatta       || 2019-04-23   || Created file
+* Author                    || Date         || Description
+* Stefano Zanatta           || 2019-04-23   || Created file
+* Stefano Zanatta           || 2019-04-24   || Implemented clasd
+* Matteo Depascale          || 2019-04-29   || Verified
+* Matteo Depascale          || 2019-04-30   || Approved
 */
-
 import {Block} from "./Block";
 import {BlockConfig, BlockTwitterReadConfig} from "../JSONconfigurations/JSONconfiguration";
 import {ConnectorBlockTwitterWrite} from "../connectors/ConnectorBlockTwitterWrite";
 import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { ElicitBlock } from "./utility/ElicitBlock";
 
-//https://www.npmjs.com/package/twitter
-
-
 export class BlockTwitterWrite implements Block, ElicitBlock {
 
     private connector: ConnectorBlockTwitterWrite;
-    private _text: Promise<string> | undefined;
     private userTweet: string = '';
 
     constructor(blockConfig: BlockConfig) {

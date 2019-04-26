@@ -6,9 +6,11 @@
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
-* Stefano Zanatta       || 2019-03-24   || Completed Class
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Stefano Zanatta           || 2019-03-24   || Completed Class
+* Matteo Depascale          || 2019-03-28   || Verified
+* Matteo Depascale          || 2019-04-10   || Approved
 */
 import { BlockConfig, BlockFilterableConfig } from "../../JSONconfigurations/JSONconfiguration";
 import { WorkflowElement } from "./WorkflowElement";

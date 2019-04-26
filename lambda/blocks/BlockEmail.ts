@@ -1,18 +1,20 @@
 /*
 * File: BlockEmail.ts
-* Version: 0.0.1
+* Version: 1.0.0
 * Date: 2019-03-20
 * Author: Matteo Depascale
 * License:
 *
 * History:
-* Author                || Date         || Description
-* Matteo Depascale      || 2019-03-20   || Created file
+* Author                    || Date         || Description
+* Matteo Depascale          || 2019-03-20   || Created file
+* Matteo Depascale          || 2019-04-24   || Implemented clasd
+* Stefano Zanatta           || 2019-04-25   || Verified
+* Matteo Depascale          || 2019-04-30   || Approved
 */
 import {Block} from "./Block";
 import {BlockConfig, BlockEmailConfig} from "./../JSONconfigurations/JSONconfiguration";
 import { ConnectorBlockEmail } from "../connectors/ConnectorBlockEmail";
-import { PhrasesGenerator } from "./utility/PhrasesGenerator";
 import { Filterable } from "./utility/Filterable";
 
 export class BlockEmail implements Block, Filterable {
