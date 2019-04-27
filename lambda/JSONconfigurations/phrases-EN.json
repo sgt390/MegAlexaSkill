@@ -1,13 +1,28 @@
 {
+    "autenticationMessage":[
+        "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Amazon Alexa App",
+        "First you must authenticate with your Amazon Account to use MegAlexa. Follow the instructions that I sent to you in your Amazon Alexa App",
+        "Sorry you must authenticate with your Amazon Account to use MegAlexa. Please follow the instructions that I sent to you in your Amazon Alexa Ap "
+    ],
     "skillStart":[
-        "Welcome to MegAlexa, how can I help you?",
-        "Hi, welcome back to MegAlexa",
-        "Which workflow would you like to open?"
+        "Welcome to MegAlexa",
+        "Hi, welcome to MegAlexa" 
     ],
     "workflowStart":[
-        "Your worklflow are",
-        "These are the workflows you have created",
-        "You can chose one of these workflows"
+        "What is your workflow?"
+    ],
+    "workflowName":[
+        "Say your workflow name or create a new one in your MegAlexa Application"
+    ],
+    "errorCommand":[
+        "Sorry, I can't understand the command. Please say again.",
+        "I am very sorry I can't understand the command. Please repeat.",
+        "I can't understand the command so please say again.",
+        "Please repeat, I can't understand the command"
+    ],
+    "finishMessage":[
+        "Goodbye!",
+        "Bye, bye"
     ],
     "pinBlockStart":[
         "Say your pin to continue",
@@ -18,18 +33,15 @@
         "Whisper your four digits number"
     ],
     "wrongPin":[
-        "Incorrect, please repeat",
+        "Incorrect, please retry",
         "Wrong, try again",
-        "Wrong, retry"
+        "Wrong, retry",
+        "I'm sorry but the pin is wrong, retry",
+        "The pin is wrong, maybe next time you'll be luckier. Please retry"
     ],
     "correctPin":[
         "Pin is correct",
         "Perfect, the pin is correct"
-    ],
-    "readList":[
-        "These are the elements that you have in your list",
-        "The items on your list are these",
-        "Your list has these elements"
     ],
     "addList":[
         "has been added",
@@ -42,9 +54,6 @@
     "readlEmail":[
         "These are your new emails"
     ],
-    "readTwitter":[
-        "These are the tweets required"
-    ],
     "writeTwitter":[
         "Say your tweet to continue",
         "Tell me the tweet you want to post",
@@ -54,13 +63,8 @@
         "Your tweet is posted successfully",
         "excellent, the tweet was posted"
     ],
-    "feedRss":[
-        "Here is your feed",
-        "This is your feed"
-    ],
-    "calendar":[
-        "These are the events you have planned",
-        "These are the events on your calendar"
+    "tweetedTwitter":[
+        "tweeted" 
     ],
     "weatherStart":[
         "Currently in",
@@ -83,26 +87,26 @@
         "degree",
         "degree"
     ],
-    "news":[
-        "Here is your flash briefing",
-        "Here are the news"
-    ],
-    "sport":[
-        "Here is your sport flash briefing"
-    ],
-    "stock":[
-        "Here are your stock-market news"
-    ],
-    "crypto":[
-        "Here are your cryptocurrency related news"
-    ],
     "workflowDone":[
         "Your workflow is completed"
+    ],
+    "atTime":[
+        "at"
+    ],
+    "dayTime":[
+        "On"
+    ],
+    "noLocation":[
+        "There is no location specified"
+    ],
+    "location":[
+        "Location"
+    ],
+    "senderEmail":[
+        "sender"
+    ],
+    "subjectEmail":[
+        "subject"
     ]
-
-
-
-
-
 
 }

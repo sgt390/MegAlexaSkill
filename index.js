@@ -15,11 +15,16 @@
 /* User will start the workflow, when it's alarm's turn then alexa will start 
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
+import { PhrasesGenerator } from "./blocks/utility/PhrasesGenerator";
 const Alexa = require('ask-sdk');
 const {User} = require('./User.js');
 
-const AUTENTICATION_MESSAGE = "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Alexa App";
-const WELCOME_MESSAGE = "Welcome to megalexa!"; 
+const AUTENTICATION_MESSAGE = PhrasesGenerator. randomAutenticationMessageSentence();
+const WELCOME_MESSAGE = PhrasesGenerator.randomStartSkillSentence();
+const WORKFLOW_REQUEST= PhrasesGenerator.randomWorkflowStartSentence();
+const ERROR_COMMAND_NOT_FOUND=PhrasesGenerator.randomErrorCommandSentence();
+const FINISH_MESSAGE=PhrasesGenerator.randomFinishSentence();
+const WORKFLOW_NAME=PhrasesGenerator.randomWorkflowNameSentence();
 
 
 /**
@@ -28,7 +33,7 @@ const WELCOME_MESSAGE = "Welcome to megalexa!";
 const LaunchRequestHandler = {
     canHandle(handlerInput) {
         return handlerInput.requestEnvelope.request.type === 'LaunchRequest'
-                && getUserAccessToken(handlerInput); 
+        && getUserAccessToken(handlerInput); 
       },
       handle(handlerInput) {
         const speechText = WELCOME_MESSAGE;
@@ -70,7 +75,7 @@ const StartedWorkflowIntentHandler = {
   handle(handlerInput) {
     //implement multiple speechText using custom Voice Dialog Flow from ADR Document
     
-    const speechText = "what is your workflow?";
+    const speechText = WORKFLOW_REQUEST;
     return handlerInput.responseBuilder
       .speak(speechText)
       .reprompt(speechText)
@@ -178,7 +183,7 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
-    const speechText = 'say your workflow name or create a new one in your MegAlexa app';
+    const speechText =WORKFLOW_NAME;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -195,7 +200,7 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
-    const speechText = 'Goodbye!';
+    const speechText =FINISH_MESSAGE;
 
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -222,8 +227,8 @@ const ErrorHandler = {
     console.log(`Error handled: ${error.message}`);
 
     return handlerInput.responseBuilder
-      .speak('Sorry, I can\'t understand the command. Please say again.')
-      .reprompt('Sorry, I can\'t understand the command. Please say again.')
+      .speak(ERROR_COMMAND_NOT_FOUND)
+      .reprompt(ERROR_COMMAND_NOT_FOUND)
       .getResponse();
   },
 };

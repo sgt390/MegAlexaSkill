@@ -15,6 +15,7 @@
 
 import { ConnectorBlock } from "./ConnectorBlock";
 import { tokenGoogleApi, credentials } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 
 const {google} = require('googleapis');
 /**
@@ -59,9 +60,9 @@ export class ConnectorBlockCalendar implements ConnectorBlock {
             }).then(async function(res:any){
                 return await res.data.items.reduce(async function(response:string, event:any) {
                     let startTime = event.start.dateTime;
-                    let startTimeConv = "" + startTime.substring(0, startTime.indexOf("T")) + " at " + startTime.substring(startTime.indexOf("T")+1, startTime.indexOf("+"));
-                    let location : string = !event.location ? " there is no location specified" : ", location: " + event.location;
-                    return await response + ("On " + startTimeConv + ", "+ event.summary + location +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
+                    let startTimeConv = "" + startTime.substring(0, startTime.indexOf("T")) + " "+PhrasesGenerator.atTime()+" "+ startTime.substring(startTime.indexOf("T")+1, startTime.indexOf("+"));
+                    let location : string = !event.location ? PhrasesGenerator.noLocation() : ","+PhrasesGenerator.location()+":" + event.location;
+                    return await response + (PhrasesGenerator.dayTime()+" "+ startTimeConv + ", "+ event.summary + location +"; ").replace("@", "at").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
             }).catch((err:string) => {throw err});
     }
