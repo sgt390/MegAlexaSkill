@@ -36,22 +36,38 @@ export class BlockList implements Filterable, ElicitBlock{
 
     public text(): string {
         
-        let add = ["add", "insert", "aggiungi", "inserisci"];
-        let remove = ['delete', 'remove', 'elimina', 'rimuovi']; 
-        let text = '';
+        const add = ["add", "insert", "aggiungi", "inserisci"];
+        const remove = ['delete', 'remove', 'elimina', 'rimuovi'];
+        const edit = ["edit", "modify", "modifica", "cambia"];
+        let text = ""; //TODO
 
         if (this.elicitSlot === '') {
             text = this.list.filter((el,index) => index<this.limit)
-                .reduce((result,element) => result + " " + element,"")
+                .reduce((result,element) => result + " " + element + ", ","")
                 .trim();
+            text += " do you like our effort to do list?" //TODO
         } else if (add.some(el => this.elicitSlot.includes(el))) {
-            let newElement = this.elicitSlot.replace(/add\s|insert\s|inserisci\s|aggiungi\s/,'');
-            BlockService.modifyBlock(this.createNewBlockListAdd(this.list, newElement),Workflow.getWorkflowPosition());
+            const newElement = this.elicitSlot.replace(/add\s|insert\s|inserisci\s|aggiungi\s/,'');
+            BlockService.modifyBlock(this.createNewBlockListAdd(this.list, newElement), Workflow.getWorkflowPosition());
             text = newElement + " " + PhrasesGenerator.randomAddListSentence();
         } else if(remove.some(el => this.elicitSlot.includes(el))) {
-            let newElement = this.elicitSlot.replace(/delete\s|remove\s|elimina\s|rimuovi\s/,'');
-            BlockService.modifyBlock(this.createNewBlockListDelete(this.list,newElement),Workflow.getWorkflowPosition());
-            text = newElement + " " + PhrasesGenerator.randomDeleteListSentence();
+            const removeElement = this.elicitSlot.replace(/delete\s|remove\s|elimina\s|rimuovi\s/,'');
+            const newList = this.createNewBlockListDelete(this.list, removeElement);
+            BlockService.modifyBlock(newList.blockListJSON, Workflow.getWorkflowPosition());
+
+            text = !newList.empty ? removeElement + " " + PhrasesGenerator.randomDeleteListSentence() : removeElement + " is not present";
+
+        } else if(edit.some(el => this.elicitSlot.includes(el))) {
+            const editElement = this.elicitSlot.replace(/edit\s|modify\s|modifica\s|cambia\s/,'');
+            const newList = this.createNewBlockListEdit(this.list, editElement);
+            BlockService.modifyBlock(newList, Workflow.getWorkflowPosition());
+            
+            text = !newList.empty ? newList.oldElement + " " + "edited with " + newList.newElement : newList.oldElement  + " is not present"; //TODO
+            
+        }
+        
+        else if(this.slotRequired()) {
+            text = "please repeat"; 
         }
 
         return text;
@@ -83,17 +99,53 @@ export class BlockList implements Filterable, ElicitBlock{
         return newBlockList;
     }
 
-    private createNewBlockListDelete(userList:string[], newElement: string): blockListJSON {
+    private createNewBlockListDelete(userList:string[], removeElement: string): {"empty": number, "blockListJSON": blockListJSON} {
 
-        userList = userList.filter((element) => !(element === newElement));
+        let empty = userList.filter(element => element === removeElement).length;
+        userList = userList.filter(element => !(element === removeElement));
 
         let newBlockList =  {
             "blockType": "List",
             "config": {
               "List": userList
             }
-        };
-        return newBlockList;
+        };      
+
+        const JSONreturn = {
+            empty: empty,
+            blockListJSON: newBlockList
+        }
+
+        return JSONreturn;
     }
 
+    private createNewBlockListEdit(userList:string[], modifyElement: string): {"empty": number, "blockListJSON": blockListJSON, "oldElement": string, "newElement": string} {
+        const withEdit = ["with", "con"];
+
+        let empty = userList.filter(element => element === modifyElement).length;
+        const oldElement = withEdit.map(el => modifyElement.substring(0, modifyElement.indexOf(el)))[0];
+        let newElement : string = "";
+
+        if(!empty) {
+            newElement = withEdit.map(el => modifyElement.substring(modifyElement.indexOf(el)+el.length+1))[0];
+            userList = userList.filter(element => !(element === oldElement));
+            userList.push(newElement);
+        }
+
+        let newBlockList =  {
+            "blockType": "List",
+            "config": {
+              "List": userList
+            }
+        };      
+
+        const JSONreturn = {
+            empty: empty,
+            blockListJSON: newBlockList,
+            oldElement: oldElement,
+            newElement: newElement
+        }
+
+        return JSONreturn;
+    }
 }
