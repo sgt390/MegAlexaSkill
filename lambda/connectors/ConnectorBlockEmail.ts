@@ -15,6 +15,7 @@
 
 import { ConnectorBlock } from "./ConnectorBlock";
 import { tokenGoogleApi, credentials } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 
 const {google} = require('googleapis');
 
@@ -66,7 +67,7 @@ export class ConnectorBlockEmail implements ConnectorBlock {
                     //const email_content = msg.data.snippet;
                     const sender = msg.data.payload.headers.filter((el:any) => el.name === 'From')[0].value.replace("@", " at ");
                     const subject = msg.data.payload.headers.filter((el:any) => el.name === 'Subject')[0].value;
-                    return await response + ("sender: " + sender + ", subject: "+ subject+ ", email: " + email_content +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
+                    return await response + (PhrasesGenerator.senderEmail()+" "+ sender + ","+" "+PhrasesGenerator.subjectEmail()+":"+ subject+ ", email: " + email_content +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
             }).catch((err:string) => {throw err});
     }

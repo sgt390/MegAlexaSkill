@@ -15,6 +15,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { BlockTwitterReadHTLConfig, connectorTwitterTimelineUser } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const Twitter = require('twitter');
 
 export class ConnectorBlockTwitterHomeTL implements ConnectorBlock {
@@ -40,7 +41,7 @@ export class ConnectorBlockTwitterHomeTL implements ConnectorBlock {
         return this.user.get('statuses/home_timeline', params)
             .then(function (tweets: connectorTwitterTimelineUser) {
                 return tweets.map(function(tweet:any) {
-                    return tweet.user.name +' tweeted '+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
+                    return tweet.user.name +" "+PhrasesGenerator.tweetedTwitterSentence()+" "+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
                 });
             })
             .catch(function (error:string) {

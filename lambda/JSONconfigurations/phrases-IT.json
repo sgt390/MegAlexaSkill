@@ -1,13 +1,28 @@
 {
+    "autenticationMessage":[
+        "Devi autenticarti con il tuo account Amazon per usare MegAlexa. Se non sai come autenticarti segui le istruzioni che ti ho inviato nell'applicazione Amazon Alexa",
+        "Mi dispiace ma per usare MegAlexa devi prima autenticarti. Se non sai come eseguire l'autenticazione segui le istruzioni che ti ho inviato nell'applicazione Amazon Alexa"
+    ],
     "skillStart":[
         "Benvenuto in MegAlexa, come posso aiutarti?",
-        "Quale workflow desideri aprire?",
-        "Con quale workflow vuoi iniziare?",
-        "Da quale workflow partiamo?"
+        "Ciao benvenuto in Alexa, come posso esserti d'aiuto?"
     ],
     "workflowStart":[
-        "I tuoi workflow sono i seguenti ",
-        "Hai a disposizione i segienti workflow"
+        "Quale workflow vuoi far eseguire?",
+        "Dimmi il workflow che vuoi far eseguire"
+    ],
+    "workflowName":[
+        "Dì il nome del tuo workflow oppure creane uno nell'applicazione MegAlexa",
+        "Dimmi il nome del tuo workflow oppure creane uno nell'applicazione MegAlexa"
+    ],
+    "errorCommand":[
+        "Mi dispiace non ho compreso il comando, ripeti per favore",
+        "Non riesco a comprendere il comando richiesto, per favore ripeti"
+    ],
+    "finishMessage":[
+        "Ciao",
+        "A presto",
+        "Ciao, spero di risentirti presto!"
     ],
     "pinBlockStart":[
         "Qual è il tuo codice?",
@@ -18,18 +33,15 @@
     ],
     "wrongPin":[
         "Sbagliato, riprova",
-        "Codice non corretto, riprova"
+        "Codice non corretto, riprova",
+        "Mi dispiace il pin non è corretto, riprova",
+        "Il codice non è corretto. Riprova, forse sarai più fortunato",
+        "Sfortunatamente il codice non è corretto, riprovaci"
     ],
-
     "correctPin":[
         "Il Pin è corretto",
         "Splendido, il Pin è corretto",
         "Corretto"
-    ],
-    "readList":[
-        "Questi sono gli elementi nella lista: ",
-        "Ecco gli elementi nella lista: ",
-        "La tua lista contiene i seguenti elementi: "
     ],
     "addList":[
         "è stato aggiunto",
@@ -42,14 +54,6 @@
     "readlEmail":[
         "Queste sono le tue email"
     ],
-    "readTwitter":[
-        "Questi sono i tweet",
-        "Questi sono i tweet richiesti",
-        "Ecco i tweet",
-        "Ecco i tweet richiesti",
-        "Questi sono i tweet che hai chiesto",
-        "Questi sono i tweet che desideri ascoltare"
-    ],
     "writeTwitter":[
         "Dì il tweet che vuoi scrivere",
         "Dimmi il tweet che vuoi postare",
@@ -59,15 +63,8 @@
         "Il tuo tweet è ora condiviso",
         "Perfetto, il tuo tweet è ora condiviso"
     ],
-
-    "feedRss":[
-        "Questi sono gli aggiornamenti dei siti che segui",
-        "Gli aggoirnamenti dei siti che segui sono i seguenti",
-        "Gli ultimi aggiornamenti dei siti che segui sono i seguenti"
-    ],
-    "calendar":[
-        "Questi sono gli eventi che hai pianificato",
-        "Questi sono gli eventi presenti sul tuo calendario"
+    "tweetedTwitter":[
+        "ha twittato" 
     ],
     "weatherStart":[
         "Attualmente a",
@@ -91,31 +88,27 @@
     "weatherCelsius": [
         "gradi"
     ],
-    "news":[
-        "Questo è il tuo sommario quotidiano",
-        "Eccoti le notizie quotidiane",
-        "Le notizie di oggi sono le seguenti"
-    ],
-    "sport":[
-        "Questo è il tuo sommario quotidiano sportivo",
-        "Queste sono le seguenti notizie sportive",
-        "Le notizie sportive sono le seguenti"
-    ],
-    "stock":[
-        "Ecco le notizie sul mercato finanziario",
-        "Queste sono le notizie sul mercato finanziario"
-    ],
-    "crypto":[
-        "Ecco le notizie relative alla criptovaluta"
-    ],
     "workflowDone":[
         "Il tuo workflow è completato",
         "Il workflow è finito"
+    ],
+    "atTime":[
+        "alle"
+    ],
+    "dayTime":[
+        "Il giorno"
+    ],
+    "noLocation":[
+        "Nessun luogo indicato"
+    ],
+    "location":[
+        "Luogo"
+    ],
+    "senderEmail":[
+        "mittente"
+    ],
+    "subjectEmail":[
+        "oggetto"
     ]
-
-
-
-
-
 
 }
