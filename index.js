@@ -15,7 +15,7 @@
 /* User will start the workflow, when it's alarm's turn then alexa will start 
  * timer (song volume 0), timer stops when countdown == 0 and Alarm will ring
 */ 
-import { PhrasesGenerator } from "./blocks/utility/PhrasesGenerator";
+const { PhrasesGenerator } = require("./blocks/utility/PhrasesGenerator");
 const Alexa = require('ask-sdk');
 const {User} = require('./User.js');
 
