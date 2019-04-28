@@ -5,8 +5,9 @@
         "Sorry you must authenticate with your Amazon Account to use MegAlexa. Please follow the instructions that I sent to you in your Amazon Alexa Ap "
     ],
     "skillStart":[
-        "Welcome to MegAlexa",
-        "Hi, welcome to MegAlexa" 
+        "Welcome to MegAlexa, how can I help you?",
+        "Hi, welcome to MegAlexa, how can I help you?",
+        "Hellow welcome to MegAlexa, how can I help you?"
     ],
     "workflowStart":[
         "What is your workflow?"

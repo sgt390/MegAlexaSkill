@@ -4,8 +4,8 @@
         "Mi dispiace ma per usare MegAlexa devi prima autenticarti. Se non sai come eseguire l'autenticazione segui le istruzioni che ti ho inviato nell'applicazione Amazon Alexa"
     ],
     "skillStart":[
-        "Benvenuto in MegAlexa",
-        "Ciao, benvenuto in Alexa"
+        "Benvenuto in MegAlexa, come posso aiutarti?",
+        "Ciao benvenuto in Alexa, come posso esserti d'aiuto?"
     ],
     "workflowStart":[
         "Quale workflow vuoi far eseguire?",
