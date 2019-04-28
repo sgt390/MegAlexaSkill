@@ -19,12 +19,9 @@ const { PhrasesGenerator } = require('./blocks/utility/PhrasesGenerator');
 const Alexa = require('ask-sdk');
 const {User} = require('./User.js');
 
-const AUTENTICATION_MESSAGE = PhrasesGenerator. randomAutenticationMessageSentence();
-const WELCOME_MESSAGE = PhrasesGenerator.randomStartSkillSentence();
-const WORKFLOW_REQUEST= PhrasesGenerator.randomWorkflowStartSentence();
-const ERROR_COMMAND_NOT_FOUND=PhrasesGenerator.randomErrorCommandSentence();
-const FINISH_MESSAGE=PhrasesGenerator.randomFinishSentence();
-const WORKFLOW_NAME=PhrasesGenerator.randomWorkflowNameSentence();
+
+
+
 
 
 /**
@@ -36,6 +33,10 @@ const LaunchRequestHandler = {
         && getUserAccessToken(handlerInput); 
       },
       handle(handlerInput) {
+        const request = handlerInput.requestEnvelope.request;
+        const language = request.locale;
+        User.language(language);
+        const WELCOME_MESSAGE = PhrasesGenerator.randomStartSkillSentence();
         const speechText = WELCOME_MESSAGE;
         return handlerInput.responseBuilder
           .speak(speechText)
@@ -53,6 +54,11 @@ const MissingAccessTokenHandler = {
     return !getUserAccessToken(handlerInput)
   },
   handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+    
+    const AUTENTICATION_MESSAGE = PhrasesGenerator. randomAutenticationMessageSentence();
       speechText = AUTENTICATION_MESSAGE;
       return handlerInput.responseBuilder
         .speak(speechText)
@@ -74,7 +80,10 @@ const StartedWorkflowIntentHandler = {
   },
   handle(handlerInput) {
     //implement multiple speechText using custom Voice Dialog Flow from ADR Document
-    
+    const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+    const WORKFLOW_REQUEST= PhrasesGenerator.randomWorkflowStartSentence();
     const speechText = WORKFLOW_REQUEST;
     return handlerInput.responseBuilder
       .speak(speechText)
@@ -183,6 +192,10 @@ const HelpIntentHandler = {
       && handlerInput.requestEnvelope.request.intent.name === 'AMAZON.HelpIntent';
   },
   handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+    const WORKFLOW_NAME=PhrasesGenerator.randomWorkflowNameSentence();
     const speechText =WORKFLOW_NAME;
 
     return handlerInput.responseBuilder
@@ -200,6 +213,10 @@ const CancelAndStopIntentHandler = {
         || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
   },
   handle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+    const FINISH_MESSAGE=PhrasesGenerator.randomFinishSentence();
     const speechText =FINISH_MESSAGE;
 
     return handlerInput.responseBuilder
@@ -225,7 +242,10 @@ const ErrorHandler = {
   },
   handle(handlerInput, error) {
     console.log(`Error handled: ${error.message}`);
-
+    const request = handlerInput.requestEnvelope.request;
+    const language = request.locale;
+    User.language(language);
+   const ERROR_COMMAND_NOT_FOUND=PhrasesGenerator.randomErrorCommandSentence();
     return handlerInput.responseBuilder
       .speak(ERROR_COMMAND_NOT_FOUND)
       .reprompt(ERROR_COMMAND_NOT_FOUND)

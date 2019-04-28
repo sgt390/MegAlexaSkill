@@ -26,7 +26,7 @@ export class PhrasesGenerator {
 
     public static setLanguage(languagePassed:string) {
         this.language=languagePassed;
-        if(this.language=="it-IT") 
+        if(this.language==="it-IT") 
             PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
         else
            PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-EN.json');
