@@ -135,10 +135,10 @@ export class BlockList implements Filterable, ElicitBlock{
     private createNewBlockListEdit(userList:string[], modifyElement: string): {"countItem": number, "blockListJSON": blockListJSON, "oldElement": string, "newElement": string} {
         const withEdit = ["with", "con"];
 
-        const oldElement = withEdit.map(el => modifyElement.substring(0, modifyElement.indexOf(el)))[0];
-        let countItem = userList.filter(element => element === oldElement).length;
+        const oldElement = withEdit.map(el => modifyElement.substring(0, modifyElement.indexOf(el)-1))[0];
+        let countItem = userList.filter(element => (element === oldElement)).length;
         let newElement : string = "";
-
+        
         if(countItem) {
             newElement = withEdit.map(el => modifyElement.substring(modifyElement.indexOf(el)+el.length+1))[0];
             console.log("newElement" + newElement);
