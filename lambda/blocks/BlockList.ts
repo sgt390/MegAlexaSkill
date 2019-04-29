@@ -39,13 +39,13 @@ export class BlockList implements Filterable, ElicitBlock{
         const add = ["add", "insert", "aggiungi", "inserisci"];
         const remove = ['delete', 'remove', 'elimina', 'rimuovi'];
         const edit = ["edit", "modify", "modifica", "cambia"];
-        let text = ""; //TODO
+        let text = ""; 
 
         if (this.elicitSlot === '') {
             text = this.list.filter((el,index) => index<this.limit)
                 .reduce((result,element) => result + " " + element + ", ","")
                 .trim();
-            text += " do you like our effort to do list?" //TODO
+            text +=" "+PhrasesGenerator.randomAddDeleteModifySentence();
         } 
         else if (add.some(el => this.elicitSlot.includes(el))) {
             const newElement = this.elicitSlot.replace(/add\s|insert\s|inserisci\s|aggiungi\s/,'');
@@ -58,7 +58,7 @@ export class BlockList implements Filterable, ElicitBlock{
             BlockService.modifyBlock(newList.blockListJSON, Workflow.getWorkflowPosition());
 
             if(!newList.countItem)
-                text = removeElement + " is not present"
+                text = removeElement +" "+PhrasesGenerator.randomNotPresentSentence();
             else
                 text = removeElement + " " + PhrasesGenerator.randomDeleteListSentence()
 
@@ -71,9 +71,9 @@ export class BlockList implements Filterable, ElicitBlock{
             BlockService.modifyBlock(newList.blockListJSON, Workflow.getWorkflowPosition());
             
             if(!newList.countItem)
-                text = newList.oldElement + " is not present"
+                text = newList.oldElement +" "+PhrasesGenerator.randomNotPresentSentence();
             else
-                text = newList.oldElement + " " + "edited with " + newList.newElement
+                text = newList.oldElement + " " +PhrasesGenerator.randomEditedElementSentence()+" "+ newList.newElement;
 
             //text = !newList.countItem ? newList.oldElement + " " + "edited with " + newList.newElement : newList.oldElement  + " is not present"; //TODO
             

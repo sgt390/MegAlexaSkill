@@ -7,7 +7,7 @@
     "skillStart":[
         "Welcome to MegAlexa, how can I help you?",
         "Hi, welcome to MegAlexa, how can I help you?",
-        "Hellow welcome to MegAlexa, how can I help you?"
+        "Hello welcome to MegAlexa, how can I help you?"
     ],
     "workflowStart":[
         "What is your workflow?"
@@ -23,7 +23,8 @@
     ],
     "finishMessage":[
         "Goodbye!",
-        "Bye, bye"
+        "Bye, bye",
+        "I hope to hear from you soon!Bye"
     ],
     "pinBlockStart":[
         "Say your pin to continue",
@@ -44,6 +45,10 @@
         "Pin is correct",
         "Perfect, the pin is correct"
     ],
+    "addDeleteModify":[
+        "Do you want to add delete or modify any element on your list?",
+        "Do you want to insert edit or remove any item on your list?"
+    ],
     "addList":[
         "has been added",
         "successfully added"
@@ -51,6 +56,13 @@
     "deleteList": [
         "has been removed",
         "successfully deleted"
+    ],
+    "notPresent": [
+        "The element  is not present",
+        "The requested item is not present"
+    ],
+    "editedWith": [
+        "edited with"
     ],
     "readlEmail":[
         "These are your new emails"

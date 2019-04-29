@@ -158,8 +158,8 @@ export class Workflow {
 
 }
 
-/*
-const wf = new Workflow(
+
+/*const wf = new Workflow(
     [
         {
           "blockType": "TextToSpeech",
@@ -176,5 +176,5 @@ const wf = new Workflow(
       ], 'test',0);
 
 wf.alexaResponse().then(el => console.log(el.text)).catch(err => console.log('££££££'+err));
-
 */
+
