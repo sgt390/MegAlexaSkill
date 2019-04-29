@@ -104,7 +104,7 @@ export class Workflow {
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
                 Workflow.workflowStartingPosition = startingPoistion + i;
 
-                _text += await blocks[i].text() + "; ";
+                _text += await blocks[i].text() + " ";
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
