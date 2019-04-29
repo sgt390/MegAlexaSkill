@@ -28,7 +28,7 @@
         "Qual è il tuo codice?",
         "Dimmi il tuo codice segreto",
         "Confessami il tuo codice per continuare",
-        "Qual è il tuo PIN",
+        "Qual è il tuo PIN?",
         "Dimmi le quattro cifre segrete"
     ],
     "wrongPin":[
@@ -43,6 +43,12 @@
         "Splendido, il Pin è corretto",
         "Corretto"
     ],
+    "addDeleteModify":[
+        "Vuoi aggiungere eliminare o modificare un elemento della tua lista?",
+        "Desideri aggiungere modificare o eliminare un elemento della tua lista?",
+        "Nella tua lista vuoi aggiungere modificare o eliminare qualche elemento?",
+        "Nella tua lista desideri inserire cambiare o rimuovere qualche elemento?"
+    ],
     "addList":[
         "è stato aggiunto",
         "correttamente aggiunto"
@@ -50,6 +56,13 @@
     "deleteList": [
         "è stato rimosso",
         "correttamente rimosso"
+    ],
+    "notPresent": [
+        "L'elemento non è presente",
+        "L'elemento richiesto non è presente"
+    ],
+    "editedWith": [
+        "modificato con"
     ],
     "readlEmail":[
         "Queste sono le tue email"

@@ -88,7 +88,13 @@ export class PhrasesGenerator {
         let s: string=PhrasesGenerator.jsonPhrases.correctPin[randomNumber];
         return s;
     }
-       
+
+    static randomAddDeleteModifySentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addDeleteModify.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.addDeleteModify[randomNumber];
+        return s;
+    }
+
     static randomAddListSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addList.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.addList[randomNumber];
@@ -96,8 +102,20 @@ export class PhrasesGenerator {
     }
 
     static randomDeleteListSentence():string{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addList.length-1);
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.deleteList.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.deleteList[randomNumber];
+        return s;
+    }
+
+    static randomNotPresentSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.notPresent.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.notPresent[randomNumber];
+        return s;
+    }
+
+    static randomEditedElementSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.editedWith.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.editedWith[randomNumber];
         return s;
     }
 
@@ -150,7 +168,7 @@ export class PhrasesGenerator {
     }
     
     static randomWeatherCelsiusSentence():string{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherHigh.length-1);
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherCelsius.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.weatherCelsius[randomNumber];
         return s;
     }
@@ -172,8 +190,8 @@ export class PhrasesGenerator {
         return s;
     }
     static dayTime():string{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.atTime.length-1);
-        let s: string=PhrasesGenerator.jsonPhrases.atTime[randomNumber];
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.dayTime.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.dayTime[randomNumber];
         return s;
     }
     static noLocation():string{
