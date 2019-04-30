@@ -21,6 +21,7 @@ import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
 import { blockJSON, AlexaResponse, BlockConfig } from "./JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "./block/utility/PhrasesGenerator";
 import { Filter } from "./blocks/utility/Filter";
 import { Filterable } from "./blocks/utility/Filterable";
 import { ElicitBlock } from "./blocks/utility/ElicitBlock";
@@ -34,6 +35,7 @@ import { BlockTwitterWrite } from "./blocks/BlockTwitterWrite";
 import { BlockEmail } from "./blocks/BlockEmail";
 import { BlockTwitterReadHomeTL } from "./blocks/BlockTwitterReadHomeTL";
 import { BlockCalendar } from "./blocks/BlockCalendar";
+
 
 
 export class Workflow {
@@ -113,7 +115,7 @@ export class Workflow {
             }
 
             if (!elicitSlot) {
-                _text += 'Workflow is over, you can start with a new one;'
+                _text += PhrasesGenerator.randomDoneWorkflowSentence();
             }
             return {
                 text: _text,
