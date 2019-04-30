@@ -71,6 +71,12 @@ export class PhrasesGenerator {
         let s: string=PhrasesGenerator.jsonPhrases.finishMessage[randomNumber];
         return s;
     }
+
+    static randomDoneWorkflowSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.doneWorkflow.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.doneWorkflow[randomNumber];
+        return s;
+    }
     static randomPinBlockStartSentence(): string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.pinBlockStart.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.pinBlockStart[randomNumber];
@@ -176,12 +182,6 @@ export class PhrasesGenerator {
     static randomWeatherLowSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherLow.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.weatherLow[randomNumber];
-        return s;
-    }
-
-    static randomWorkflowDoneSentence():string{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.workflowDone.length-1);
-        let s: string=PhrasesGenerator.jsonPhrases.workflowDone[randomNumber];
         return s;
     }
     static atTime():string{
