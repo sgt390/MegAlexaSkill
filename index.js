@@ -183,7 +183,6 @@ const InProgressWorkflowIntentHandler = {
 const getUserAccessToken = function(handlerInput){
   const { accessToken } = handlerInput.requestEnvelope.context.System.user;
   return accessToken;
-  //return "amzn1.account.AGC777NBGNIAWSP6EBO33ULF7XMQ"; // THIS IS AN ID
 }
 
 const HelpIntentHandler = {
