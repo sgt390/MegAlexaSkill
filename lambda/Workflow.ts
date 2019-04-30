@@ -21,7 +21,7 @@ import {BlockTextToSpeech} from "./blocks/BlockTextToSpeech";
 import {BlockFeedRSS} from './blocks/BlockFeedRSS';
 import {Block} from './blocks/Block'
 import { blockJSON, AlexaResponse, BlockConfig } from "./JSONconfigurations/JSONconfiguration";
-import { PhrasesGenerator } from "./block/utility/PhrasesGenerator";
+import { PhrasesGenerator } from "./blocks/utility/PhrasesGenerator";
 import { Filter } from "./blocks/utility/Filter";
 import { Filterable } from "./blocks/utility/Filterable";
 import { ElicitBlock } from "./blocks/utility/ElicitBlock";
