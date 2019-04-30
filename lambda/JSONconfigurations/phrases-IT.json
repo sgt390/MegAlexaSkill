@@ -24,6 +24,10 @@
         "A presto",
         "Ciao, spero di risentirti presto!"
     ],
+    "doneWorkflow":[
+        "Il tuo workflow è finito, puoi iniziarne uno nuovo",
+        "Il tuo workflow è completato, puoi eseguirne un altro"
+    ],
     "pinBlockStart":[
         "Qual è il tuo codice?",
         "Dimmi il tuo codice segreto",
@@ -100,10 +104,6 @@
     ],
     "weatherCelsius": [
         "gradi"
-    ],
-    "workflowDone":[
-        "Il tuo workflow è completato",
-        "Il workflow è finito"
     ],
     "atTime":[
         "alle"

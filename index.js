@@ -58,7 +58,7 @@ const MissingAccessTokenHandler = {
     const language = request.locale;
     User.language(language);
     
-    const AUTENTICATION_MESSAGE = PhrasesGenerator. randomAutenticationMessageSentence();
+    const AUTENTICATION_MESSAGE = PhrasesGenerator.randomAutenticationMessageSentence();
       speechText = AUTENTICATION_MESSAGE;
       return handlerInput.responseBuilder
         .speak(speechText)
