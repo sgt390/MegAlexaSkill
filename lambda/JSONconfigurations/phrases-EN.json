@@ -42,6 +42,12 @@
         "I'm sorry but the pin is wrong, retry",
         "The pin is wrong, maybe next time you'll be luckier. Please try again"
     ],
+    "pleaseRepeatList":[
+        "i did not understand, please add, remove, delete an element, or say done to start the next block",
+        "please, repeat",
+        "hmmm, what did you say?",
+        "im not sure, please repeat"
+    ],
     "correctPin":[
         "Pin is correct",
         "Perfect, the pin is correct"

@@ -55,24 +55,3 @@ export class ConnectorBlockweather implements ConnectorBlock {
             weather.setLang('it');
     }
 }
-/*
-const weatherconfig = {
-    Latitude: "45.4064",
-    Longitude: "11.8768"
-}
-const abba = new ConnectorBlockweather(weatherconfig);
-abba.connect().then(el => console.log(el));
-*/
-/*
-*   CORRETTOMA NON PROMISE
-*
- return weather.getAllWeather(function(err: string, data: any) {
-            if(err)
-                console.log("error while creating the weather connector: £££££££" + err);
-            else {
-                return "Currently in " + data.name + " is " + data.main.temp + " with " +
-                    data.weather[0].description + ", you can expect an hight of " + data.main.temp_min + 
-                    " and a low of " + data.main.temp_max;
-            }
-        })
-*/

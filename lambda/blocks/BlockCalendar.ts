@@ -37,13 +37,3 @@ export class BlockCalendar implements Block, Filterable {
         return this.connector.connect(this.limit);
     }
 }
-
-/*
-const conf = {
-    'token': token,
-    'credentials': credentials
-}
-
-let a = new BlockCalendar(conf);
-
-a.text().then(el => console.log(el));*/

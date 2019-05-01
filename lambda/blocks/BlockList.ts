@@ -70,17 +70,12 @@ export class BlockList implements Filterable, ElicitBlock{
             const newList = this.createNewBlockListEdit(this.list, editElement);
             BlockService.modifyBlock(newList.blockListJSON, Workflow.getWorkflowPosition());
             
-            if(!newList.countItem)
-                text = newList.oldElement +" "+PhrasesGenerator.randomNotPresentSentence();
-            else
-                text = newList.oldElement + " " +PhrasesGenerator.randomEditedElementSentence()+" "+ newList.newElement;
-
-            //text = !newList.countItem ? newList.oldElement + " " + "edited with " + newList.newElement : newList.oldElement  + " is not present"; //TODO
+            text = (!newList.countItem)? newList.oldElement +" "+PhrasesGenerator.randomNotPresentSentence(): newList.oldElement + " " +PhrasesGenerator.randomEditedElementSentence()+" "+ newList.newElement;
             
         }
         
         else if(this.slotRequired()) {
-            text = "please repeat"; 
+            text = PhrasesGenerator.pleaseRepeatList(); 
         }
 
         return text;

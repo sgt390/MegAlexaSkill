@@ -46,10 +46,10 @@ export class ConnectorBlockCalendar implements ConnectorBlock {
     }
 
     public connect(limit:number=5): Promise<string>{
-        return this.listEvents(this.oAuth2Client, 'label:unread', (el:any) => console.log(el),limit);
+        return this.listEvents(this.oAuth2Client, 'label:unread',limit);
     }
     
-    private listEvents(auth:any, query:string, callback:any,limit:number): Promise<string> {
+    private listEvents(auth:any, query:string, limit:number): Promise<string> {
         const calendar = google.calendar({version: 'v3', auth});
         return calendar.events.list({
             'calendarId': 'primary',
@@ -67,14 +67,3 @@ export class ConnectorBlockCalendar implements ConnectorBlock {
             }).catch((err:string) => {throw err});
     }
 }
-
-/*
-const conf = {
-    'token': token,
-    'credentials': credentials
-}
-
-let a = new ConnectorBlockCalendar(token, credentials);
-
-a.connect().then(el => console.log(el));
-*/

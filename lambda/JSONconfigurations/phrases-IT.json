@@ -53,6 +53,12 @@
         "Nella tua lista vuoi aggiungere modificare o eliminare qualche elemento?",
         "Nella tua lista desideri inserire cambiare o rimuovere qualche elemento?"
     ],
+    "pleaseRepeatList":[
+        "non ho capito, puoi dire aggiungi, elimina, rimuovi seguito da un elemento o finito per uscire",
+        "perfavore, ripeti",
+        "hmmm, che volevi dire?",
+        "non sono sicura, puoi ripetere?"
+    ],
     "addList":[
         "è stato aggiunto",
         "correttamente aggiunto"

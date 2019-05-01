@@ -35,11 +35,3 @@ export class BlockTwitterReadHomeTL implements Block, Filterable {
         return this;
     }
 }
-
-/*
-const tconf = {
-    
-}
-let a = new ConnectorBlockTwitterHomeTL(tconf);
-a.connect().then(el => console.log(el));
-*/

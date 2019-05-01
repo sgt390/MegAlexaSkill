@@ -100,7 +100,11 @@ export class PhrasesGenerator {
         let s: string=PhrasesGenerator.jsonPhrases.addDeleteModify[randomNumber];
         return s;
     }
-
+    static pleaseRepeatList():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.pleaseRepeatList.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.pleaseRepeatList[randomNumber];
+        return s;
+    }
     static randomAddListSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.addList.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.addList[randomNumber];
