@@ -16,7 +16,7 @@
     ],
     "errorCommand":[
         "Sorry, I can't understand the command. Please say again.",
-        "I am very sorry I can't understand the command. Please repeat.",
+        "I am very sorry I did not understood the command. Please repeat.",
         "I can't understand the command so please say again.",
         "Please repeat, I can't understand the command"
     ],
@@ -33,23 +33,22 @@
         "What's you Pin?",
         "Tell me your secret code",
         "Let me know your Pin to continue",
-        "Confess me your secret code",
-        "Whisper your four digits number"
+        "Confess me your secret code"
     ],
     "wrongPin":[
         "Incorrect, please retry",
         "Wrong, try again",
         "Wrong, retry",
         "I'm sorry but the pin is wrong, retry",
-        "The pin is wrong, maybe next time you'll be luckier. Please retry"
+        "The pin is wrong, maybe next time you'll be luckier. Please try again"
     ],
     "correctPin":[
         "Pin is correct",
         "Perfect, the pin is correct"
     ],
     "addDeleteModify":[
-        "Do you want to add delete or modify any element on your list?",
-        "Do you want to insert edit or remove any item on your list?"
+        "Do you want to add, delete or modify any element on your list?",
+        "Do you want to insert, edit or remove any item on your list?"
     ],
     "addList":[
         "has been added",
@@ -60,7 +59,7 @@
         "successfully deleted"
     ],
     "notPresent": [
-        "The element  is not present",
+        "The element is not present",
         "The requested item is not present"
     ],
     "editedWith": [
@@ -75,8 +74,8 @@
         "Say the tweet you want to post"
     ],
     "successTwitter":[
-        "Your tweet is posted successfully",
-        "excellent, the tweet was posted"
+        "Your tweet has been posted successfully",
+        "Excellent, the tweet has been posted"
     ],
     "tweetedTwitter":[
         "tweeted" 
