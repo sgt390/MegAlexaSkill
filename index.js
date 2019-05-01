@@ -207,9 +207,15 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
+    const request = handlerInput.requestEnvelope.request;
+    const slots = request.intent.slots;
+    const elicitSlot = slots.elicitSlot.value;
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent');
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent')
+      || elicitSlot === 'stop'
+      || elicitSlot === 'esci'
+      || elicitSlot === 'quit'
   },
   handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;

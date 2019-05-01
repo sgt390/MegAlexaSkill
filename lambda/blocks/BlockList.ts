@@ -36,9 +36,9 @@ export class BlockList implements Filterable, ElicitBlock{
 
     public text(): string {
         
-        const add = ["add", "insert", "aggiungi", "inserisci"];
-        const remove = ['delete', 'remove', 'elimina', 'rimuovi'];
-        const edit = ["edit", "modify", "modifica", "cambia"];
+        const add = ["add ", "insert ", "aggiungi ", "inserisci "];
+        const remove = ['delete ', 'remove ', 'elimina ', 'rimuovi '];
+        const edit = ["edit ", "modify ", "modifica ", "cambia "];
         let text = ""; 
 
         if (this.elicitSlot === '') {
@@ -46,7 +46,7 @@ export class BlockList implements Filterable, ElicitBlock{
                 .reduce((result,element) => result + " " + element + ", ","")
                 .trim();
             text +=" "+PhrasesGenerator.randomAddDeleteModifySentence();
-        } 
+        }
         else if (add.some(el => this.elicitSlot.includes(el))) {
             const newElement = this.elicitSlot.replace(/add\s|insert\s|inserisci\s|aggiungi\s/,'');
             BlockService.modifyBlock(this.createNewBlockListAdd(this.list, newElement), Workflow.getWorkflowPosition());
