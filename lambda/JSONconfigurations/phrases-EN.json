@@ -6,8 +6,7 @@
     ],
     "skillStart":[
         "Welcome to MegAlexa, how can I help you?",
-        "Hi, welcome to MegAlexa, how can I help you?",
-        "Hello welcome to MegAlexa, how can I help you?"
+        "Hi, welcome to MegAlexa, how can I help you?"
     ],
     "workflowStart":[
         "What is your workflow?"
