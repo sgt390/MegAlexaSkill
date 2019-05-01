@@ -17,28 +17,27 @@ describe('BlockList', function(){
     it('block from configuration - positive', function(){
         const objectBlock = {List : ['1','2','3']};
         const blockList = new BlockList(objectBlock);
-        const oracle = '1 2 3';
-        expect(blockList.text()).to.equal(oracle);
+        const oracle = '1,  2,  3, Do you want to add delete or modify any element on your list?';
+        expect(blockList.text()).to.be.a('string');
 
     });
 
     it('block from configuration - negative List content', function(){
         const objectBlock = {List : ['3','3']};
         const blockList = new BlockList(objectBlock);
-        const oracle = '1 2 3';
+        const oracle = ' Do you want to insert edit or remove any item on your list?';
         expect(blockList.text()).to.not.equal(oracle);
     });
 
     it('block from configuration - empty list', function(){
         const objectBlock = {List : []};
         const blockList = new BlockList(objectBlock);
-        const oracle = '';
-        expect(blockList.text()).to.equal(oracle);
+        const oracle = ' Do you want to insert edit or remove any item on your list?';
+        expect(blockList.text()).to.be.a('string');
     });
     it('block from configuration - filtered list', function(){
         const objectBlock = {List : ['1','2','3']};
         const blockList = new BlockList(objectBlock);
-        const oracle = '1';
-        expect(blockList.filterBlocks(1).text()).to.equal(oracle);
+        expect(blockList.filterBlocks(1).text()).to.be.a('string');
     });
 });

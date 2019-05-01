@@ -29,7 +29,6 @@ export class User {
     constructor(accessToken: string) {
         const values = this.credentialsByAccessToken(accessToken)
         .then(function(result){
-            console.log("constructorUSER: " + result.user_id + "name " + result.name + "email " + result.email)
             return [result.user_id, result.name, result.email];
         }).catch(function(error){
             throw 'error while creating the user: '+error;

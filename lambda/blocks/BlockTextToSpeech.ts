@@ -23,7 +23,6 @@ export class BlockTextToSpeech implements Block {
         const blockTTSConfig = <BlockTTSConfig> blockConfig;
         this._text = blockTTSConfig.TextToSpeech;
         if (this._text === undefined) {
-            console.log("TextToSpeech value in TextToSpeech block not found");
             this._text = "error";
         }
     }

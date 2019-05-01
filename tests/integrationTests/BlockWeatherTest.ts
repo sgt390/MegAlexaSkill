@@ -13,7 +13,6 @@
 
 //import {expect} from 'chai';
 import {BlockWeather} from '../../lambda/blocks/BlockWeather';
-import { Block } from '../../lambda/blocks/Block';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 import { ElicitBlock } from '../../lambda/blocks/utility/ElicitBlock';

@@ -141,7 +141,6 @@ export class BlockList implements Filterable, ElicitBlock{
         
         if(countItem) {
             newElement = withEdit.map(el => modifyElement.substring(modifyElement.indexOf(el)+el.length+1))[0];
-            console.log("newElement" + newElement);
             userList = userList.filter(element => !(element === oldElement));
             userList.push(newElement);
         }

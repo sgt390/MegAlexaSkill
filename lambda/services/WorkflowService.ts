@@ -20,9 +20,10 @@ export class WorkflowService {
 
     public async create(userID: Promise<string>, workflowName: string, position: number, slot: string): Promise<Workflow> {
         let config: Promise<blockJSON[]> = this.workflowFromDatabase(userID,workflowName);
-        return config.then(result => new Workflow(result, workflowName, position, slot)).catch(function(error) {
-            throw new error("error while creating the workflow: " + workflowName + ". £££ERROR: "+ error);
-        });
+        return config.then(result => new Workflow(result, workflowName, position, slot))
+            .catch(function(error) {
+                throw "error while creating the workflow: " + workflowName + ". £££ERROR: "+ error;
+            });
     }
     
     /**
@@ -36,8 +37,7 @@ export class WorkflowService {
         .then(function(response: WorkflowData){
             return response.data;
         }).catch(function(error: string){
-            console.log('exception while reading the user_id from database. £££ERROR: '+ error);
-            return [];
+            throw 'exception while reading the user_id from database. £££ERROR: '+ error;
         });
     }
 }
