@@ -11,7 +11,6 @@
 * Matteo Depascale      || 2019-02-25   || Verified
 * Matteo Depascale      || 2019-03-25   || Approved
 */
-import { connectorResult } from "../JSONconfigurations/JSONconfiguration";
 
 export interface ConnectorBlock {
 

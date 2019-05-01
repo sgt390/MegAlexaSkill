@@ -16,7 +16,7 @@ import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const expect = chai.expect;
 
-describe('BlockFeedRSS', function(){
+describe('Connector FeedRSS', function(){
    it('block from configuration - throw', function(){
         const blockFeedRSS = new ConnectorBlockFeedRSS('http://notexistingtest.rss');
             expect(blockFeedRSS.connect()).to.eventually.throw();

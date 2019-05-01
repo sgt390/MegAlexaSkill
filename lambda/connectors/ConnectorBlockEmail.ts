@@ -41,17 +41,17 @@ export class ConnectorBlockEmail implements ConnectorBlock {
         const {client_secret, client_id, redirect_uris} = credentials.installed;
         const oAuth2Client = new google.auth.OAuth2(
         client_id, client_secret, redirect_uris[0]);
-      
+    
         oAuth2Client.setCredentials(token);
         return oAuth2Client;
         
     }
 
     public connect(limit:number=5): Promise<string>{
-        return this.listMessages(this.oAuth2Client, 'label:unread', (el:any) => console.log(el),limit);
+        return this.listMessages(this.oAuth2Client, 'label:unread', limit);
     }
     
-    private listMessages(auth:any, query:string, callback:any,limit:number): Promise<string> {
+    private listMessages(auth:any, query:string, limit:number): Promise<string> {
         const gmail = google.gmail({version: 'v1', auth});
         return gmail.users.messages.list({
             'userId': 'me',

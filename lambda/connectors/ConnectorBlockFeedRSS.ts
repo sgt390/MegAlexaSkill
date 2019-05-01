@@ -14,7 +14,6 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorFeedRSSResult } from "../JSONconfigurations/JSONconfiguration";
-import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const Parser = require('rss-parser');
 const parser = new Parser();
 
