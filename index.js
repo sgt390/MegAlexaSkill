@@ -93,37 +93,6 @@ const StartedWorkflowIntentHandler = {
   }
 };
 
-
-
-////////////////////////////////////////* BEGIN DEMO *////////////////////////////
-/*
-const ElicitInProgressWorkflowIntentHandler = {
-  canHandle(handlerInput) {
-    const attributesManager = handlerInput.attributesManager;
-    const request = handlerInput.requestEnvelope.request;
-    const attributes = attributesManager.getSessionAttributes() || {};
-    attributes.blockStatus = (!request.intent.slots.element.value || request.intent.slots.element.value !== "no")? "elicit": "noElicit";
-    attributesManager.setSessionAttributes(attributes);
-    return request.type === 'IntentRequest'
-      && request.intent.name === 'WorkflowIntent'
-      && request.dialogState !== 'COMPLETED'
-      && request.intent.slots.workflow_name.value
-      && (!handlerInput.attributesManager.getSessionAttributes().blockStatus
-      || handlerInput.attributesManager.getSessionAttributes().blockStatus === "elicit")
-  },
-  async handle(handlerInput) {
-    handlerInput.attributesManager.getSessionAttributes().blockStatus = "noElicit";
-          return handlerInput.responseBuilder
-            .speak(speechText)
-            .reprompt(speechText)
-            .addElicitSlotDirective("element")
-            .getResponse();
-  }
-
-
-  // && handlerInput.attributesManager.getSessionAttributes().blockType
-}*/
-
 const InProgressWorkflowIntentHandler = {
   canHandle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
@@ -207,15 +176,12 @@ const HelpIntentHandler = {
 
 const CancelAndStopIntentHandler = {
   canHandle(handlerInput) {
-    const request = handlerInput.requestEnvelope.request;
-    const slots = request.intent.slots;
-    const elicitSlot = slots.elicitSlot.value;
     return handlerInput.requestEnvelope.request.type === 'IntentRequest'
       && (handlerInput.requestEnvelope.request.intent.name === 'AMAZON.CancelIntent'
-        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent')
-      || elicitSlot === 'stop'
-      || elicitSlot === 'esci'
-      || elicitSlot === 'quit'
+        || handlerInput.requestEnvelope.request.intent.name === 'AMAZON.StopIntent'
+      || handlerInput.requestEnvelope.intent.slots.elicitSlot.value === 'stop'
+      || handlerInput.requestEnvelope.intent.slots.elicitSlot.value === 'esci'
+      || handlerInput.requestEnvelope.intent.slots.elicitSlot.value === 'quit')
   },
   handle(handlerInput) {
     const request = handlerInput.requestEnvelope.request;
