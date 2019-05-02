@@ -34,6 +34,7 @@ export class PhrasesGenerator {
         */
         switch (this.language) {
             case "it-IT": PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
+                break;
             default: PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-EN.json');
         }
     }
