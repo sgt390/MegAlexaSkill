@@ -43,9 +43,13 @@ export class ConnectorBlockTwitterUserTL implements ConnectorBlock {
         return this.user.get('statuses/user_timeline', params)
             .then(function (tweets: connectorTwitterTimelineUser) {
                 return tweets.map(function(tweet:any) {
-                    if(tweet.user.name="")
-                        return PhrasesGenerator.noTweetFoundTwitterSentence()
-                    return tweet.user.name +" "+PhrasesGenerator.tweetedTwitterSentence()+" "+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
+                    let text = "";
+                    if(tweet.user.name=""){
+                        text = PhrasesGenerator.noTweetFoundTwitterSentence()
+                    } else{
+                        text = tweet.user.name +" "+PhrasesGenerator.tweetedTwitterSentence()+" "+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
+                    }
+                    return text;
                 });
             })
             .catch(function (error:string) {

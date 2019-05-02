@@ -106,7 +106,8 @@ export class Workflow {
             for(let i=0; i<blocks.length && !elicitSlot; ++i) {
                 Workflow.workflowStartingPosition = startingPoistion + i;
 
-                _text += await blocks[i].text() + " ";
+                // Alexa Key words are removed from the response (we don't have control to emails, tweets, ...)
+                _text += (await blocks[i].text()).replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "") + " ";
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
