@@ -86,6 +86,10 @@
     "tweetedTwitter":[
         "tweeted" 
     ],
+    "noTweetFoundTwitter": [
+        "there aren't tweets at the moment",
+        "currently there aren't tweets"
+    ],
     "weatherStart":[
         "Currently in",
         "Right now in"

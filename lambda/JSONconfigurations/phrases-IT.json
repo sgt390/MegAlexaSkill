@@ -89,6 +89,10 @@
     "tweetedTwitter":[
         "ha twittato" 
     ],
+    "noTweetFoundTwitter": [
+        "non sono presenti tweet al momento",
+        "attualmente non ci sono tweet da leggere"
+    ],
     "weatherStart":[
         "Attualmente a",
         "A",

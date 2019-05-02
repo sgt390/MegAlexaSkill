@@ -160,6 +160,12 @@ export class PhrasesGenerator {
         return s;
     }
 
+    static noTweetFoundTwitterSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.tweetedTwitter.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noTweetFoundTwitter[randomNumber];
+        return s;
+    }
+
     static randomWeatherStartSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.weatherStart.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.weatherStart[randomNumber];
