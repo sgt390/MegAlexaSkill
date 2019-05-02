@@ -26,10 +26,16 @@ export class PhrasesGenerator {
 
     public static setLanguage(languagePassed:string) {
         this.language=languagePassed;
+        /*
         if(this.language==="it-IT") 
             PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
         else
            PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-EN.json');
+        */
+        switch (this.language) {
+            case "it-IT": PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-IT.json');
+            default: PhrasesGenerator.jsonPhrases= require ('../../JSONconfigurations/phrases-EN.json');
+        }
     }
 
     public static getLanguage() {
