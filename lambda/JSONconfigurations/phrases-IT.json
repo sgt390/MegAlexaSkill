@@ -132,6 +132,26 @@
     ],
     "subjectEmail":[
         "oggetto"
-    ]
+    ],
+    "noWeatherSentence":[
+        "in questo momento il servizio meteo non è disponibile.",
+        "il meteo non è disponibile."
+    ],
+    "noWriteTwitterSentence":[
+        "c'è stato un problema con l'invio del tweet",
+        "tweet non inviato, controlla che i dati inseriti nell'app siano corretti"
+    ],
+    "noFeedSentence":[
+        "c'è stato un problema con il feed rss, per favore controlla che il link inserito sia giusto",
+        "non riesco a trovare il tuo feed rss"
+    ],
+    "noEmailFoundSentence":[
+        "non hai nuove email"
+    ],
+    "noEventFoundCalendarSentence":[
+        "non hai alcun evento pianificato",
+        "nessun evento pianificato nel calendario di google",
+        "il tuo calendario di google è vuoto"
+    ]    
 
 }

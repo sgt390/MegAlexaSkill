@@ -32,7 +32,8 @@ export class ConnectorBlockweather implements ConnectorBlock {
         return new Promise((resolve, reject) => {
             weather.getAllWeather(function(err: string, data: any) {
                 if(err) {
-                    reject("error while creating the weather connector: £££££££" + err);
+                    //reject("error while creating the weather connector: £££££££" + err);
+                    resolve(Promise.resolve(PhrasesGenerator.noWeatherSentence()));
                 }
                 else {
                     resolve(PhrasesGenerator.randomWeatherStartSentence()+ " " + data.name + " " +  

@@ -14,6 +14,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorFeedRSSResult } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "../blocks/utility/PhrasesGenerator";
 const Parser = require('rss-parser');
 const parser = new Parser();
 
@@ -32,8 +33,8 @@ export class ConnectorBlockFeedRSS implements ConnectorBlock {
             .reduce(((buffer, element) => buffer + element), "")
             .trim();
             
-        }).catch(function(error: string) {
-            throw 'there was an error with the feed rss connector: £££££'+ error;
+        }).catch(function (error:string) {
+            return Promise.resolve(PhrasesGenerator.noFeedSentence());
         });
     }
 }

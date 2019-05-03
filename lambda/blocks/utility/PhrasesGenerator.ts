@@ -231,5 +231,32 @@ export class PhrasesGenerator {
         let s: string=PhrasesGenerator.jsonPhrases.subjectEmail[randomNumber];
         return s;
     }
+    ////////////
+    static noWeatherSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noWeatherSentence.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noWeatherSentence[randomNumber];
+        return s;
+    }
+    static noWriteTwitterSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noWriteTwitterSentence.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noWriteTwitterSentence[randomNumber];
+        return s;
+    }
+    static noFeedSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noFeedSentence.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noFeedSentence[randomNumber];
+        return s;
+    }
+    static noEmailFoundSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noEmailFoundSentence.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noEmailFoundSentence[randomNumber];
+        return s;
+    }
+    static noEventFoundCalendarSentence():string{
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noEventFoundCalendarSentence.length-1);
+        let s: string=PhrasesGenerator.jsonPhrases.noEventFoundCalendarSentence[randomNumber];
+        return s;
+    }
+
 };
 

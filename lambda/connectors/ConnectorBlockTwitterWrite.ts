@@ -41,7 +41,7 @@ export class ConnectorBlockTwitterWrite implements ConnectorBlock {
                 return PhrasesGenerator.randomSuccessTwitterSentence();
             })
             .catch(function (error:string) {
-                throw 'error while creating the twitter connector: £££££££'+ error;
+                return Promise.resolve(PhrasesGenerator.noWriteTwitterSentence());
             });
     }
 }

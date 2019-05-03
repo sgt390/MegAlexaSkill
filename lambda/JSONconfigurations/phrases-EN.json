@@ -128,6 +128,26 @@
     ],
     "subjectEmail":[
         "subject"
-    ]
+    ],
+    "noWeatherSentence":[
+        "i can't reach the weather service.",
+        "the weather service is not working."
+    ],
+    "noWriteTwitterSentence":[
+        "there was a problem with the tweet",
+        "i could not send your tweet, please check your MegAlexa app"
+    ],
+    "noFeedSentence":[
+        "there was a problem with the feed rss, check that the link is correct",
+        "i can't find the feed rss"
+    ],
+    "noEmailFoundSentence":[
+        "you don't have any unread email"
+    ],
+    "noEventFoundCalendarSentence":[
+        "you don't have any planned event",
+        "no planned event in your google calendar",
+        "your google calendar is empty"
+    ]    
 
 }

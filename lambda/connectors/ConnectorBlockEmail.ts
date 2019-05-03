@@ -69,6 +69,8 @@ export class ConnectorBlockEmail implements ConnectorBlock {
                     const subject = msg.data.payload.headers.filter((el:any) => el.name === 'Subject')[0].value;
                     return await response + (PhrasesGenerator.senderEmail()+" "+ sender + ","+" "+PhrasesGenerator.subjectEmail()+":"+ subject+ ", email: " + email_content +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
-            }).catch((err:string) => {throw err});
+            }).catch(function (error:string) {
+                return Promise.resolve(PhrasesGenerator.noEmailFoundSentence());
+            });
     }
 }

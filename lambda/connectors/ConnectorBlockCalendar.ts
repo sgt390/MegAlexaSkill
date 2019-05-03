@@ -64,6 +64,8 @@ export class ConnectorBlockCalendar implements ConnectorBlock {
                     let location : string = !event.location ? PhrasesGenerator.noLocation() : ", "+PhrasesGenerator.location()+": " + event.location;
                     return await response + (PhrasesGenerator.dayTime()+" "+ startTimeConv + ", "+ event.summary + location +"; ").replace("@", "at").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
-            }).catch((err:string) => {throw err});
+            }).catch(function (error:string) {
+                return Promise.resolve(PhrasesGenerator.noEventFoundCalendarSentence());
+            });
     }
 }
