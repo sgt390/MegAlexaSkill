@@ -14,6 +14,7 @@
 */
 import { ConnectorBlock } from "./ConnectorBlock";
 import { connectorTwitterHashtag, BlockTwitterReadHashtagConfig } from "../JSONconfigurations/JSONconfiguration";
+import { PhrasesGenerator } from "../blocks/utility/PhrasesGenerator";
 const Twitter = require('twitter');
 
 export class ConnectorBlockTwitterHashtag implements ConnectorBlock {
@@ -46,7 +47,7 @@ export class ConnectorBlockTwitterHashtag implements ConnectorBlock {
                 });
             })
             .catch(function (error:string) {
-                throw 'error while creating the twitter connector: £££££££'+ error;
+                return Promise.resolve(PhrasesGenerator.noTweetFoundTwitterSentence());
             });
     }
 }

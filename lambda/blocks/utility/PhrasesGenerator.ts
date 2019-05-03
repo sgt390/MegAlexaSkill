@@ -161,7 +161,7 @@ export class PhrasesGenerator {
     }
 
     static noTweetFoundTwitterSentence():string{
-        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.tweetedTwitter.length-1);
+        var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.noTweetFoundTwitter.length-1);
         let s: string=PhrasesGenerator.jsonPhrases.noTweetFoundTwitter[randomNumber];
         return s;
     }

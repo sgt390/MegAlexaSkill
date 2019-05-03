@@ -107,7 +107,7 @@ export class Workflow {
                 Workflow.workflowStartingPosition = startingPoistion + i;
 
                 // Alexa Key words are removed from the response (we don't have control to emails, tweets, ...)
-                _text += (await blocks[i].text()).replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "") + " ";
+                _text += (await blocks[i].text()) + " ";
                 // if block is elicit and slot is not filled yet, quit the cycle and save the workflow position
                 if((<ElicitBlock>blocks[i]).slotRequired && (<ElicitBlock>blocks[i]).slotRequired()) {
                     elicitSlot = true;
@@ -118,6 +118,7 @@ export class Workflow {
             if (!elicitSlot) {
                 _text += PhrasesGenerator.randomDoneWorkflowSentence();
             }
+            _text = _text.replace(/\@/g, " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
             return {
                 text: _text,
                 elicitSlot:elicitSlot,

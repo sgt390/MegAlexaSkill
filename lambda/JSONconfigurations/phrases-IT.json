@@ -48,13 +48,13 @@
         "Corretto"
     ],
     "addDeleteModify":[
-        "Vuoi aggiungere eliminare o modificare un elemento della tua lista?",
-        "Desideri aggiungere modificare o eliminare un elemento della tua lista?",
-        "Nella tua lista vuoi aggiungere modificare o eliminare qualche elemento?",
-        "Nella tua lista desideri inserire cambiare o rimuovere qualche elemento?"
+        "Vuoi aggiungere, eliminare o modificare un elemento della tua lista?",
+        "Desideri aggiungere, modificare o eliminare un elemento della tua lista?",
+        "Nella tua lista vuoi aggiungere, modificare o eliminare qualche elemento?",
+        "Nella tua lista desideri inserire, cambiare o rimuovere qualche elemento?"
     ],
     "pleaseRepeatList":[
-        "non ho capito, puoi dire aggiungi, elimina, rimuovi seguito da un elemento. Di fatto per uscire.",
+        "non ho capito, puoi dire aggiungi, elimina, rimuovi, seguito da un elemento. Oppure dire fatto per uscire.",
         "perfavore, ripeti.",
         "hmmm, che volevi dire?",
         "non sono sicura, puoi ripetere?"
@@ -72,7 +72,7 @@
         "L'elemento richiesto non è presente."
     ],
     "editedWith": [
-        "modificato con."
+        "modificato con"
     ],
     "readEmail":[
         "Queste sono le tue email."

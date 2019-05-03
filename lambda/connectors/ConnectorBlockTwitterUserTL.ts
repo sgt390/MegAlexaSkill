@@ -13,7 +13,7 @@
 * Matteo Depascale      || 2019-04-26   || Approved
 */
 import { ConnectorBlock } from "./ConnectorBlock";
-import { connectorTwitterTimelineUser, BlockTwitterReadConfig, connectorTwitterHashtag } from "../JSONconfigurations/JSONconfiguration";
+import { connectorTwitterTimelineUser, BlockTwitterReadConfig } from "../JSONconfigurations/JSONconfiguration";
 import { PhrasesGenerator } from "./../blocks/utility/PhrasesGenerator";
 const Twitter = require('twitter');
 
@@ -42,20 +42,13 @@ export class ConnectorBlockTwitterUserTL implements ConnectorBlock {
 
         return this.user.get('statuses/user_timeline', params)
             .then(function (tweets: connectorTwitterTimelineUser) {
+                //console.log(tweets)
                 return tweets.map(function(tweet:any) {
-                    let text = "";
-                    if(tweet.user.name=""){
-                        text = PhrasesGenerator.noTweetFoundTwitterSentence()
-                    } else{
-                        text = tweet.user.name +" "+PhrasesGenerator.tweetedTwitterSentence()+" "+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
-                    }
-                    return text;
+                    return tweet.user.name +" "+PhrasesGenerator.tweetedTwitterSentence()+" "+ (tweet.full_text.replace(/(?:https?|ftp):\/\/[\n\S]+/g, '')).trim();
                 });
             })
             .catch(function (error:string) {
-                throw 'error while creating the twitter connector: £££££££'+ error;
+                return Promise.resolve(PhrasesGenerator.noTweetFoundTwitterSentence());
             });
     }
 }
-
-

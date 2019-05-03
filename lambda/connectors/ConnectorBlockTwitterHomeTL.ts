@@ -45,7 +45,7 @@ export class ConnectorBlockTwitterHomeTL implements ConnectorBlock {
                 });
             })
             .catch(function (error:string) {
-                throw 'error while creating the twitter connector: £££££££'+ error;
+                return Promise.resolve(PhrasesGenerator.noTweetFoundTwitterSentence());
             });
     }
 }
