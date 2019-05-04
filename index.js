@@ -110,7 +110,7 @@ const InProgressWorkflowIntentHandler = {
     const attributesManager = handlerInput.attributesManager;
     const attributes = attributesManager.getSessionAttributes() || {};
 
-    const workflowName = slots.workflow_name.value.toLowerCase().replace(/\s/g, "");
+    const workflowName = (slots.workflow_name.value.toLowerCase()).replace(/\s/g, "");
     const userAccessToken = getUserAccessToken(handlerInput);
     const user = new User(userAccessToken);
     const workflowPosition = attributes.workflowPosition;
