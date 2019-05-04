@@ -87,11 +87,11 @@ export class BlockList implements Filterable, ElicitBlock{
     }
 
     setElicitSlot(slot: string): void {
-        this.elicitSlot = slot;
+        this.elicitSlot = slot.toLowerCase();
     }
 
     slotRequired(): boolean {
-        return this.elicitSlot === 'done' || this.elicitSlot === 'fatto'? false: true;
+        return this.elicitSlot === 'done' || this.elicitSlot === 'fatto' || this.elicitSlot === 'no'? false: true;
     }
 
     private createNewBlockListAdd(userList:string[], newElement: string): blockListJSON {
@@ -128,14 +128,14 @@ export class BlockList implements Filterable, ElicitBlock{
     }
 
     private createNewBlockListEdit(userList:string[], modifyElement: string): {"countItem": number, "blockListJSON": blockListJSON, "oldElement": string, "newElement": string} {
-        const withEdit = ["with", "con"];
+        const withEdit = PhrasesGenerator.editSentence();
 
-        const oldElement = withEdit.map(el => modifyElement.substring(0, modifyElement.indexOf(el)-1))[0];
+        const oldElement = modifyElement.substring(0, modifyElement.indexOf(withEdit)-1);
         let countItem = userList.filter(element => (element === oldElement)).length;
         let newElement : string = "";
         
         if(countItem) {
-            newElement = withEdit.map(el => modifyElement.substring(modifyElement.indexOf(el)+el.length+1))[0];
+            newElement = modifyElement.substring(modifyElement.indexOf(withEdit)+withEdit.length+1);
             userList = userList.filter(element => !(element === oldElement));
             userList.push(newElement);
         }

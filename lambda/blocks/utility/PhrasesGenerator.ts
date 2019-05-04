@@ -135,6 +135,10 @@ export class PhrasesGenerator {
         let s: string=PhrasesGenerator.jsonPhrases.editedWith[randomNumber];
         return s;
     }
+    static editSentence():string{
+        let s: string=PhrasesGenerator.jsonPhrases.editList[0];
+        return s;
+    }
 
     static randomReadEmailSentence():string{
         var randomNumber: number=PhrasesGenerator.randomInt(0,PhrasesGenerator.jsonPhrases.readEmail.length-1);
