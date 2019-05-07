@@ -39,7 +39,7 @@
         "Incorrect, please retry",
         "Wrong, try again",
         "Wrong, retry",
-        "I'm sorry but the pin is wrong, retry",
+        "I am sorry but the pin is wrong, retry",
         "The pin is wrong, maybe next time you'll be luckier. Please try again"
     ],
     "pleaseRepeatList":[
