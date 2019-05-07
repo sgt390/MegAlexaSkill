@@ -39,11 +39,11 @@ export class ConnectorBlockweather implements ConnectorBlock {
                     resolve(PhrasesGenerator.randomWeatherStartSentence()+ " " + data.name + " " +  
                         PhrasesGenerator.randomWeatherGradeSentence() + " " + Math.round(data.main.temp) + " " +
                         PhrasesGenerator.randomWeatherCelsiusSentence() + " " + 
-                        PhrasesGenerator.randomWeatherDetailsSentence() + " " + data.weather[0].description + " " + 
+                        PhrasesGenerator.randomWeatherDetailsSentence() + " " + data.weather[0].description + ", " + 
                         PhrasesGenerator.randomWeatherLowSentence() + " " + Math.round(data.main.temp_min) + " " +
                         PhrasesGenerator.randomWeatherCelsiusSentence() + " " +
                         PhrasesGenerator.randomWeatherHighSentence() + " " + Math.round(data.main.temp_max) + " " +
-                        PhrasesGenerator.randomWeatherCelsiusSentence() + " " );
+                        PhrasesGenerator.randomWeatherCelsiusSentence() + ". " );
                 }
             });
         });
