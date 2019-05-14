@@ -63,13 +63,14 @@ export class ConnectorBlockEmail implements ConnectorBlock {
                         'userId': 'me',
                         'id': messageInfo.id
                     });
-                    const email_content = Buffer.from(msg.data.payload.parts[0].body.data,'Base64').toString('ascii');
-                    //const email_content = msg.data.snippet;
+                    //const email_content = Buffer.from(msg.data.payload.parts[0].body.data,'Base64').toString('ascii');
+                    const email_content = msg.data.snippet;
                     const sender = msg.data.payload.headers.filter((el:any) => el.name === 'From')[0].value.replace("@", " at ");
                     const subject = msg.data.payload.headers.filter((el:any) => el.name === 'Subject')[0].value;
                     return await response + (PhrasesGenerator.senderEmail()+" "+ sender + ","+" "+PhrasesGenerator.subjectEmail()+":"+ subject+ ", email: " + email_content +"; ").replace("@", " at ").replace(/\<|\>|\/|\\|\=|\&|\*|\"|\||^|\£|\$|/g, "");
                 }, '');
             }).catch(function (error:string) {
+                console.log("££££££ " + error)
                 return Promise.resolve(PhrasesGenerator.noEmailFoundSentence());
             });
     }
