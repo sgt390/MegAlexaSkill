@@ -1,0 +1,156 @@
+{
+    "autenticationMessage":[
+        "You must authenticate with your Amazon Account to use MegAlexa. I sent instructions for how to do this in your Amazon Alexa App",
+        "First you must authenticate with your Amazon Account to use MegAlexa. Follow the instructions that I sent to you in your Amazon Alexa App",
+        "Sorry you must authenticate with your Amazon Account to use MegAlexa. Please follow the instructions that I sent to you in your Amazon Alexa Ap "
+    ],
+    "skillStart":[
+        "Welcome to MegAlexa, how can I help you?",
+        "Hi, welcome to MegAlexa, how can I help you?"
+    ],
+    "workflowStart":[
+        "What is your workflow?"
+    ],
+    "workflowName":[
+        "Say your workflow name or create a new one in your MegAlexa Application"
+    ],
+    "errorCommand":[
+        "Sorry, I can't understand the command. Please say again.",
+        "I am very sorry I did not understood the command. Please repeat.",
+        "I can't understand the command so please say again.",
+        "Please repeat, I can't understand the command"
+    ],
+    "finishMessage":[
+        "Goodbye!",
+        "Bye bye.",
+        "I hope to hear from you soon! Bye"
+    ],
+    "doneWorkflow":[
+        "Your workflow is over, you can start with a new one"
+    ],
+    "pinBlockStart":[
+        "Say your pin to continue",
+        "What's you Pin?",
+        "Tell me your secret code",
+        "Let me know your Pin to continue",
+        "Confess me your secret code"
+    ],
+    "wrongPin":[
+        "Incorrect, please retry",
+        "Wrong, try again",
+        "Wrong, retry",
+        "I am sorry but the pin is wrong, retry",
+        "The pin is wrong, maybe next time you'll be luckier. Please try again"
+    ],
+    "pleaseRepeatList":[
+        "i did not understand, please add, remove, delete an element, or say done to continue",
+        "please, repeat",
+        "hmmm, what did you say?",
+        "im not sure, please repeat"
+    ],
+    "correctPin":[
+        "Pin is correct",
+        "Perfect, the pin is correct"
+    ],
+    "addDeleteModify":[
+        "Do you want to add, delete or modify any element on your list?",
+        "Do you want to insert, edit or remove any item on your list?"
+    ],
+    "addList":[
+        "has been added",
+        "successfully added"
+    ],
+    "deleteList": [
+        "has been removed",
+        "successfully deleted"
+    ],
+    "notPresent": [
+        "The element is not present",
+        "The requested item is not present"
+    ],
+    "editedWith": [
+        "edited with"
+    ],
+    "editList": [
+        "with"
+    ],
+    "readEmail":[
+        "These are your new emails"
+    ],
+    "writeTwitter":[
+        "Say your tweet to continue",
+        "Tell me the tweet you want to post",
+        "Say the tweet you want to post"
+    ],
+    "successTwitter":[
+        "Your tweet has been posted successfully",
+        "Excellent, the tweet has been posted"
+    ],
+    "tweetedTwitter":[
+        "tweeted" 
+    ],
+    "noTweetFoundTwitter": [
+        "there aren't tweets at the moment",
+        "currently there aren't tweets"
+    ],
+    "weatherStart":[
+        "Currently in",
+        "Right now in"
+    ],
+    "weatherGrade":[
+        "there is"
+    ],
+    "weatherDetails":[
+        "with"
+    ],
+    "weatherHigh":[
+        "and an high of"
+    ],
+    "weatherLow":[
+        "you can expect a low of"
+    ],
+    "weatherCelsius": [
+        "degree celsius",
+        "degree",
+        "degree"
+    ],
+    "atTime":[
+        "at"
+    ],
+    "dayTime":[
+        "On"
+    ],
+    "noLocation":[
+        "There is no location specified"
+    ],
+    "location":[
+        "Location"
+    ],
+    "senderEmail":[
+        "sender"
+    ],
+    "subjectEmail":[
+        "subject"
+    ],
+    "noWeatherSentence":[
+        "i can't reach the weather service.",
+        "the weather service is not working."
+    ],
+    "noWriteTwitterSentence":[
+        "there was a problem with the tweet",
+        "i could not send your tweet, please check your MegAlexa app"
+    ],
+    "noFeedSentence":[
+        "there was a problem with the feed rss, check that the link is correct",
+        "i can't find the feed rss"
+    ],
+    "noEmailFoundSentence":[
+        "you don't have any unread email"
+    ],
+    "noEventFoundCalendarSentence":[
+        "you don't have any planned event",
+        "no planned event in your google calendar",
+        "your google calendar is empty"
+    ]    
+
+}
