@@ -1,5 +1,8 @@
 # MegAlexaSkill
 
+## Travis
+[![Build Status](https://travis-ci.com/sgt390/MegAlexaSkill.svg?branch=master)](https://travis-ci.com/sgt390/MegAlexaSkill)
+
 ## npm scripts
 
 ### Install packages
